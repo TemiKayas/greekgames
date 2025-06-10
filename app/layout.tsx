@@ -16,16 +16,28 @@ const crimsonText = Crimson_Text({
 });
 
 export const metadata: Metadata = {
-  title: "Greek Games - Epic Mythological Adventures",
+  title:
+    "Learn Greek Through Play - Interactive Modern Greek Language Learning",
   description:
-    "Immerse yourself in the legendary world of ancient Greece through epic interactive web games. Experience Greek mythology like never before.",
+    "Master Modern Greek with engaging games, vocabulary exercises, and cultural immersion. Learn the Greek alphabet, everyday words, and conversation skills through interactive activities.",
   keywords: [
-    "Greek mythology",
-    "web games",
-    "ancient Greece",
-    "interactive games",
-    "mythology games",
+    "learn Greek",
+    "Modern Greek language",
+    "Greek alphabet",
+    "Greek vocabulary",
+    "language learning games",
+    "interactive Greek lessons",
+    "Greek culture",
+    "Greek conversation",
   ],
+  authors: [{ name: "Learn Greek Through Play" }],
+  openGraph: {
+    title: "Learn Greek Through Play - Interactive Language Learning",
+    description:
+      "Master Modern Greek with engaging games and cultural immersion",
+    type: "website",
+    locale: "en_US",
+  },
 };
 
 export default function RootLayout({
