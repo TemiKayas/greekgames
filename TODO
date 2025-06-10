@@ -20,24 +20,36 @@ How to make a Greek-themed web game with:
     ✔ Responsive design for all devices
     ✔ Victory and pause states
     ✔ Score tracking and statistics
-    This is a memory game with 12 greek gods, its a matching game where you find
-    a pair of the matching gods. There 3 difficulty levels, easy, medium and hard.
-    The easy level has 12 cards, the medium level has 18 cards, and the hard level has 24 cards.
-    The game is a timed game, you have 1 minute to find all the pairs. This
-    could be applied to a english word and a differnt language word.
+    ✔ This is a memory game with 12 greek gods, its a matching game where you find
+    ✔ a pair of the matching gods. There 3 difficulty levels, easy, medium and hard.
+    ✔ The easy level has 12 cards, the medium level has 18 cards, and the hard level has 24 cards.
+    ✔ The game is a timed game, you have 1 minute to find all the pairs. This
+    ✔ could be applied to a english word and a differnt language word.
 
-## 2) Game Architecture & Planning:
-  ☐ Define game concept and core mechanics
-  ☐ Create wireframes/mockups for game screens
-  ☐ Design game state structure
-  ☐ Plan component hierarchy
-  ☐ Define TypeScript interfaces for game entities
-  ☐ Setup folder structure:
-    * /components/game
-    * /hooks/game
-    * /stores
-    * /types
-    * /utils/game
+  ✔ Game Registry System @started(25-06-09 23:30) @done(25-06-09 23:45) @lasted(15m)
+    ✔ Centralized games configuration in registry.ts
+    ✔ TypeScript interfaces for game metadata
+    ✔ Automatic game discovery and display
+    ✔ Reusable GameCard component
+    ✔ Status-based game filtering (available, beta, coming-soon, etc.)
+    ✔ Category-based game organization
+    ✔ Featured games system
+    ✔ Animated homepage with dynamic game stats
+    ✔ HOW_TO_ADD_GAMES.md documentation for easy expansion
+
+  ✔ Define game concept and core mechanics - Memory game + extensible framework @started(25-06-09 23:30) @done(25-06-09 23:45) @lasted(15m)
+  ✔ Create wireframes/mockups for game screens - Homepage + game layout implemented
+  ✔ Design game state structure - Zustand store pattern established
+  ✔ Plan component hierarchy - Reusable GameCard + game-specific components
+  ✔ Define TypeScript interfaces for game entities - Complete type system in place
+  ✔ Setup folder structure: ✔ IMPLEMENTED
+    ✔ /components/game (created)
+    ✔ /components/ui (GameCard component)
+    ✔ /hooks/game (created)
+    ✔ /stores (gameStore.ts)
+    ✔ /types (game.ts + games.ts)
+    ✔ /utils/game (greekGods.ts)
+    ✔ /utils/games (registry.ts)
 
 ## 3) Core Game Components
   ☐ Create GameBoard/GameArea component
