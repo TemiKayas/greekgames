@@ -17,8 +17,15 @@ const crimsonText = Crimson_Text({
 
 export const metadata: Metadata = {
   title: "Greek Games - Epic Mythological Adventures",
-  description: "Immerse yourself in the legendary world of ancient Greece through epic interactive web games. Experience Greek mythology like never before.",
-  keywords: ["Greek mythology", "web games", "ancient Greece", "interactive games", "mythology games"],
+  description:
+    "Immerse yourself in the legendary world of ancient Greece through epic interactive web games. Experience Greek mythology like never before.",
+  keywords: [
+    "Greek mythology",
+    "web games",
+    "ancient Greece",
+    "interactive games",
+    "mythology games",
+  ],
 };
 
 export default function RootLayout({

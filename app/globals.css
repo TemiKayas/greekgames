@@ -11,7 +11,7 @@
   --accent: #dc143c; /* Deep red */
   --muted: #64748b;
   --border: #334155;
-  
+
   /* Light mode overrides */
   --background-light: #fef9e7;
   --surface-light: #ffffff;
@@ -30,20 +30,21 @@
   --color-accent: var(--accent);
   --color-muted: var(--muted);
   --color-border: var(--border);
-  
+
   /* Typography */
   --font-display: var(--font-display);
   --font-body: var(--font-body);
-  --font-mono: ui-monospace, 'Fira Code', monospace;
-  
+  --font-mono: ui-monospace, "Fira Code", monospace;
+
   /* Spacing & Layout */
   --spacing-hero: 8rem;
   --spacing-section: 6rem;
   --border-radius-card: 0.75rem;
   --border-radius-button: 0.5rem;
-  
+
   /* Shadows */
-  --shadow-card: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-card:
+    0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --shadow-glow: 0 0 20px rgb(212 175 55 / 0.3);
 }
 
@@ -93,5 +94,9 @@ body {
 }
 
 .golden-gradient {
-  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--primary) 0%,
+    var(--primary-dark) 100%
+  );
 }
