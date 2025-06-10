@@ -1,5 +1,5 @@
 import { GameCard, GameState, GameStats } from "@/app/types/game";
-import { GAME_CONFIG, GREEK_GODS } from "@/app/utils/game/greekGods";
+import { GAME_CONFIG, GREEK_ALPHABET } from "@/app/utils/game/greekGods";
 import { create } from "zustand";
 
 interface GameStore extends GameState {
@@ -14,23 +14,25 @@ interface GameStore extends GameState {
 
 const createGameCards = (difficulty: GameState["difficulty"]): GameCard[] => {
   const pairCount = GAME_CONFIG[difficulty].pairs;
-  const selectedGods = GREEK_GODS.slice(0, pairCount);
+  const selectedLetters = GREEK_ALPHABET.slice(0, pairCount);
 
-  // Create pairs of cards
+  // Create pairs of cards - one uppercase, one lowercase for each letter
   const cards: GameCard[] = [];
-  selectedGods.forEach((god, index) => {
-    // First card of the pair
+  selectedLetters.forEach((letter, index) => {
+    // Uppercase card
     cards.push({
-      id: `${god.id}-1`,
-      godId: god.id,
+      id: `${letter.id}-upper`,
+      letterId: letter.id,
+      letterType: "uppercase",
       isFlipped: false,
       isMatched: false,
       position: index * 2,
     });
-    // Second card of the pair
+    // Lowercase card
     cards.push({
-      id: `${god.id}-2`,
-      godId: god.id,
+      id: `${letter.id}-lower`,
+      letterId: letter.id,
+      letterType: "lowercase",
       isFlipped: false,
       isMatched: false,
       position: index * 2 + 1,
@@ -106,8 +108,8 @@ export const useGameStore = create<GameStore>((set, get) => ({
       const card1 = updatedCards.find((c) => c.id === card1Id);
       const card2 = updatedCards.find((c) => c.id === card2Id);
 
-      if (card1 && card2 && card1.godId === card2.godId) {
-        // Match found!
+      if (card1 && card2 && card1.letterId === card2.letterId) {
+        // Match found! (Same letter, different cases)
         setTimeout(() => {
           const matchedCards = get().cards.map((card) =>
             card.id === card1Id || card.id === card2Id

@@ -10,6 +10,7 @@ How to make a Greek-themed web game with:
     ✔ Zustand (state management)
     ✔ Lucide React (icons)
 
+    ✔ Redisgn home page to reflect more of a modern Greek learning games website. @started(25-06-10 18:55) @done(25-06-10 19:02) @lasted(7m36s)
 ## 🎮 BETA GAME COMPLETED
   ✔ "Gods of Olympus" Memory Game @started(25-06-09 22:45) @done(25-06-09 23:15) @lasted(30m)
     ✔ TypeScript interfaces and game types
@@ -26,30 +27,31 @@ How to make a Greek-themed web game with:
     ✔ The game is a timed game, you have 1 minute to find all the pairs. This
     ✔ could be applied to a english word and a differnt language word.
 
-  ✔ Game Registry System @started(25-06-09 23:30) @done(25-06-09 23:45) @lasted(15m)
-    ✔ Centralized games configuration in registry.ts
-    ✔ TypeScript interfaces for game metadata
-    ✔ Automatic game discovery and display
-    ✔ Reusable GameCard component
-    ✔ Status-based game filtering (available, beta, coming-soon, etc.)
-    ✔ Category-based game organization
-    ✔ Featured games system
-    ✔ Animated homepage with dynamic game stats
-    ✔ HOW_TO_ADD_GAMES.md documentation for easy expansion
+## 2) Game Architecture & Planning: @started(25-06-09 23:30) @done(25-06-09 23:45) @lasted(15m)
+        ✔ Game Registry System @started(25-06-09 23:30) @done(25-06-09 23:45) @lasted(15m)
+          ✔ Centralized games configuration in registry.ts
+          ✔ TypeScript interfaces for game metadata
+          ✔ Automatic game discovery and display
+          ✔ Reusable GameCard component
+          ✔ Status-based game filtering (available, beta, coming-soon, etc.)
+          ✔ Category-based game organization
+          ✔ Featured games system
+          ✔ Animated homepage with dynamic game stats
+          ✔ HOW_TO_ADD_GAMES.md documentation for easy expansion
 
-  ✔ Define game concept and core mechanics - Memory game + extensible framework @started(25-06-09 23:30) @done(25-06-09 23:45) @lasted(15m)
-  ✔ Create wireframes/mockups for game screens - Homepage + game layout implemented
-  ✔ Design game state structure - Zustand store pattern established
-  ✔ Plan component hierarchy - Reusable GameCard + game-specific components
-  ✔ Define TypeScript interfaces for game entities - Complete type system in place
-  ✔ Setup folder structure: ✔ IMPLEMENTED
-    ✔ /components/game (created)
-    ✔ /components/ui (GameCard component)
-    ✔ /hooks/game (created)
-    ✔ /stores (gameStore.ts)
-    ✔ /types (game.ts + games.ts)
-    ✔ /utils/game (greekGods.ts)
-    ✔ /utils/games (registry.ts)
+        ✔ Define game concept and core mechanics - Memory game + extensible framework @started(25-06-09 23:30) @done(25-06-09 23:45) @lasted(15m)
+        ✔ Create wireframes/mockups for game screens - Homepage + game layout implemented
+        ✔ Design game state structure - Zustand store pattern established
+        ✔ Plan component hierarchy - Reusable GameCard + game-specific components
+        ✔ Define TypeScript interfaces for game entities - Complete type system in place
+        ✔ Setup folder structure: ✔ IMPLEMENTED
+          ✔ /components/game (created)
+          ✔ /components/ui (GameCard component)
+          ✔ /hooks/game (created)
+          ✔ /stores (gameStore.ts)
+          ✔ /types (game.ts + games.ts)
+          ✔ /utils/game (greekGods.ts)
+          ✔ /utils/games (registry.ts)
 
 ## 3) Core Game Components
   ☐ Create GameBoard/GameArea component

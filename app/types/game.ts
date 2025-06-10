@@ -1,16 +1,18 @@
-// Greek Gods Memory Game Types
+// Greek Alphabet Memory Game Types
 
-export interface GreekGod {
+export interface GreekLetter {
   id: string;
   name: string;
-  symbol: string;
-  domain: string;
+  uppercase: string;
+  lowercase: string;
+  pronunciation: string;
   description: string;
 }
 
 export interface GameCard {
   id: string;
-  godId: string;
+  letterId: string;
+  letterType: "uppercase" | "lowercase";
   isFlipped: boolean;
   isMatched: boolean;
   position: number;
@@ -49,3 +51,12 @@ export type GameAction =
   | { type: "END_GAME"; won: boolean }
   | { type: "RESET_GAME" }
   | { type: "UPDATE_STATS"; stats: Partial<GameStats> };
+
+// Legacy - keeping GreekGod for backwards compatibility
+export interface GreekGod {
+  id: string;
+  name: string;
+  symbol: string;
+  domain: string;
+  description: string;
+}

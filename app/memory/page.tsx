@@ -3,13 +3,13 @@
 import { useGameStore } from "@/app/stores/gameStore";
 import {
   DIFFICULTY_DESCRIPTIONS,
-  GREEK_GODS,
+  GREEK_ALPHABET,
 } from "@/app/utils/game/greekGods";
 import { motion } from "framer-motion";
 import { Home, Pause, Play, RotateCcw } from "lucide-react";
 import Link from "next/link";
 
-export default function MemoryGame() {
+export default function AlphabetGame() {
   const {
     cards,
     gameStatus,
@@ -26,8 +26,8 @@ export default function MemoryGame() {
     flipCard(cardId);
   };
 
-  const getGodByCardId = (godId: string) => {
-    return GREEK_GODS.find((god) => god.id === godId);
+  const getLetterByCardId = (letterId: string) => {
+    return GREEK_ALPHABET.find((letter) => letter.id === letterId);
   };
 
   if (gameStatus === "menu") {
@@ -43,12 +43,22 @@ export default function MemoryGame() {
               Back to Home
             </Link>
             <h1 className="font-display text-5xl md:text-7xl font-bold text-primary mb-6">
-              Gods of Olympus
+              Greek Alphabet Master
             </h1>
             <p className="text-xl text-muted mb-8">
-              Test your memory with the mighty Greek gods
+              Match uppercase and lowercase Greek letters
             </p>
-            <div className="h-1 w-24 golden-gradient mx-auto"></div>
+            <div className="h-1 w-24 golden-gradient mx-auto mb-8"></div>
+            <div className="bg-surface/50 border border-border rounded-lg p-6 max-w-2xl mx-auto mb-8">
+              <h3 className="font-display text-lg font-semibold text-primary mb-3">
+                🎯 How to Play
+              </h3>
+              <p className="text-foreground/80 text-sm leading-relaxed">
+                Click cards to flip them and find matching pairs of uppercase
+                and lowercase Greek letters. Learn letter names and
+                pronunciation as you play!
+              </p>
+            </div>
           </div>
 
           <div className="max-w-2xl mx-auto">
@@ -97,7 +107,7 @@ export default function MemoryGame() {
             Home
           </Link>
           <h1 className="font-display text-3xl font-bold text-primary">
-            Gods of Olympus
+            Greek Alphabet Master
           </h1>
           <div className="flex items-center gap-4">
             {gameStatus === "playing" && (
@@ -129,7 +139,7 @@ export default function MemoryGame() {
             <div className="text-2xl font-bold text-primary">
               {stats.matches}
             </div>
-            <div className="text-sm text-muted">Matches</div>
+            <div className="text-sm text-muted">Letters Learned</div>
           </div>
           <div className="bg-surface border border-border rounded-lg p-4 text-center">
             <div className="text-2xl font-bold text-primary">{stats.score}</div>
@@ -139,7 +149,7 @@ export default function MemoryGame() {
             <div className="text-2xl font-bold text-primary capitalize">
               {difficulty}
             </div>
-            <div className="text-sm text-muted">Difficulty</div>
+            <div className="text-sm text-muted">Level</div>
           </div>
         </div>
 
@@ -150,12 +160,17 @@ export default function MemoryGame() {
               difficulty === "easy"
                 ? "grid-cols-3 md:grid-cols-4"
                 : difficulty === "medium"
-                  ? "grid-cols-4 md:grid-cols-4"
-                  : "grid-cols-4 md:grid-cols-5"
+                  ? "grid-cols-3 md:grid-cols-6"
+                  : "grid-cols-4 md:grid-cols-6"
             }`}
           >
             {cards.map((card) => {
-              const god = getGodByCardId(card.godId);
+              const letter = getLetterByCardId(card.letterId);
+              const displayLetter =
+                card.letterType === "uppercase"
+                  ? letter?.uppercase
+                  : letter?.lowercase;
+
               return (
                 <motion.div
                   key={card.id}
@@ -175,13 +190,18 @@ export default function MemoryGame() {
                   >
                     {card.isFlipped || card.isMatched ? (
                       <div className="text-center">
-                        <div className="text-4xl mb-2">{god?.symbol}</div>
+                        <div className="text-5xl mb-2 font-display text-primary">
+                          {displayLetter}
+                        </div>
                         <div className="text-xs font-medium text-primary">
-                          {god?.name}
+                          {letter?.name}
+                        </div>
+                        <div className="text-xs text-muted mt-1">
+                          {card.letterType === "uppercase" ? "Upper" : "Lower"}
                         </div>
                       </div>
                     ) : (
-                      <div className="text-4xl text-muted/30">🏛️</div>
+                      <div className="text-4xl text-muted/30">📚</div>
                     )}
                   </div>
                 </motion.div>
@@ -198,17 +218,17 @@ export default function MemoryGame() {
             className="fixed inset-0 bg-background/80 flex items-center justify-center"
           >
             <div className="bg-surface border border-border rounded-lg p-8 text-center max-w-md">
-              <h2 className="font-display text-2xl font-bold text-primary mb-4">
+              <h2 className="font-display text-2xl font-semibold text-primary mb-4">
                 Game Paused
               </h2>
               <p className="text-muted mb-6">
-                Take a break, the gods will wait
+                Take your time learning the alphabet!
               </p>
               <button
                 onClick={resumeGame}
-                className="bg-primary hover:bg-primary-dark text-background font-semibold py-3 px-6 rounded-lg transition-colors"
+                className="bg-primary hover:bg-primary-dark text-background font-semibold py-2 px-6 rounded-lg transition-colors"
               >
-                Resume Game
+                Continue Learning
               </button>
             </div>
           </motion.div>
@@ -221,39 +241,29 @@ export default function MemoryGame() {
             className="fixed inset-0 bg-background/80 flex items-center justify-center"
           >
             <div className="bg-surface border border-border rounded-lg p-8 text-center max-w-md">
-              <h2 className="font-display text-3xl font-bold text-primary mb-4">
-                Victory! ⚡
+              <div className="text-6xl mb-4">🎉</div>
+              <h2 className="font-display text-3xl font-semibold text-primary mb-4">
+                Συγχαρητήρια!
               </h2>
+              <p className="text-lg text-primary mb-2">Congratulations!</p>
               <p className="text-muted mb-6">
-                You have pleased the gods with your memory skills!
+                You&apos;ve mastered {stats.matches} Greek letters!
+                <br />
+                Score: {stats.score} points in {stats.moves} moves
               </p>
-              <div className="grid grid-cols-2 gap-4 mb-6 text-sm">
-                <div>
-                  <div className="font-semibold text-primary">
-                    {stats.moves}
-                  </div>
-                  <div className="text-muted">Moves</div>
-                </div>
-                <div>
-                  <div className="font-semibold text-primary">
-                    {stats.score}
-                  </div>
-                  <div className="text-muted">Score</div>
-                </div>
-              </div>
-              <div className="flex gap-4">
+              <div className="flex gap-3 justify-center">
                 <button
-                  onClick={() => startGame(difficulty)}
-                  className="bg-primary hover:bg-primary-dark text-background font-semibold py-3 px-6 rounded-lg transition-colors"
+                  onClick={resetGame}
+                  className="bg-primary hover:bg-primary-dark text-background font-semibold py-2 px-4 rounded-lg transition-colors"
                 >
                   Play Again
                 </button>
-                <button
-                  onClick={resetGame}
-                  className="bg-surface border border-border font-semibold py-3 px-6 rounded-lg transition-colors hover:bg-primary/10"
+                <Link
+                  href="/"
+                  className="bg-surface border border-border hover:bg-primary/10 font-semibold py-2 px-4 rounded-lg transition-colors"
                 >
-                  Main Menu
-                </button>
+                  Back Home
+                </Link>
               </div>
             </div>
           </motion.div>

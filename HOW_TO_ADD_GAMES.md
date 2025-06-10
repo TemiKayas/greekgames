@@ -3,6 +3,7 @@
 ## ⚡ Quick Start (2 Steps!)
 
 ### 1. Add your learning activity to the registry
+
 Edit `app/utils/games/registry.ts` and add your activity to the `GAMES` array:
 
 ```typescript
@@ -22,6 +23,7 @@ Edit `app/utils/games/registry.ts` and add your activity to the `GAMES` array:
 ```
 
 ### 2. Create your learning activity page
+
 Create a new file at `app/your-activity/page.tsx`:
 
 ```typescript
@@ -44,33 +46,37 @@ That's it! Your activity will automatically appear on the homepage! 🚀
 ## 📋 Configuration Options
 
 ### Activity Status Options
+
 ```typescript
-"available"      // ✅ Fully functional learning tool
-"beta"          // 🧪 Beta testing for learners
-"coming-soon"   // 📅 Announced but not ready
-"in-development" // 🔨 Being built
-"planning"      // 📝 Just an idea
+"available"; // ✅ Fully functional learning tool
+"beta"; // 🧪 Beta testing for learners
+"coming-soon"; // 📅 Announced but not ready
+"in-development"; // 🔨 Being built
+"planning"; // 📝 Just an idea
 ```
 
 ### Learning Categories
+
 ```typescript
-"memory"    // Memory games and vocabulary matching
-"puzzle"    // Logic puzzles and language games
-"adventure" // Story-driven learning experiences
-"action"    // Fast-paced language practice
-"strategy"  // Advanced language construction
+"memory"; // Memory games and vocabulary matching
+"puzzle"; // Logic puzzles and language games
+"adventure"; // Story-driven learning experiences
+"action"; // Fast-paced language practice
+"strategy"; // Advanced language construction
 ```
 
 ### Difficulty Levels
+
 ```typescript
-"easy"   // Beginner (A1-A2 level)
-"medium" // Intermediate (B1-B2 level)
-"hard"   // Advanced (C1-C2 level)
+"easy"; // Beginner (A1-A2 level)
+"medium"; // Intermediate (B1-B2 level)
+"hard"; // Advanced (C1-C2 level)
 ```
 
 ## 🇬🇷 Greek Language Learning Focus
 
 Your activities should help learners with:
+
 - **Vocabulary**: Essential Modern Greek words
 - **Grammar**: Verb conjugations, noun cases
 - **Pronunciation**: Audio and phonetic guides
@@ -81,6 +87,7 @@ Your activities should help learners with:
 ## 🎨 Using Greek Theme
 
 Your activity automatically gets access to:
+
 - **Colors**: `text-primary`, `bg-surface`, `border-border`
 - **Fonts**: `font-display` (Cinzel), `font-body` (Crimson Text)
 - **Greek Text**: Use Unicode for Greek characters (Αα, Ββ, Γγ...)
@@ -91,6 +98,7 @@ Your activity automatically gets access to:
 ## 🏗️ Folder Structure for Learning Activities
 
 Create organized folders for complex activities:
+
 ```
 app/
 └── your-activity/
@@ -113,6 +121,7 @@ app/
 ## 📱 Responsive Learning Design
 
 Use these Tailwind classes for multi-device learning:
+
 ```css
 /* Mobile-first responsive design */
 text-sm md:text-base lg:text-lg
@@ -131,14 +140,15 @@ To feature your activity on the homepage, add its ID to `FEATURED_GAME_IDS` in `
 ```typescript
 export const FEATURED_GAME_IDS = [
   "gods-of-olympus",
-  "your-activity-id",  // Add here
-  "alphabet-master"
+  "your-activity-id", // Add here
+  "alphabet-master",
 ];
 ```
 
 ## 🔍 Learning Activity Discovery
 
 Activities are automatically organized by:
+
 - **Homepage**: Featured activities prominently displayed
 - **Categories**: Auto-grouped by learning type
 - **Difficulty**: Filtered by language level
@@ -147,6 +157,7 @@ Activities are automatically organized by:
 ## ✨ Educational Examples
 
 Check out the existing memory game at `app/memory/page.tsx` for:
+
 - Vocabulary learning with visual associations
 - Progress tracking and scoring
 - Greek cultural context (gods and mythology)
@@ -156,6 +167,7 @@ Check out the existing memory game at `app/memory/page.tsx` for:
 ## 🎓 Learning Best Practices
 
 When creating activities:
+
 1. **Start Simple**: Begin with basic vocabulary
 2. **Add Context**: Use Greek culture and stories
 3. **Include Audio**: Pronunciation is crucial
@@ -176,4 +188,4 @@ Your learning activities automatically deploy with the main site. No extra confi
 
 ---
 
-*Καλή τύχη! (Good luck!) May your activities inspire Greek language learners! 🇬🇷📚*
+_Καλή τύχη! (Good luck!) May your activities inspire Greek language learners! 🇬🇷📚_

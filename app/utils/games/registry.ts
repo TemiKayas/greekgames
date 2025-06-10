@@ -4,44 +4,44 @@ import { GameCollection, GameMetadata } from "@/app/types/games";
 // Add new language learning activities here and they'll automatically appear!
 
 export const GAMES: GameMetadata[] = [
-  // ✅ EXISTING GAMES (Reframed for language learning)
+  // ✅ EXISTING GAMES (Alphabet Learning)
   {
-    id: "gods-of-olympus",
-    title: "Greek Gods Memory",
-    description: "Learn the names of Greek gods and their domains in Greek",
-    status: "beta",
-    icon: "⚡",
+    id: "greek-alphabet-master",
+    title: "Greek Alphabet Master",
+    description:
+      "Match uppercase and lowercase Greek letters to master the alphabet",
+    status: "available",
+    icon: "Αα",
     href: "/memory",
     category: "memory",
     difficulty: "easy",
     estimatedPlayTime: "3-8 min",
     features: [
-      "12 Greek Gods",
-      "Greek Vocabulary",
-      "Visual Learning",
-      "Mythology Context",
+      "24 Greek Letters",
+      "Upper & Lowercase",
+      "Letter Names",
+      "Pronunciation Guide",
     ],
     releaseDate: "2024-12-09",
-    version: "0.1.0-beta",
+    version: "1.0.0",
   },
 
   // 📚 CORE LANGUAGE LEARNING GAMES
   {
-    id: "alphabet-master",
-    title: "Greek Alphabet Master",
-    description:
-      "Master the 24 letters of the Greek alphabet with interactive exercises",
+    id: "alphabet-writing",
+    title: "Greek Writing Practice",
+    description: "Learn to write Greek letters with guided practice exercises",
     status: "coming-soon",
-    icon: "Αα",
-    href: "/alphabet",
+    icon: "✍️",
+    href: "/writing",
     category: "puzzle",
     difficulty: "easy",
     estimatedPlayTime: "5-15 min",
     features: [
-      "24 Greek Letters",
-      "Letter Recognition",
-      "Pronunciation Guide",
-      "Writing Practice",
+      "Letter Tracing",
+      "Stroke Order",
+      "Practice Sheets",
+      "Progress Tracking",
     ],
     releaseDate: "2025-01-15",
   },
@@ -164,8 +164,8 @@ export const GAMES: GameMetadata[] = [
 
 // 🏆 FEATURED LEARNING ACTIVITIES (highlight on homepage)
 export const FEATURED_GAME_IDS = [
-  "gods-of-olympus",
-  "alphabet-master",
+  "greek-alphabet-master",
+  "alphabet-writing",
   "everyday-vocabulary",
 ];
 
