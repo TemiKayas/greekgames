@@ -1,26 +1,97 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Greek-inspired color palette */
+  --background: #0f1419;
+  --surface: #1a2332;
+  --foreground: #f4f1e8;
+  --primary: #d4af37; /* Golden */
+  --primary-dark: #b8941f;
+  --secondary: #8b4513; /* Bronze */
+  --accent: #dc143c; /* Deep red */
+  --muted: #64748b;
+  --border: #334155;
+  
+  /* Light mode overrides */
+  --background-light: #fef9e7;
+  --surface-light: #ffffff;
+  --foreground-light: #1e293b;
+  --border-light: #e2e8f0;
 }
 
 @theme inline {
+  /* Colors */
   --color-background: var(--background);
+  --color-surface: var(--surface);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-primary: var(--primary);
+  --color-primary-dark: var(--primary-dark);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  
+  /* Typography */
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-mono: ui-monospace, 'Fira Code', monospace;
+  
+  /* Spacing & Layout */
+  --spacing-hero: 8rem;
+  --spacing-section: 6rem;
+  --border-radius-card: 0.75rem;
+  --border-radius-button: 0.5rem;
+  
+  /* Shadows */
+  --shadow-card: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-glow: 0 0 20px rgb(212 175 55 / 0.3);
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: var(--background-light);
+    --surface: var(--surface-light);
+    --foreground: var(--foreground-light);
+    --border: var(--border-light);
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body);
+  line-height: 1.6;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-dark);
+}
+
+/* Greek-inspired decorative elements */
+.greek-pattern {
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 10px,
+    var(--primary) 10px,
+    var(--primary) 12px
+  );
+}
+
+.golden-gradient {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
 }
