@@ -1,21 +1,25 @@
-import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
-  // Placeholder games data - will be replaced with real data later
+  // Game data with updated status
   const featuredGames = [
     {
       id: 1,
+      title: "Gods of Olympus",
+      description: "Test your memory with the mighty Greek gods",
+      status: "Beta Available",
+      image: "⚡",
+      href: "/memory",
+      available: true,
+    },
+    {
+      id: 2,
       title: "Odyssey Quest",
       description: "Embark on an epic journey through ancient Greece",
       status: "Coming Soon",
       image: "🏛️",
-    },
-    {
-      id: 2,
-      title: "Gods of Olympus",
-      description: "Battle alongside the mighty Greek gods",
-      status: "In Development",
-      image: "⚡",
+      href: "#",
+      available: false,
     },
     {
       id: 3,
@@ -23,6 +27,8 @@ export default function Home() {
       description: "Lead your army to victory in ancient battles",
       status: "Planning",
       image: "🛡️",
+      href: "#",
+      available: false,
     },
   ];
 
@@ -72,16 +78,30 @@ export default function Home() {
                     {game.title}
                   </h3>
                   <p className="text-foreground/70 mb-4">{game.description}</p>
-                  <span className="inline-block px-4 py-2 bg-primary/20 text-primary rounded-[--border-radius-button] text-sm font-medium">
+                  <span
+                    className={`inline-block px-4 py-2 rounded-[--border-radius-button] text-sm font-medium ${
+                      game.available
+                        ? "bg-primary/20 text-primary"
+                        : "bg-muted/20 text-muted"
+                    }`}
+                  >
                     {game.status}
                   </span>
                 </div>
-                <button
-                  className="w-full bg-primary hover:bg-primary-dark text-background font-semibold py-3 px-6 rounded-[--border-radius-button] transition-colors duration-200 opacity-50 cursor-not-allowed"
-                  disabled
-                >
-                  Play Game
-                </button>
+                {game.available ? (
+                  <Link href={game.href}>
+                    <button className="w-full bg-primary hover:bg-primary-dark text-background font-semibold py-3 px-6 rounded-[--border-radius-button] transition-colors duration-200">
+                      Play Game
+                    </button>
+                  </Link>
+                ) : (
+                  <button
+                    className="w-full bg-primary hover:bg-primary-dark text-background font-semibold py-3 px-6 rounded-[--border-radius-button] transition-colors duration-200 opacity-50 cursor-not-allowed"
+                    disabled
+                  >
+                    Coming Soon
+                  </button>
+                )}
               </div>
             ))}
           </div>
@@ -110,11 +130,19 @@ export default function Home() {
               <p className="text-sm text-muted">Next.js</p>
             </div>
           </div>
-          <p className="text-foreground/70 max-w-2xl mx-auto">
+          <p className="text-foreground/70 max-w-2xl mx-auto mb-6">
             Experience the power of ancient myths through cutting-edge web
             technologies. Our games combine the timeless appeal of Greek
             mythology with modern interactive design.
           </p>
+          <div className="bg-primary/10 border border-primary/20 rounded-lg p-4 inline-block">
+            <p className="text-primary font-semibold">
+              🚀 Beta Testing Available!
+            </p>
+            <p className="text-sm text-primary/80">
+              Try our Gods of Olympus memory game
+            </p>
+          </div>
         </section>
       </main>
 
