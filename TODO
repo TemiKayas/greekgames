@@ -53,6 +53,18 @@ How to make a Greek-themed web game with:
           ✔ /utils/game (greekGods.ts)
           ✔ /utils/games (registry.ts)
 
+
+Games:
+  ✔ Alphabet pair memory matching game @started(25-06-10 19:21) @done(25-06-10 19:21) @lasted(20 mins)
+  ✔ had to fix a bug with the vercel deployment, it was saomthing with my account verification. on git, fixed it with a bunch of git user settings @started(25-06-10 19:54) @done(25-06-10 19:54) @lasted(27 mins)
+  ☐ Greek writting practice game
+
+
+
+
+
+
+
 ## 3) Core Game Components
   ☐ Create GameBoard/GameArea component
   ☐ Build Player/Character component
@@ -70,7 +82,6 @@ How to make a Greek-themed web game with:
   ☐ Create save/load functionality (localStorage)
 
 ## 5) User Interface & Experience
-  ☐ Design main menu with Greek mythology theme
   ☐ Create settings/options menu
   ☐ Build game over/victory screens
   ☐ Implement responsive design for mobile
@@ -93,7 +104,7 @@ How to make a Greek-themed web game with:
   ☐ Performance testing and profiling
 
 ## 8) Deployment & Distribution
-  ☐ Setup Vercel deployment
+  ✔ Setup Vercel deployment @started(25-06-10 19:19) @done(25-06-10 19:19) @lasted(1m)
   ☐ Configure custom domain (optional)
   ☐ Add analytics tracking (Google Analytics/Vercel Analytics)
   ☐ Setup error tracking (Sentry)

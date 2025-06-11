@@ -30,20 +30,22 @@ export const GAMES: GameMetadata[] = [
   {
     id: "alphabet-writing",
     title: "Greek Writing Practice",
-    description: "Learn to write Greek letters with guided practice exercises",
-    status: "coming-soon",
+    description:
+      "Practice Greek writing with fill-in-the-blank exercises for verbs, vocabulary, and sentences",
+    status: "available",
     icon: "✍️",
     href: "/writing",
     category: "puzzle",
-    difficulty: "easy",
-    estimatedPlayTime: "5-15 min",
+    difficulty: "medium",
+    estimatedPlayTime: "8-15 min",
     features: [
-      "Letter Tracing",
-      "Stroke Order",
-      "Practice Sheets",
-      "Progress Tracking",
+      "Verb Conjugations",
+      "Basic Vocabulary",
+      "Sentence Completion",
+      "Greek Keyboard Support",
     ],
-    releaseDate: "2025-01-15",
+    releaseDate: "2024-12-10",
+    version: "1.0.0",
   },
 
   {
