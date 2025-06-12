@@ -224,7 +224,6 @@ export default function Home() {
             View Progress Details
           </button>
         </motion.section>
-
       </main>
 
       {/* Footer CTA */}

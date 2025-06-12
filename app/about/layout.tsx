@@ -1,8 +1,10 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Learn Modern Greek Online - Free Interactive Games & Vocabulary Exercises | Greek Games",
-  description: "Master Modern Greek with our free interactive learning games, vocabulary exercises, and grammar practice. Learn Greek alphabet, vocabulary, and grammar through engaging activities designed for all skill levels.",
+  title:
+    "Learn Modern Greek Online - Free Interactive Games & Vocabulary Exercises | Greek Games",
+  description:
+    "Master Modern Greek with our free interactive learning games, vocabulary exercises, and grammar practice. Learn Greek alphabet, vocabulary, and grammar through engaging activities designed for all skill levels.",
   keywords: [
     "Greek learning games",
     "Greek vocabulary exercises",
@@ -23,7 +25,7 @@ export const metadata: Metadata = {
     "Greek language course",
     "Greek language app",
     "Greek language learning platform",
-    "Modern Greek vocabulary"
+    "Modern Greek vocabulary",
   ],
   authors: [{ name: "Blue Dev Digital" }],
   creator: "Blue Dev Digital",
@@ -40,8 +42,10 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Learn Modern Greek Online - Free Interactive Games & Vocabulary Exercises",
-    description: "Master Modern Greek with our free interactive learning games, vocabulary exercises, and grammar practice. Perfect for beginners and intermediate learners.",
+    title:
+      "Learn Modern Greek Online - Free Interactive Games & Vocabulary Exercises",
+    description:
+      "Master Modern Greek with our free interactive learning games, vocabulary exercises, and grammar practice. Perfect for beginners and intermediate learners.",
     url: "https://greekgames.com/about",
     siteName: "Greek Games",
     locale: "en_US",
@@ -49,8 +53,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Learn Modern Greek Online - Free Interactive Games & Vocabulary Exercises",
-    description: "Master Modern Greek with our free interactive learning games, vocabulary exercises, and grammar practice.",
+    title:
+      "Learn Modern Greek Online - Free Interactive Games & Vocabulary Exercises",
+    description:
+      "Master Modern Greek with our free interactive learning games, vocabulary exercises, and grammar practice.",
     creator: "@BlueDevDigital",
   },
   alternates: {
