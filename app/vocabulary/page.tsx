@@ -1,10 +1,10 @@
 "use client";
 
 import {
-    getVocabularyByDifficulty,
-    GreekVocabularyItem,
-    shuffleArray,
-    VOCABULARY_CONFIG,
+  getVocabularyByDifficulty,
+  GreekVocabularyItem,
+  shuffleArray,
+  VOCABULARY_CONFIG,
 } from "@/app/utils/vocabulary/greekWords";
 import { AnimatePresence, motion } from "framer-motion";
 import { Home, Play, RotateCcw, Trophy } from "lucide-react";
@@ -32,7 +32,9 @@ export default function VocabularyGame() {
   const [shuffledWords, setShuffledWords] = useState<GreekVocabularyItem[]>([]);
   const [dropZones, setDropZones] = useState<DropZone[]>([]);
   const [draggedItem, setDraggedItem] = useState<DraggedItem | null>(null);
-  const [selectedWord, setSelectedWord] = useState<GreekVocabularyItem | null>(null);
+  const [selectedWord, setSelectedWord] = useState<GreekVocabularyItem | null>(
+    null
+  );
   const [score, setScore] = useState(0);
   const [matches, setMatches] = useState(0);
   const [timeLeft, setTimeLeft] = useState(0);
@@ -112,7 +114,11 @@ export default function VocabularyGame() {
       setDropZones((prev) =>
         prev.map((zone) =>
           zone.id === dropZone.id
-            ? { ...zone, isMatched: true, draggedItem: { id: word.id, greek: word.greek } }
+            ? {
+                ...zone,
+                isMatched: true,
+                draggedItem: { id: word.id, greek: word.greek },
+              }
             : zone
         )
       );
@@ -120,9 +126,7 @@ export default function VocabularyGame() {
       setScore(score + 100);
 
       // Remove the word from available words
-      setShuffledWords((prev) =>
-        prev.filter((w) => w.id !== word.id)
-      );
+      setShuffledWords((prev) => prev.filter((w) => w.id !== word.id));
 
       // Clear selections
       setSelectedWord(null);
@@ -148,7 +152,7 @@ export default function VocabularyGame() {
     e.preventDefault();
     if (!draggedItem) return;
 
-    const word = vocabulary.find(w => w.id === draggedItem.id);
+    const word = vocabulary.find((w) => w.id === draggedItem.id);
     if (word) {
       handleMatch(word, dropZone);
     }
@@ -208,8 +212,12 @@ export default function VocabularyGame() {
                 🎯 How to Play
               </h3>
               <p className="text-foreground/80 text-sm sm:text-base leading-relaxed">
-                <strong>Drag & Drop:</strong> Drag Greek words onto matching images<br/>
-                <strong>Click to Match:</strong> Click a word, then click its matching image<br/>
+                <strong>Drag &amp; Drop:</strong> Drag Greek words onto matching
+                images
+                <br />
+                <strong>Click to Match:</strong> Click a word, then click its
+                matching image
+                <br />
                 Learn pronunciation and meaning as you play!
               </p>
             </div>
@@ -297,7 +305,8 @@ export default function VocabularyGame() {
                   <div className="text-xl sm:text-2xl md:text-3xl font-bold text-primary">
                     {vocabulary.length > 0
                       ? Math.round((matches / vocabulary.length) * 100)
-                      : 0}%
+                      : 0}
+                    %
                   </div>
                 </div>
               </div>
@@ -367,7 +376,9 @@ export default function VocabularyGame() {
             <div className="text-xs sm:text-sm text-muted">Matched</div>
           </div>
           <div className="bg-surface border border-border rounded-lg p-3 sm:p-4 text-center">
-            <div className="text-lg sm:text-2xl font-bold text-primary">{score}</div>
+            <div className="text-lg sm:text-2xl font-bold text-primary">
+              {score}
+            </div>
             <div className="text-xs sm:text-sm text-muted">Score</div>
           </div>
           <div className="bg-surface border border-border rounded-lg p-3 sm:p-4 text-center">
@@ -426,7 +437,9 @@ export default function VocabularyGame() {
                         ? "bg-primary-dark text-background scale-105 shadow-lg"
                         : "bg-primary text-background hover:bg-primary-dark hover:scale-105"
                     }`}
-                    whileHover={{ scale: selectedWord?.id === word.id ? 1.05 : 1.02 }}
+                    whileHover={{
+                      scale: selectedWord?.id === word.id ? 1.05 : 1.02,
+                    }}
                     whileTap={{ scale: 0.98 }}
                   >
                     <div className="font-bold">{word.greek}</div>
@@ -441,7 +454,9 @@ export default function VocabularyGame() {
             </div>
             {shuffledWords.length === 0 && (
               <div className="text-center text-muted py-4 sm:py-6">
-                <p className="text-sm sm:text-base">All words have been matched! 🎉</p>
+                <p className="text-sm sm:text-base">
+                  All words have been matched! 🎉
+                </p>
               </div>
             )}
           </div>

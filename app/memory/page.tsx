@@ -2,8 +2,8 @@
 
 import { useGameStore } from "@/app/stores/gameStore";
 import {
-    DIFFICULTY_DESCRIPTIONS,
-    GREEK_ALPHABET,
+  DIFFICULTY_DESCRIPTIONS,
+  GREEK_ALPHABET,
 } from "@/app/utils/game/greekGods";
 import { motion } from "framer-motion";
 import { Home, Pause, Play, RotateCcw } from "lucide-react";
@@ -132,7 +132,9 @@ export default function AlphabetGame() {
         {/* Stats */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4 mb-6 sm:mb-8">
           <div className="bg-surface border border-border rounded-lg p-3 sm:p-4 text-center">
-            <div className="text-lg sm:text-2xl font-bold text-primary">{stats.moves}</div>
+            <div className="text-lg sm:text-2xl font-bold text-primary">
+              {stats.moves}
+            </div>
             <div className="text-xs sm:text-sm text-muted">Moves</div>
           </div>
           <div className="bg-surface border border-border rounded-lg p-3 sm:p-4 text-center">
@@ -142,7 +144,9 @@ export default function AlphabetGame() {
             <div className="text-xs sm:text-sm text-muted">Letters Learned</div>
           </div>
           <div className="bg-surface border border-border rounded-lg p-3 sm:p-4 text-center">
-            <div className="text-lg sm:text-2xl font-bold text-primary">{stats.score}</div>
+            <div className="text-lg sm:text-2xl font-bold text-primary">
+              {stats.score}
+            </div>
             <div className="text-xs sm:text-sm text-muted">Score</div>
           </div>
           <div className="bg-surface border border-border rounded-lg p-3 sm:p-4 text-center">
@@ -225,13 +229,19 @@ export default function AlphabetGame() {
                 Congratulations!
               </h2>
               <p className="text-foreground/80 mb-4 sm:mb-6 text-sm sm:text-base">
-                You've mastered the Greek alphabet! You completed the{" "}
+                You&apos;ve mastered the Greek alphabet! You completed the{" "}
                 <span className="font-semibold text-primary capitalize">
                   {difficulty}
                 </span>{" "}
                 level in{" "}
-                <span className="font-semibold text-primary">{stats.moves}</span>{" "}
-                moves.
+                <span className="font-semibold text-primary">
+                  {stats.moves}
+                </span>{" "}
+                moves with a score of{" "}
+                <span className="font-semibold text-primary">
+                  {stats.score}
+                </span>
+                !
               </p>
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <button
@@ -263,7 +273,7 @@ export default function AlphabetGame() {
                 Game Paused
               </h2>
               <p className="text-foreground/80 mb-4 sm:mb-6 text-sm sm:text-base">
-                Take your time! Click continue when you're ready to resume.
+                Take your time! Click continue when you&apos;re ready to resume.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <button

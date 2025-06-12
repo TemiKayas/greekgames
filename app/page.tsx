@@ -177,7 +177,9 @@ export default function Home() {
               <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-1 sm:mb-2">
                 {all.length}
               </div>
-              <p className="text-muted text-xs sm:text-sm">Learning Activities</p>
+              <p className="text-muted text-xs sm:text-sm">
+                Learning Activities
+              </p>
             </div>
             <div className="text-center">
               <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-1 sm:mb-2">

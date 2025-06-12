@@ -17,7 +17,8 @@ const WRITING_EXERCISES: GreekWritingExercise[] = [
     correctAnswer: "είμαι",
     translation: "I am a student",
     hint: "The verb 'to be' in first person singular",
-    explanation: "Είμαι is the first person singular form of the verb 'to be' (είμαι, είσαι, είναι...)",
+    explanation:
+      "Είμαι is the first person singular form of the verb 'to be' (είμαι, είσαι, είναι...)",
   },
   {
     id: "verb-2",
@@ -27,7 +28,8 @@ const WRITING_EXERCISES: GreekWritingExercise[] = [
     correctAnswer: "έχεις",
     translation: "You have a house",
     hint: "The verb 'to have' in second person singular",
-    explanation: "Έχεις is the second person singular form of 'to have' (έχω, έχεις, έχει...)",
+    explanation:
+      "Έχεις is the second person singular form of 'to have' (έχω, έχεις, έχει...)",
   },
   {
     id: "verb-3",
@@ -37,7 +39,8 @@ const WRITING_EXERCISES: GreekWritingExercise[] = [
     correctAnswer: "κάνουμε",
     translation: "We do the work",
     hint: "The verb 'to do/make' in first person plural",
-    explanation: "Κάνουμε is the first person plural form of 'to do/make' (κάνω, κάνεις, κάνει, κάνουμε...)",
+    explanation:
+      "Κάνουμε is the first person plural form of 'to do/make' (κάνω, κάνεις, κάνει, κάνουμε...)",
   },
   {
     id: "verb-4",
@@ -47,7 +50,8 @@ const WRITING_EXERCISES: GreekWritingExercise[] = [
     correctAnswer: "πάνε",
     translation: "They go to school",
     hint: "The verb 'to go' in third person plural",
-    explanation: "Πάνε is the third person plural form of 'to go' (πάω, πας, πάει, πάμε, πάτε, πάνε)",
+    explanation:
+      "Πάνε is the third person plural form of 'to go' (πάω, πας, πάει, πάμε, πάτε, πάνε)",
   },
 
   // Basic Vocabulary
@@ -59,7 +63,8 @@ const WRITING_EXERCISES: GreekWritingExercise[] = [
     correctAnswer: "σπίτι",
     translation: "My house is big",
     hint: "A place where you live",
-    explanation: "Σπίτι means 'house' or 'home' - it's a neuter noun (το σπίτι)",
+    explanation:
+      "Σπίτι means 'house' or 'home' - it's a neuter noun (το σπίτι)",
   },
   {
     id: "vocab-2",
@@ -79,7 +84,8 @@ const WRITING_EXERCISES: GreekWritingExercise[] = [
     correctAnswer: "καλός",
     translation: "He is a good person",
     hint: "An adjective meaning positive/nice",
-    explanation: "Καλός means 'good' - it changes form based on gender (καλός/καλή/καλό)",
+    explanation:
+      "Καλός means 'good' - it changes form based on gender (καλός/καλή/καλό)",
   },
   {
     id: "vocab-4",
@@ -101,7 +107,8 @@ const WRITING_EXERCISES: GreekWritingExercise[] = [
     correctAnswer: "Πώς",
     translation: "What is your name?",
     hint: "Question word meaning 'how'",
-    explanation: "Πώς σε λένε; is a common way to ask 'What's your name?' (literally: How do they call you?)",
+    explanation:
+      "Πώς σε λένε; is a common way to ask 'What's your name?' (literally: How do they call you?)",
   },
   {
     id: "sentence-2",
@@ -111,7 +118,8 @@ const WRITING_EXERCISES: GreekWritingExercise[] = [
     correctAnswer: "στην",
     translation: "I live in Athens",
     hint: "Preposition for 'in' with feminine cities",
-    explanation: "Στην is the contraction of 'στη + την' - used with feminine cities like η Αθήνα",
+    explanation:
+      "Στην is the contraction of 'στη + την' - used with feminine cities like η Αθήνα",
   },
   {
     id: "sentence-3",
@@ -121,7 +129,8 @@ const WRITING_EXERCISES: GreekWritingExercise[] = [
     correctAnswer: "πολύ",
     translation: "I like Greek music very much",
     hint: "Adverb meaning 'very' or 'a lot'",
-    explanation: "Πολύ means 'very' or 'much' - used to intensify adjectives or express degree",
+    explanation:
+      "Πολύ means 'very' or 'much' - used to intensify adjectives or express degree",
   },
   {
     id: "sentence-4",
@@ -131,7 +140,8 @@ const WRITING_EXERCISES: GreekWritingExercise[] = [
     correctAnswer: "Πόσα",
     translation: "How old are you?",
     hint: "Question word for 'how many'",
-    explanation: "Πόσα χρόνια είσαι; literally means 'How many years are you?' - the standard way to ask age",
+    explanation:
+      "Πόσα χρόνια είσαι; literally means 'How many years are you?' - the standard way to ask age",
   },
 ];
 
@@ -143,18 +153,23 @@ const CATEGORIES = {
 
 export default function WritingGame() {
   const [gameStarted, setGameStarted] = useState(false);
-  const [currentExercise, setCurrentExercise] = useState<GreekWritingExercise | null>(null);
+  const [currentExercise, setCurrentExercise] =
+    useState<GreekWritingExercise | null>(null);
   const [userAnswer, setUserAnswer] = useState("");
   const [showHint, setShowHint] = useState(false);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const [completedExercises, setCompletedExercises] = useState<string[]>([]);
   const [gameComplete, setGameComplete] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [availableExercises, setAvailableExercises] = useState<GreekWritingExercise[]>([]);
+  const [availableExercises, setAvailableExercises] = useState<
+    GreekWritingExercise[]
+  >([]);
 
   useEffect(() => {
     if (gameStarted && selectedCategory) {
-      const exercises = WRITING_EXERCISES.filter(ex => ex.category === selectedCategory);
+      const exercises = WRITING_EXERCISES.filter(
+        (ex) => ex.category === selectedCategory
+      );
       setAvailableExercises(exercises);
       if (exercises.length > 0) {
         setCurrentExercise(exercises[0]);
@@ -175,7 +190,9 @@ export default function WritingGame() {
   const checkAnswer = () => {
     if (!currentExercise || !userAnswer.trim()) return;
 
-    const correct = userAnswer.trim().toLowerCase() === currentExercise.correctAnswer.toLowerCase();
+    const correct =
+      userAnswer.trim().toLowerCase() ===
+      currentExercise.correctAnswer.toLowerCase();
     setIsCorrect(correct);
 
     if (correct) {
@@ -183,7 +200,9 @@ export default function WritingGame() {
       setCompletedExercises(newCompleted);
 
       setTimeout(() => {
-        const remaining = availableExercises.filter(ex => !newCompleted.includes(ex.id));
+        const remaining = availableExercises.filter(
+          (ex) => !newCompleted.includes(ex.id)
+        );
         if (remaining.length > 0) {
           setCurrentExercise(remaining[0]);
           setUserAnswer("");
@@ -210,8 +229,9 @@ export default function WritingGame() {
   const skipExercise = () => {
     if (!currentExercise) return;
 
-    const remaining = availableExercises.filter(ex =>
-      ex.id !== currentExercise.id && !completedExercises.includes(ex.id)
+    const remaining = availableExercises.filter(
+      (ex) =>
+        ex.id !== currentExercise.id && !completedExercises.includes(ex.id)
     );
 
     if (remaining.length > 0) {
@@ -246,7 +266,8 @@ export default function WritingGame() {
                 🎯 How to Play
               </h3>
               <p className="text-foreground/80 text-sm sm:text-base leading-relaxed">
-                Fill in the missing Greek words to complete each sentence. Use hints when needed and learn proper grammar and vocabulary usage!
+                Fill in the missing Greek words to complete each sentence. Use
+                hints when needed and learn proper grammar and vocabulary usage!
               </p>
             </div>
           </div>
@@ -257,7 +278,9 @@ export default function WritingGame() {
             </h2>
             <div className="grid gap-3 sm:gap-4">
               {Object.entries(CATEGORIES).map(([key, title]) => {
-                const exerciseCount = WRITING_EXERCISES.filter(ex => ex.category === key).length;
+                const exerciseCount = WRITING_EXERCISES.filter(
+                  (ex) => ex.category === key
+                ).length;
                 return (
                   <motion.button
                     key={key}
@@ -276,8 +299,11 @@ export default function WritingGame() {
                         </p>
                       </div>
                       <div className="text-xl sm:text-2xl">
-                        {key === "verb-conjugations" ? "🔄" :
-                         key === "basic-vocabulary" ? "📚" : "✏️"}
+                        {key === "verb-conjugations"
+                          ? "🔄"
+                          : key === "basic-vocabulary"
+                            ? "📚"
+                            : "✏️"}
                       </div>
                     </div>
                   </motion.button>
@@ -300,9 +326,11 @@ export default function WritingGame() {
               Excellent Work!
             </h1>
             <p className="text-base sm:text-lg text-foreground/80 mb-6 sm:mb-8">
-              You've completed all exercises in{" "}
+              You&apos;ve completed all exercises in{" "}
               <span className="font-semibold text-primary">
-                {selectedCategory ? CATEGORIES[selectedCategory as keyof typeof CATEGORIES] : ""}
+                {selectedCategory
+                  ? CATEGORIES[selectedCategory as keyof typeof CATEGORIES]
+                  : ""}
               </span>
               ! Your Greek writing skills are improving.
             </p>
@@ -317,7 +345,9 @@ export default function WritingGame() {
               <div className="text-2xl sm:text-3xl font-bold text-primary mb-2">
                 {completedExercises.length}/{availableExercises.length}
               </div>
-              <p className="text-sm sm:text-base text-muted">Exercises Completed</p>
+              <p className="text-sm sm:text-base text-muted">
+                Exercises Completed
+              </p>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
@@ -367,7 +397,9 @@ export default function WritingGame() {
         <div className="max-w-2xl mx-auto mb-6 sm:mb-8">
           <div className="flex items-center justify-between mb-2 sm:mb-3">
             <span className="text-sm sm:text-base text-muted">
-              {selectedCategory ? CATEGORIES[selectedCategory as keyof typeof CATEGORIES] : ""}
+              {selectedCategory
+                ? CATEGORIES[selectedCategory as keyof typeof CATEGORIES]
+                : ""}
             </span>
             <span className="text-sm sm:text-base text-primary font-semibold">
               {completedExercises.length + 1}/{availableExercises.length}
@@ -396,7 +428,11 @@ export default function WritingGame() {
               >
                 <div className="text-center mb-4 sm:mb-6">
                   <span className="inline-block bg-primary/10 text-primary px-3 py-1 rounded-full text-xs sm:text-sm font-medium mb-3 sm:mb-4">
-                    {CATEGORIES[currentExercise.category as keyof typeof CATEGORIES]}
+                    {
+                      CATEGORIES[
+                        currentExercise.category as keyof typeof CATEGORIES
+                      ]
+                    }
                   </span>
                   <h2 className="font-display text-xl sm:text-2xl md:text-3xl font-semibold text-primary mb-2 sm:mb-3">
                     Complete the Sentence
@@ -405,20 +441,22 @@ export default function WritingGame() {
 
                 {/* Greek Sentence */}
                 <div className="text-center mb-4 sm:mb-6">
-                                     <p className="text-lg sm:text-xl md:text-2xl font-display text-foreground mb-2 sm:mb-3 leading-relaxed">
-                     {currentExercise.sentence.split("_____").map((part: string, index: number, array: string[]) => (
-                       <span key={index}>
-                         {part}
-                         {index < array.length - 1 && (
-                           <span className="inline-block min-w-[80px] sm:min-w-[120px] mx-1 sm:mx-2 px-2 sm:px-3 py-1 bg-primary/20 border-2 border-dashed border-primary rounded text-base sm:text-lg">
-                             {userAnswer || "?"}
-                           </span>
-                         )}
-                       </span>
-                     ))}
+                  <p className="text-lg sm:text-xl md:text-2xl font-display text-foreground mb-2 sm:mb-3 leading-relaxed">
+                    {currentExercise.sentence
+                      .split("_____")
+                      .map((part: string, index: number, array: string[]) => (
+                        <span key={index}>
+                          {part}
+                          {index < array.length - 1 && (
+                            <span className="inline-block min-w-[80px] sm:min-w-[120px] mx-1 sm:mx-2 px-2 sm:px-3 py-1 bg-primary/20 border-2 border-dashed border-primary rounded text-base sm:text-lg">
+                              {userAnswer || "?"}
+                            </span>
+                          )}
+                        </span>
+                      ))}
                   </p>
                   <p className="text-sm sm:text-base text-muted italic">
-                    "{currentExercise.translation}"
+                    &ldquo;{currentExercise.translation}&rdquo;
                   </p>
                 </div>
 
@@ -452,10 +490,17 @@ export default function WritingGame() {
                     className="mb-4 sm:mb-6 p-3 sm:p-4 bg-primary/10 border border-primary/20 rounded-lg"
                   >
                     <div className="flex items-center gap-2 mb-1 sm:mb-2">
-                      <Lightbulb size={16} className="text-primary sm:w-4 sm:h-4" />
-                      <span className="text-sm sm:text-base font-medium text-primary">Hint</span>
+                      <Lightbulb
+                        size={16}
+                        className="text-primary sm:w-4 sm:h-4"
+                      />
+                      <span className="text-sm sm:text-base font-medium text-primary">
+                        Hint
+                      </span>
                     </div>
-                    <p className="text-sm sm:text-base text-foreground/80">{currentExercise.hint}</p>
+                    <p className="text-sm sm:text-base text-foreground/80">
+                      {currentExercise.hint}
+                    </p>
                   </motion.div>
                 )}
 
@@ -474,22 +519,34 @@ export default function WritingGame() {
                     >
                       <div className="flex items-center gap-2 mb-1 sm:mb-2">
                         {isCorrect ? (
-                          <CheckCircle size={16} className="text-green-400 sm:w-5 sm:h-5" />
+                          <CheckCircle
+                            size={16}
+                            className="text-green-400 sm:w-5 sm:h-5"
+                          />
                         ) : (
-                          <span className="text-red-400 text-lg sm:text-xl">✗</span>
+                          <span className="text-red-400 text-lg sm:text-xl">
+                            ✗
+                          </span>
                         )}
-                        <span className={`font-medium text-sm sm:text-base ${
-                          isCorrect ? "text-green-400" : "text-red-400"
-                        }`}>
+                        <span
+                          className={`font-medium text-sm sm:text-base ${
+                            isCorrect ? "text-green-400" : "text-red-400"
+                          }`}
+                        >
                           {isCorrect ? "Correct!" : "Try again"}
                         </span>
                       </div>
                       {!isCorrect && (
                         <p className="text-sm sm:text-base text-foreground/80 mb-2">
-                          The correct answer is: <span className="font-semibold text-primary">{currentExercise.correctAnswer}</span>
+                          The correct answer is:{" "}
+                          <span className="font-semibold text-primary">
+                            {currentExercise.correctAnswer}
+                          </span>
                         </p>
                       )}
-                      <p className="text-sm sm:text-base text-foreground/80">{currentExercise.explanation}</p>
+                      <p className="text-sm sm:text-base text-foreground/80">
+                        {currentExercise.explanation}
+                      </p>
                     </motion.div>
                   )}
                 </AnimatePresence>

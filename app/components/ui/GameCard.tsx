@@ -83,7 +83,7 @@ export function GameCard({ game, index, showFeatures = false }: GameCardProps) {
         {showFeatures && game.features && (
           <div className="mb-4 sm:mb-6">
             <h4 className="text-xs sm:text-sm font-medium text-primary mb-2 sm:mb-3">
-              What you'll learn:
+              What you&apos;ll learn:
             </h4>
             <div className="flex flex-wrap gap-1 sm:gap-2">
               {game.features.slice(0, 3).map((feature, i) => (
