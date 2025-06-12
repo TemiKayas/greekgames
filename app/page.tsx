@@ -17,13 +17,13 @@ export default function Home() {
       {/* Hero Section */}
       <header className="relative overflow-hidden">
         <div className="absolute inset-0 greek-pattern opacity-10"></div>
-        <div className="relative container mx-auto px-6 py-24 text-center">
+        <div className="relative container mx-auto px-4 sm:px-6 py-12 sm:py-16 md:py-24 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mb-6"
+            className="mb-4 sm:mb-6"
           >
-            <span className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium mb-6">
+            <span className="inline-flex items-center gap-2 bg-primary/10 text-primary px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-medium mb-4 sm:mb-6">
               🇬🇷 Modern Greek Language Learning
             </span>
           </motion.div>
@@ -32,7 +32,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="font-display text-5xl md:text-7xl font-bold text-primary mb-6"
+            className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-primary mb-4 sm:mb-6"
           >
             Learn Greek
             <span className="block text-foreground">Through Play</span>
@@ -42,7 +42,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-xl md:text-2xl text-muted mb-8 max-w-3xl mx-auto"
+            className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted mb-6 sm:mb-8 max-w-3xl mx-auto px-4"
           >
             Master Modern Greek with interactive games, vocabulary exercises,
             and cultural immersion
@@ -52,14 +52,14 @@ export default function Home() {
             initial={{ opacity: 0, scaleX: 0 }}
             animate={{ opacity: 1, scaleX: 1 }}
             transition={{ delay: 0.3 }}
-            className="h-1 w-24 golden-gradient mx-auto mb-8"
+            className="h-1 w-16 sm:w-24 golden-gradient mx-auto mb-6 sm:mb-8"
           ></motion.div>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="text-lg text-foreground/80 max-w-2xl mx-auto mb-12"
+            className="text-sm sm:text-base lg:text-lg text-foreground/80 max-w-2xl mx-auto mb-8 sm:mb-12 px-4"
           >
             From the Greek alphabet to everyday conversations, build your
             language skills with engaging activities rooted in Greek culture and
@@ -70,12 +70,12 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4"
           >
-            <button className="bg-primary hover:bg-primary-dark text-background font-semibold py-4 px-8 rounded-lg transition-colors text-lg">
+            <button className="bg-primary hover:bg-primary-dark text-background font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-lg transition-colors text-base sm:text-lg">
               Start Learning Free
             </button>
-            <button className="border border-primary text-primary hover:bg-primary/10 font-semibold py-4 px-8 rounded-lg transition-colors text-lg">
+            <button className="border border-primary text-primary hover:bg-primary/10 font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-lg transition-colors text-base sm:text-lg">
               Browse Activities
             </button>
           </motion.div>
@@ -83,31 +83,31 @@ export default function Home() {
       </header>
 
       {/* Learning Path Stats */}
-      <section className="container mx-auto px-6 py-16">
+      <section className="container mx-auto px-4 sm:px-6 py-8 sm:py-12 md:py-16">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16"
+          className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6 mb-8 sm:mb-12 md:mb-16"
         >
           {[
             {
-              icon: <BookOpen size={24} />,
+              icon: <BookOpen size={20} className="sm:w-6 sm:h-6" />,
               number: "500+",
               label: "Greek Words",
             },
             {
-              icon: <Target size={24} />,
+              icon: <Target size={20} className="sm:w-6 sm:h-6" />,
               number: `${all.length}`,
               label: "Learning Activities",
             },
             {
-              icon: <Zap size={24} />,
+              icon: <Zap size={20} className="sm:w-6 sm:h-6" />,
               number: "24",
               label: "Alphabet Letters",
             },
             {
-              icon: <Users size={24} />,
+              icon: <Users size={20} className="sm:w-6 sm:h-6" />,
               number: "∞",
               label: "Cultural Stories",
             },
@@ -117,39 +117,39 @@ export default function Home() {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.7 + index * 0.1 }}
-              className="text-center bg-surface/50 rounded-lg p-6 border border-border"
+              className="text-center bg-surface/50 rounded-lg p-3 sm:p-4 md:p-6 border border-border"
             >
-              <div className="text-primary mb-3 flex justify-center">
+              <div className="text-primary mb-2 sm:mb-3 flex justify-center">
                 {stat.icon}
               </div>
-              <div className="text-3xl font-bold text-primary mb-2">
+              <div className="text-xl sm:text-2xl md:text-3xl font-bold text-primary mb-1 sm:mb-2">
                 {stat.number}
               </div>
-              <p className="text-muted text-sm">{stat.label}</p>
+              <p className="text-muted text-xs sm:text-sm">{stat.label}</p>
             </motion.div>
           ))}
         </motion.div>
       </section>
 
       {/* Featured Learning Activities */}
-      <main className="container mx-auto px-6">
+      <main className="container mx-auto px-4 sm:px-6">
         <motion.section
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8 }}
-          className="mb-20"
+          className="mb-12 sm:mb-16 md:mb-20"
         >
-          <div className="text-center mb-12">
-            <h2 className="font-display text-4xl md:text-5xl font-semibold text-primary mb-4">
+          <div className="text-center mb-8 sm:mb-12">
+            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-primary mb-3 sm:mb-4">
               Start Your Greek Journey
             </h2>
-            <p className="text-lg text-muted max-w-2xl mx-auto">
+            <p className="text-sm sm:text-base lg:text-lg text-muted max-w-2xl mx-auto px-4">
               Interactive activities designed to make learning Greek engaging
               and effective
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
             {featured.map((game, index) => (
               <GameCard
                 key={game.id}
@@ -166,107 +166,116 @@ export default function Home() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.0 }}
-          className="text-center bg-surface/50 rounded-[--border-radius-card] p-8 md:p-12 border border-border mb-20"
+          className="text-center bg-surface/50 rounded-[--border-radius-card] p-6 sm:p-8 md:p-12 border border-border mb-12 sm:mb-16 md:mb-20"
         >
-          <h2 className="font-display text-3xl font-semibold text-primary mb-6">
+          <h2 className="font-display text-xl sm:text-2xl md:text-3xl font-semibold text-primary mb-4 sm:mb-6">
             Your Learning Dashboard
           </h2>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6 mb-6 sm:mb-8">
             <div className="text-center">
-              <div className="text-4xl md:text-5xl font-bold text-primary mb-2">
+              <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-1 sm:mb-2">
                 {all.length}
               </div>
-              <p className="text-muted text-sm">Learning Activities</p>
+              <p className="text-muted text-xs sm:text-sm">Learning Activities</p>
             </div>
             <div className="text-center">
-              <div className="text-4xl md:text-5xl font-bold text-primary mb-2">
+              <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-1 sm:mb-2">
                 {availableGames.length}
               </div>
-              <p className="text-muted text-sm">Ready to Play</p>
+              <p className="text-muted text-xs sm:text-sm">Ready to Play</p>
             </div>
             <div className="text-center">
-              <div className="text-4xl md:text-5xl font-bold text-primary mb-2">
+              <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-1 sm:mb-2">
                 {Object.keys(getGameCollection().categories).length}
               </div>
-              <p className="text-muted text-sm">Skill Areas</p>
+              <p className="text-muted text-xs sm:text-sm">Skill Areas</p>
             </div>
             <div className="text-center">
-              <div className="text-4xl md:text-5xl font-bold text-primary mb-2">
+              <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-1 sm:mb-2">
                 100%
               </div>
-              <p className="text-muted text-sm">Free Access</p>
+              <p className="text-muted text-xs sm:text-sm">Free Access</p>
             </div>
           </div>
 
-          {availableGames.length > 0 && (
-            <div className="bg-primary/10 border border-primary/20 rounded-lg p-6 inline-block">
-              <h3 className="text-primary font-semibold text-lg mb-2">
-                🚀 Ready to Start Learning?
-              </h3>
-              <p className="text-sm text-primary/80 mb-4">
-                {availableGames.length} activities are ready for you to explore
-              </p>
-              <button className="bg-primary hover:bg-primary-dark text-background font-semibold py-2 px-6 rounded-lg transition-colors">
-                Begin Your Journey
-              </button>
-            </div>
-          )}
+          <p className="text-foreground/70 text-sm sm:text-base max-w-lg mx-auto mb-6 sm:mb-8">
+            Track your progress across different learning categories and unlock
+            new challenges as you advance
+          </p>
+
+          <button className="bg-primary hover:bg-primary-dark text-background font-semibold py-2 sm:py-3 px-4 sm:px-6 rounded-lg transition-colors text-sm sm:text-base">
+            View Progress Details
+          </button>
         </motion.section>
 
-        {/* Learning Method Section */}
+        {/* Learning Categories */}
         <motion.section
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.2 }}
-          className="text-center bg-surface/50 rounded-[--border-radius-card] p-8 md:p-12 border border-border"
+          className="mb-12 sm:mb-16 md:mb-20"
         >
-          <h2 className="font-display text-3xl font-semibold text-primary mb-6">
-            Learn Through Greek Culture
-          </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
-            {[
-              { icon: "🏛️", title: "Mythology", desc: "Gods & Legends" },
-              { icon: "🎭", title: "Culture", desc: "Traditions & Arts" },
-              { icon: "🗣️", title: "Speaking", desc: "Real Conversations" },
-              { icon: "📝", title: "Writing", desc: "Greek Script" },
-            ].map((method, index) => (
-              <motion.div
-                key={method.title}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 1.3 + index * 0.1 }}
-                className="text-center group cursor-default"
-              >
-                <div className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">
-                  {method.icon}
-                </div>
-                <h3 className="font-semibold text-primary mb-1 group-hover:text-primary-dark transition-colors">
-                  {method.title}
-                </h3>
-                <p className="text-sm text-muted">{method.desc}</p>
-              </motion.div>
-            ))}
+          <div className="text-center mb-8 sm:mb-12">
+            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-semibold text-primary mb-3 sm:mb-4">
+              Learning Categories
+            </h2>
+            <p className="text-sm sm:text-base lg:text-lg text-muted max-w-2xl mx-auto px-4">
+              Explore different aspects of the Greek language through targeted
+              learning experiences
+            </p>
           </div>
-          <p className="text-foreground/70 max-w-2xl mx-auto">
-            Immerse yourself in authentic Greek culture while building language
-            skills. Our activities combine traditional learning methods with
-            modern technology for an engaging educational experience.
-          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
+            {Object.entries(getGameCollection().categories).map(
+              ([category, games]) => (
+                <motion.div
+                  key={category}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="bg-surface border border-border rounded-lg p-4 sm:p-6 hover:shadow-[--shadow-glow] transition-all duration-300"
+                >
+                  <h3 className="font-display text-lg sm:text-xl font-semibold text-primary mb-2 sm:mb-3 capitalize">
+                    {category}
+                  </h3>
+                  <p className="text-foreground/70 text-sm sm:text-base mb-3 sm:mb-4">
+                    {games.length} activities available
+                  </p>
+                  <div className="flex flex-wrap gap-1 sm:gap-2">
+                    {games.slice(0, 3).map((game) => (
+                      <span
+                        key={game.id}
+                        className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-md"
+                      >
+                        {game.title}
+                      </span>
+                    ))}
+                    {games.length > 3 && (
+                      <span className="text-xs bg-muted/10 text-muted px-2 py-1 rounded-md">
+                        +{games.length - 3} more
+                      </span>
+                    )}
+                  </div>
+                </motion.div>
+              )
+            )}
+          </div>
         </motion.section>
       </main>
 
-      {/* Footer */}
-      <footer className="bg-surface border-t border-border mt-20">
-        <div className="container mx-auto px-6 py-12 text-center">
-          <div className="greek-pattern h-1 w-full mb-8 opacity-30"></div>
-          <p className="text-muted mb-4">
-            © 2024 Learn Greek Through Play. Making Modern Greek accessible
-            through interactive learning.
+      {/* Footer CTA */}
+      <footer className="bg-surface/30 border-t border-border">
+        <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-12 text-center">
+          <h2 className="font-display text-xl sm:text-2xl md:text-3xl font-semibold text-primary mb-3 sm:mb-4">
+            Ready to Start Learning?
+          </h2>
+          <p className="text-foreground/70 text-sm sm:text-base max-w-lg mx-auto mb-6 sm:mb-8 px-4">
+            Join thousands of learners discovering the beauty of the Greek
+            language through interactive games and cultural exploration
           </p>
-          <p className="text-sm text-muted/70">
-            Built with Next.js, TypeScript, and love for the Greek language 🇬🇷
-          </p>
+          <button className="bg-primary hover:bg-primary-dark text-background font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-lg transition-colors text-base sm:text-lg">
+            Begin Your Journey
+          </button>
         </div>
       </footer>
     </div>

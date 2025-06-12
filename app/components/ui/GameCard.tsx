@@ -1,88 +1,94 @@
-import { GAME_STATUS_CONFIG, GameMetadata } from "@/app/types/games";
+"use client";
+
+import type { GameMetadata } from "@/app/types/games";
 import { motion } from "framer-motion";
 import { Clock, Star } from "lucide-react";
 import Link from "next/link";
 
 interface GameCardProps {
   game: GameMetadata;
-  index?: number;
+  index: number;
   showFeatures?: boolean;
-  size?: "small" | "medium" | "large";
 }
 
-export const GameCard = ({
-  game,
-  index = 0,
-  showFeatures = false,
-  size = "medium",
-}: GameCardProps) => {
-  const statusConfig = GAME_STATUS_CONFIG[game.status];
-  const isAvailable = statusConfig.available;
-
-  const sizeClasses = {
-    small: "p-4",
-    medium: "p-6",
-    large: "p-8",
+export function GameCard({ game, index, showFeatures = false }: GameCardProps) {
+  const statusConfig = {
+    available: {
+      bgColor: "bg-green-500/20",
+      color: "text-green-400",
+      text: "Available",
+    },
+    beta: {
+      bgColor: "bg-blue-500/20",
+      color: "text-blue-400",
+      text: "Beta",
+    },
+    "coming-soon": {
+      bgColor: "bg-amber-500/20",
+      color: "text-amber-400",
+      text: "Coming Soon",
+    },
+    "in-development": {
+      bgColor: "bg-purple-500/20",
+      color: "text-purple-400",
+      text: "In Development",
+    },
+    planning: {
+      bgColor: "bg-muted/20",
+      color: "text-muted",
+      text: "Planning",
+    },
   };
 
-  const iconSizes = {
-    small: "text-4xl",
-    medium: "text-5xl",
-    large: "text-6xl",
-  };
+  const config = statusConfig[game.status];
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.1 }}
-      className={`bg-surface border border-border rounded-[--border-radius-card] ${sizeClasses[size]} hover:shadow-[--shadow-glow] transition-all duration-300 hover:scale-105 group relative overflow-hidden`}
+      className="bg-surface border border-border rounded-lg overflow-hidden hover:shadow-[--shadow-glow] transition-all duration-300 group"
     >
-      {/* Status Badge */}
-      <div className="absolute top-4 right-4 z-10">
-        <span
-          className={`inline-flex items-center px-2 py-1 rounded-md text-xs font-medium ${statusConfig.bgColor} ${statusConfig.color}`}
-        >
-          {statusConfig.label}
-        </span>
-      </div>
-
-      {/* Main Content */}
-      <div className="text-center mb-6 relative">
-        <div
-          className={`${iconSizes[size]} mb-4 group-hover:scale-110 transition-transform duration-300`}
-        >
-          {game.icon}
+      <div className="p-4 sm:p-6">
+        <div className="flex items-start justify-between mb-3 sm:mb-4">
+          <span
+            className={`inline-flex items-center px-2 py-1 rounded-md text-xs font-medium ${config.bgColor} ${config.color}`}
+          >
+            {config.text}
+          </span>
+          <div className="text-xl sm:text-2xl">{game.icon}</div>
         </div>
 
-        <h3 className="font-display text-xl md:text-2xl font-semibold text-primary mb-3 group-hover:text-primary-dark transition-colors">
+        <h3 className="font-display text-lg sm:text-xl md:text-2xl font-semibold text-primary mb-2 sm:mb-3 group-hover:text-primary-dark transition-colors">
           {game.title}
         </h3>
 
-        <p className="text-foreground/70 mb-4 text-sm md:text-base">
+        <p className="text-foreground/70 text-sm sm:text-base mb-4 sm:mb-6 line-clamp-2 leading-relaxed">
           {game.description}
         </p>
 
         {/* Game Info */}
-        <div className="flex items-center justify-center gap-4 text-xs text-muted mb-4">
+        <div className="flex items-center justify-center gap-3 sm:gap-4 text-xs sm:text-sm text-muted mb-4 sm:mb-6">
           <div className="flex items-center gap-1">
-            <Clock size={12} />
-            {game.estimatedPlayTime}
+            <Clock size={12} className="sm:w-3 sm:h-3" />
+            <span>{game.estimatedPlayTime}</span>
           </div>
           <div className="flex items-center gap-1">
-            <Star size={12} />
-            {game.difficulty}
+            <Star size={12} className="sm:w-3 sm:h-3" />
+            <span className="capitalize">{game.difficulty}</span>
           </div>
           <div className="capitalize">{game.category}</div>
         </div>
 
-        {/* Features (optional) */}
-        {showFeatures && game.features.length > 0 && (
-          <div className="mb-4">
-            <div className="flex flex-wrap gap-1 justify-center">
-              {game.features.slice(0, 3).map((feature, idx) => (
+        {showFeatures && game.features && (
+          <div className="mb-4 sm:mb-6">
+            <h4 className="text-xs sm:text-sm font-medium text-primary mb-2 sm:mb-3">
+              What you'll learn:
+            </h4>
+            <div className="flex flex-wrap gap-1 sm:gap-2">
+              {game.features.slice(0, 3).map((feature, i) => (
                 <span
-                  key={idx}
+                  key={i}
                   className="inline-block px-2 py-1 bg-primary/10 text-primary rounded text-xs"
                 >
                   {feature}
@@ -96,30 +102,22 @@ export const GameCard = ({
             </div>
           </div>
         )}
-      </div>
 
-      {/* Action Button */}
-      {isAvailable ? (
-        <Link href={game.href} className="block">
-          <motion.button
-            className="w-full bg-primary hover:bg-primary-dark text-background font-semibold py-3 px-6 rounded-[--border-radius-button] transition-colors duration-200"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
+        {game.status === "available" ? (
+          <Link href={game.href}>
+            <button className="w-full bg-primary hover:bg-primary-dark text-background font-semibold py-2 sm:py-3 px-4 sm:px-6 rounded-[--border-radius-button] transition-colors duration-200 text-sm sm:text-base">
+              Play Now
+            </button>
+          </Link>
+        ) : (
+          <button
+            disabled
+            className="w-full bg-muted/20 text-muted font-semibold py-2 sm:py-3 px-4 sm:px-6 rounded-[--border-radius-button] cursor-not-allowed text-sm sm:text-base"
           >
-            {statusConfig.buttonText}
-          </motion.button>
-        </Link>
-      ) : (
-        <button
-          className="w-full bg-muted/20 text-muted font-semibold py-3 px-6 rounded-[--border-radius-button] cursor-not-allowed"
-          disabled
-        >
-          {statusConfig.buttonText}
-        </button>
-      )}
-
-      {/* Background decoration */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+            {game.status === "coming-soon" ? "Coming Soon" : "Not Available"}
+          </button>
+        )}
+      </div>
     </motion.div>
   );
-};
+}

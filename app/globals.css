@@ -36,16 +36,18 @@
   --font-body: var(--font-body);
   --font-mono: ui-monospace, "Fira Code", monospace;
 
-  /* Spacing & Layout */
+  /* Responsive Spacing & Layout */
   --spacing-hero: 8rem;
   --spacing-section: 6rem;
+  --spacing-hero-mobile: 4rem;
+  --spacing-section-mobile: 3rem;
   --border-radius-card: 0.75rem;
   --border-radius-button: 0.5rem;
 
-  /* Shadows */
+  /* Responsive Shadows */
   --shadow-card:
-    0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-glow: 0 0 20px rgb(212 175 55 / 0.3);
+    0 0.25rem 0.375rem -0.0625rem rgb(0 0 0 / 0.1), 0 0.125rem 0.25rem -0.125rem rgb(0 0 0 / 0.1);
+  --shadow-glow: 0 0 1.25rem rgb(212 175 55 / 0.3);
 }
 
 @media (prefers-color-scheme: light) {
@@ -57,6 +59,13 @@
   }
 }
 
+@media (max-width: 768px) {
+  :root {
+    --spacing-hero: var(--spacing-hero-mobile);
+    --spacing-section: var(--spacing-section-mobile);
+  }
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
@@ -64,9 +73,15 @@ body {
   line-height: 1.6;
 }
 
-/* Custom scrollbar */
+/* Custom scrollbar with responsive sizing */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 0.25rem;
+  }
 }
 
 ::-webkit-scrollbar-track {
@@ -75,22 +90,34 @@ body {
 
 ::-webkit-scrollbar-thumb {
   background: var(--primary);
-  border-radius: 4px;
+  border-radius: 0.25rem;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--primary-dark);
 }
 
-/* Greek-inspired decorative elements */
+/* Greek-inspired decorative elements with responsive patterns */
 .greek-pattern {
   background-image: repeating-linear-gradient(
     90deg,
     transparent,
-    transparent 10px,
-    var(--primary) 10px,
-    var(--primary) 12px
+    transparent 0.625rem,
+    var(--primary) 0.625rem,
+    var(--primary) 0.75rem
   );
+}
+
+@media (max-width: 768px) {
+  .greek-pattern {
+    background-image: repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 0.5rem,
+      var(--primary) 0.5rem,
+      var(--primary) 0.625rem
+    );
+  }
 }
 
 .golden-gradient {

@@ -9,6 +9,17 @@ export interface GreekVocabularyItem {
   difficulty: "easy" | "medium" | "hard";
 }
 
+export interface GreekWritingExercise {
+  id: string;
+  category: string;
+  difficulty: "easy" | "medium" | "hard";
+  sentence: string;
+  correctAnswer: string;
+  translation: string;
+  hint: string;
+  explanation: string;
+}
+
 export const GREEK_VOCABULARY: GreekVocabularyItem[] = [
   // Easy - Basic Items (6 words)
   {

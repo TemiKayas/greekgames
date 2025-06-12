@@ -13,19 +13,7 @@ How to make a Greek-themed web game with:
     ✔ Redisgn home page to reflect more of a modern Greek learning games website. @started(25-06-10 18:55) @done(25-06-10 19:02) @lasted(7m36s)
 ## 🎮 BETA GAME COMPLETED
   ✔ "Gods of Olympus" Memory Game @started(25-06-09 22:45) @done(25-06-09 23:15) @lasted(30m)
-    ✔ TypeScript interfaces and game types
-    ✔ Zustand store for state management
-    ✔ Greek gods data with 12 olympian deities
-    ✔ Animated game components with Framer Motion
-    ✔ Three difficulty levels (easy/medium/hard)
-    ✔ Responsive design for all devices
-    ✔ Victory and pause states
-    ✔ Score tracking and statistics
-    ✔ This is a memory game with 12 greek gods, its a matching game where you find
-    ✔ a pair of the matching gods. There 3 difficulty levels, easy, medium and hard.
-    ✔ The easy level has 12 cards, the medium level has 18 cards, and the hard level has 24 cards.
-    ✔ The game is a timed game, you have 1 minute to find all the pairs. This
-    ✔ could be applied to a english word and a differnt language word.
+d
 
 ## 2) Game Architecture & Planning: @started(25-06-09 23:30) @done(25-06-09 23:45) @lasted(15m)
         ✔ Game Registry System @started(25-06-09 23:30) @done(25-06-09 23:45) @lasted(15m)
@@ -57,29 +45,19 @@ How to make a Greek-themed web game with:
 Games:
   ✔ Alphabet pair memory matching game @started(25-06-10 19:21) @done(25-06-10 19:21) @lasted(20 mins)
   ✔ had to fix a bug with the vercel deployment, it was saomthing with my account verification. on git, fixed it with a bunch of git user settings @started(25-06-10 19:54) @done(25-06-10 19:54) @lasted(27 mins)
-  ☐ Greek writting practice game
+  ✔ Greek writting practice game @started(25-06-10 19:55) @done(25-06-10 20:04) @lasted(9m3s)
+  ✔ added the drag and drop words to photos game @started(25-06-10 20:12) @done(25-06-10 20:12) @lasted(8 mins)
+
+
+polishing:
+  ✔ make it responsive for mobile, tablet and desktop. @started(25-06-12 14:19) @done(25-06-12 16:12) @lasted(1h53m16s) I took a break for a bit, took more like 40 mins
+  ☐ have evan clean up the design and make it look nice
 
 
 
 
-
-
-
-## 3) Core Game Components
-  ☐ Create GameBoard/GameArea component
-  ☐ Build Player/Character component
-  ☐ Implement game entities (enemies, items, etc.)
-  ☐ Create UI overlay components (HUD, menus)
-  ☐ Build responsive layout with Tailwind
-  ☐ Add Greek-themed styling and animations
-
-## 4) Game Logic & Systems
-  ☐ Implement game loop using useEffect/requestAnimationFrame
-  ☐ Create collision detection system
-  ☐ Build scoring/progression system
-  ☐ Implement game state management (playing, paused, game over)
-  ☐ Add sound effects and background music
-  ☐ Create save/load functionality (localStorage)
+d
+d
 
 ## 5) User Interface & Experience
   ☐ Create settings/options menu
@@ -111,14 +89,7 @@ Games:
   ☐ Create social media preview images
   ☐ Add PWA capabilities for mobile installation
 
-## 9) Greek Theme Implementation
-  ☐ Research Greek mythology for game elements
-  ☐ Design Greek-inspired color palette
-  ☐ Add Greek fonts and typography
-  ☐ Create mythology-based characters/enemies
-  ☐ Add Greek temple/architecture backgrounds
-  ☐ Include Greek mythology storyline/lore
-  ☐ Add appropriate sound effects (epic music, etc.)
+d
 
 ## 10) Advanced Features (Optional)
   ☐ Multiplayer functionality
