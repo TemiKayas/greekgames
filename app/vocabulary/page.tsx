@@ -32,11 +32,13 @@ export default function VocabularyGame() {
   const [shuffledWords, setShuffledWords] = useState<GreekVocabularyItem[]>([]);
   const [dropZones, setDropZones] = useState<DropZone[]>([]);
   const [draggedItem, setDraggedItem] = useState<DraggedItem | null>(null);
+  const [selectedWord, setSelectedWord] = useState<GreekVocabularyItem | null>(null);
   const [score, setScore] = useState(0);
   const [matches, setMatches] = useState(0);
   const [timeLeft, setTimeLeft] = useState(0);
   const [gameComplete, setGameComplete] = useState(false);
   const [showHints, setShowHints] = useState(false);
+  const [wrongMatch, setWrongMatch] = useState<string | null>(null);
 
   const config = VOCABULARY_CONFIG[difficulty];
 
@@ -62,6 +64,9 @@ export default function VocabularyGame() {
     setGameComplete(false);
     setGameStarted(true);
     setShowHints(false);
+    setSelectedWord(null);
+    setDraggedItem(null);
+    setWrongMatch(null);
   };
 
   const resetGame = () => {
@@ -70,6 +75,8 @@ export default function VocabularyGame() {
     setScore(0);
     setMatches(0);
     setDraggedItem(null);
+    setSelectedWord(null);
+    setWrongMatch(null);
   };
 
   // Timer logic
@@ -89,8 +96,48 @@ export default function VocabularyGame() {
     }
   }, [matches, vocabulary.length]);
 
+  // Clear wrong match indicator after delay
+  useEffect(() => {
+    if (wrongMatch) {
+      const timer = setTimeout(() => setWrongMatch(null), 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [wrongMatch]);
+
+  const handleMatch = (word: GreekVocabularyItem, dropZone: DropZone) => {
+    const isCorrect = word.id === dropZone.item.id;
+
+    if (isCorrect && !dropZone.isMatched) {
+      // Correct match!
+      setDropZones((prev) =>
+        prev.map((zone) =>
+          zone.id === dropZone.id
+            ? { ...zone, isMatched: true, draggedItem: { id: word.id, greek: word.greek } }
+            : zone
+        )
+      );
+      setMatches(matches + 1);
+      setScore(score + 100);
+
+      // Remove the word from available words
+      setShuffledWords((prev) =>
+        prev.filter((w) => w.id !== word.id)
+      );
+
+      // Clear selections
+      setSelectedWord(null);
+      setDraggedItem(null);
+    } else {
+      // Wrong match - show feedback
+      setWrongMatch(dropZone.id);
+      setScore(Math.max(0, score - 10)); // Small penalty for wrong match
+    }
+  };
+
+  // Drag and drop handlers
   const handleDragStart = (item: GreekVocabularyItem) => {
     setDraggedItem({ id: item.id, greek: item.greek });
+    setSelectedWord(null); // Clear click selection when dragging
   };
 
   const handleDragOver = (e: React.DragEvent) => {
@@ -101,27 +148,29 @@ export default function VocabularyGame() {
     e.preventDefault();
     if (!draggedItem) return;
 
-    const isCorrect = draggedItem.id === dropZone.item.id;
-
-    if (isCorrect && !dropZone.isMatched) {
-      // Correct match!
-      setDropZones((prev) =>
-        prev.map((zone) =>
-          zone.id === dropZone.id
-            ? { ...zone, isMatched: true, draggedItem }
-            : zone
-        )
-      );
-      setMatches(matches + 1);
-      setScore(score + 100);
-
-      // Remove the word from available words
-      setShuffledWords((prev) =>
-        prev.filter((word) => word.id !== draggedItem.id)
-      );
+    const word = vocabulary.find(w => w.id === draggedItem.id);
+    if (word) {
+      handleMatch(word, dropZone);
     }
-
     setDraggedItem(null);
+  };
+
+  // Click to match handlers
+  const handleWordClick = (word: GreekVocabularyItem) => {
+    if (selectedWord?.id === word.id) {
+      // Deselect if clicking the same word
+      setSelectedWord(null);
+    } else {
+      // Select the word
+      setSelectedWord(word);
+      setDraggedItem(null); // Clear drag state when clicking
+    }
+  };
+
+  const handleZoneClick = (dropZone: DropZone) => {
+    if (selectedWord && !dropZone.isMatched) {
+      handleMatch(selectedWord, dropZone);
+    }
   };
 
   const formatTime = (seconds: number) => {
@@ -151,7 +200,7 @@ export default function VocabularyGame() {
               Everyday Greek Words
             </h1>
             <p className="text-base sm:text-lg md:text-xl text-muted mb-6 sm:mb-8">
-              Drag Greek words to their matching images
+              Match Greek words to their images
             </p>
             <div className="h-1 w-16 sm:w-24 golden-gradient mx-auto mb-6 sm:mb-8"></div>
             <div className="bg-surface/50 border border-border rounded-lg p-4 sm:p-6 max-w-2xl mx-auto mb-6 sm:mb-8">
@@ -159,8 +208,9 @@ export default function VocabularyGame() {
                 🎯 How to Play
               </h3>
               <p className="text-foreground/80 text-sm sm:text-base leading-relaxed">
-                Drag the Greek words from the word bank and drop them onto the
-                matching images. Learn pronunciation and meaning as you play!
+                <strong>Drag & Drop:</strong> Drag Greek words onto matching images<br/>
+                <strong>Click to Match:</strong> Click a word, then click its matching image<br/>
+                Learn pronunciation and meaning as you play!
               </p>
             </div>
           </div>
@@ -344,7 +394,13 @@ export default function VocabularyGame() {
           </div>
           <div className="text-center">
             <p className="text-xs sm:text-sm text-muted">
-              Drag Greek words to matching images
+              {selectedWord ? (
+                <span className="text-primary font-medium">
+                  Selected: {selectedWord.greek} - Click an image to match!
+                </span>
+              ) : (
+                "Drag words to images or click to select"
+              )}
             </p>
           </div>
         </div>
@@ -353,7 +409,7 @@ export default function VocabularyGame() {
           {/* Word Bank */}
           <div className="bg-surface border border-border rounded-lg p-3 sm:p-4 md:p-6 mb-6 sm:mb-8">
             <h3 className="font-display text-base sm:text-lg font-semibold text-primary mb-3 sm:mb-4 text-center">
-              Word Bank - Drag to Match
+              Word Bank - Drag or Click to Select
             </h3>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 sm:gap-3">
               <AnimatePresence>
@@ -364,8 +420,14 @@ export default function VocabularyGame() {
                     exit={{ opacity: 0, scale: 0.8 }}
                     draggable
                     onDragStart={() => handleDragStart(word)}
-                    className="bg-primary text-background px-3 sm:px-4 py-2 sm:py-3 rounded-lg cursor-grab active:cursor-grabbing font-display text-sm sm:text-base md:text-lg hover:bg-primary-dark transition-colors select-none text-center"
-                    whileHover={{ scale: 1.05 }}
+                    onClick={() => handleWordClick(word)}
+                    className={`px-3 sm:px-4 py-2 sm:py-3 rounded-lg font-display text-sm sm:text-base md:text-lg transition-all duration-200 select-none text-center cursor-pointer ${
+                      selectedWord?.id === word.id
+                        ? "bg-primary-dark text-background scale-105 shadow-lg"
+                        : "bg-primary text-background hover:bg-primary-dark hover:scale-105"
+                    }`}
+                    whileHover={{ scale: selectedWord?.id === word.id ? 1.05 : 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                   >
                     <div className="font-bold">{word.greek}</div>
                     {showHints && (
@@ -389,16 +451,20 @@ export default function VocabularyGame() {
             {dropZones.map((zone) => (
               <motion.div
                 key={zone.id}
-                className={`aspect-square border-2 border-dashed rounded-lg p-2 sm:p-3 flex flex-col items-center justify-center transition-all duration-300 ${
+                className={`aspect-square border-2 border-dashed rounded-lg p-2 sm:p-3 flex flex-col items-center justify-center transition-all duration-300 cursor-pointer ${
                   zone.isMatched
                     ? "border-green-400 bg-green-500/20"
-                    : draggedItem && draggedItem.id === zone.item.id
-                      ? "border-primary bg-primary/20 scale-105"
-                      : "border-border bg-surface/50 hover:border-primary/50"
+                    : wrongMatch === zone.id
+                      ? "border-red-400 bg-red-500/20 animate-pulse"
+                      : selectedWord
+                        ? "border-primary/70 bg-primary/10 hover:border-primary hover:bg-primary/20"
+                        : "border-border bg-surface/50 hover:border-primary/50 hover:bg-surface/70"
                 }`}
                 onDragOver={handleDragOver}
                 onDrop={(e) => handleDrop(e, zone)}
+                onClick={() => handleZoneClick(zone)}
                 whileHover={{ scale: zone.isMatched ? 1 : 1.02 }}
+                whileTap={{ scale: zone.isMatched ? 1 : 0.98 }}
               >
                 <div className="text-2xl sm:text-3xl md:text-4xl mb-1 sm:mb-2">
                   {zone.item.icon}
@@ -413,9 +479,22 @@ export default function VocabularyGame() {
                     </div>
                   )}
                   {zone.isMatched && zone.draggedItem && (
-                    <div className="text-sm sm:text-base font-display text-primary font-bold">
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      className="text-sm sm:text-base font-display text-primary font-bold"
+                    >
                       {zone.draggedItem.greek}
-                    </div>
+                    </motion.div>
+                  )}
+                  {wrongMatch === zone.id && (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      className="text-xs text-red-400 mt-1"
+                    >
+                      Try again!
+                    </motion.div>
                   )}
                 </div>
               </motion.div>
