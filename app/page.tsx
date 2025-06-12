@@ -7,10 +7,18 @@ import {
 } from "@/app/utils/games/registry";
 import { motion } from "framer-motion";
 import { BookOpen, Target, Users, Zap } from "lucide-react";
+import Link from "next/link";
 
 export default function Home() {
   const { featured, all } = getGameCollection();
   const availableGames = getAvailableGames();
+
+  const scrollToGames = () => {
+    const gamesSection = document.getElementById("games-section");
+    if (gamesSection) {
+      gamesSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -72,12 +80,17 @@ export default function Home() {
             transition={{ delay: 0.5 }}
             className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4"
           >
-            <button className="bg-primary hover:bg-primary-dark text-background font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-lg transition-colors text-base sm:text-lg">
+            <button
+              onClick={scrollToGames}
+              className="bg-primary hover:bg-primary-dark text-background font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-lg transition-colors text-base sm:text-lg"
+            >
               Start Learning Free
             </button>
-            <button className="border border-primary text-primary hover:bg-primary/10 font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-lg transition-colors text-base sm:text-lg">
-              Browse Activities
-            </button>
+            <Link href="/about">
+              <button className="border border-primary text-primary hover:bg-primary/10 font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-lg transition-colors text-base sm:text-lg">
+                About Us
+              </button>
+            </Link>
           </motion.div>
         </div>
       </header>
@@ -134,6 +147,7 @@ export default function Home() {
       {/* Featured Learning Activities */}
       <main className="container mx-auto px-4 sm:px-6">
         <motion.section
+          id="games-section"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8 }}
@@ -211,58 +225,6 @@ export default function Home() {
           </button>
         </motion.section>
 
-        {/* Learning Categories */}
-        <motion.section
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.2 }}
-          className="mb-12 sm:mb-16 md:mb-20"
-        >
-          <div className="text-center mb-8 sm:mb-12">
-            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-semibold text-primary mb-3 sm:mb-4">
-              Learning Categories
-            </h2>
-            <p className="text-sm sm:text-base lg:text-lg text-muted max-w-2xl mx-auto px-4">
-              Explore different aspects of the Greek language through targeted
-              learning experiences
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
-            {Object.entries(getGameCollection().categories).map(
-              ([category, games]) => (
-                <motion.div
-                  key={category}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="bg-surface border border-border rounded-lg p-4 sm:p-6 hover:shadow-[--shadow-glow] transition-all duration-300"
-                >
-                  <h3 className="font-display text-lg sm:text-xl font-semibold text-primary mb-2 sm:mb-3 capitalize">
-                    {category}
-                  </h3>
-                  <p className="text-foreground/70 text-sm sm:text-base mb-3 sm:mb-4">
-                    {games.length} activities available
-                  </p>
-                  <div className="flex flex-wrap gap-1 sm:gap-2">
-                    {games.slice(0, 3).map((game) => (
-                      <span
-                        key={game.id}
-                        className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-md"
-                      >
-                        {game.title}
-                      </span>
-                    ))}
-                    {games.length > 3 && (
-                      <span className="text-xs bg-muted/10 text-muted px-2 py-1 rounded-md">
-                        +{games.length - 3} more
-                      </span>
-                    )}
-                  </div>
-                </motion.div>
-              )
-            )}
-          </div>
-        </motion.section>
       </main>
 
       {/* Footer CTA */}
@@ -275,7 +237,10 @@ export default function Home() {
             Join thousands of learners discovering the beauty of the Greek
             language through interactive games and cultural exploration
           </p>
-          <button className="bg-primary hover:bg-primary-dark text-background font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-lg transition-colors text-base sm:text-lg">
+          <button
+            onClick={scrollToGames}
+            className="bg-primary hover:bg-primary-dark text-background font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-lg transition-colors text-base sm:text-lg"
+          >
             Begin Your Journey
           </button>
         </div>
