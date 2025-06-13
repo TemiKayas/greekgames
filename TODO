@@ -10,7 +10,7 @@ How to make a Greek-themed web game with:
     ✔ Zustand (state management)
     ✔ Lucide React (icons)
 
-    ✔ Redisgn home page to reflect more of a modern Greek learning games website. @started(25-06-10 18:55) @done(25-06-10 19:02) @lasted(7m36s)
+    ✔ Redesign home page to reflect more of a modern Greek learning games website. @started(25-06-10 18:55) @done(25-06-10 19:02) @lasted(7m36s)
 ## 🎮 BETA GAME COMPLETED
   ✔ "Gods of Olympus" Memory Game @started(25-06-09 22:45) @done(25-06-09 23:15) @lasted(30m)
 d
@@ -52,50 +52,31 @@ Games:
 polishing:
   ✔ make it responsive for mobile, tablet and desktop. @started(25-06-12 14:19) @done(25-06-12 16:12) @lasted(1h53m16s) I took a break for a bit, took more like 40 mins
   ☐ have evan clean up the design and make it look nice
+  ✔ remove the weird learning catagories @started(25-06-12 17:53) @done(25-06-12 17:56) @lasted(3m9s)
+  ✔ fix the buttons on the home page, have 1 go to an about page thats just for SEO @started(25-06-12 17:56) @done(25-06-12 18:03) @lasted(7m48s)
+  ✔ add an about page for SEO @started(25-06-12 18:04) @done(25-06-12 18:18) @lasted(14m37s)
 
+Part 2:
+  verify that the home page is good for getting people:
+    1) Lets ensure that the home page has the 3 games as a demo of the games.
+    2) Lets ensure that the home page has a button to go to the about page.
+    3) Lets ensure that the home page has a button to go to the games page.:
+      - right now its a section on the home page
 
+  Need to setup some sort of acount sign up and login system.:
+    1) Firebase to allow people to sign up and login
+    2) Save the users progress to the database for their games
+    2.5) Perhaps have a sort of assighned teacher to the user, so they can track their progress and get help from the teacher.
+    3) Have a sort of leaderboard system, so people can see how they are doing compared to others.
+    4) Have a sort of rewards system, so people can earn rewards for their progress.
+    5) Have a sort of achievements system, so people can earn achievements for their progress.
+    6) Have a sort of badges system, so people can earn badges for their progress.
+    7) Have a sort of leaderboard system, so people can see how they are doing compared to others.
+    8) Have a sort of rewards system, so people can earn rewards for their progress.
+    9) Have a sort of achievements system, so people can earn achievements for their progress.
 
-
-d
-d
-
-## 5) User Interface & Experience
-  ☐ Create settings/options menu
-  ☐ Build game over/victory screens
-  ☐ Implement responsive design for mobile
-  ☐ Add keyboard and touch controls
-  ☐ Create loading states and transitions
-  ☐ Add accessibility features (ARIA labels, keyboard navigation)
-
-## 6) Performance & Optimization
-  ☐ Optimize rendering performance
-  ☐ Implement object pooling for game entities
-  ☐ Add image optimization and lazy loading
-  ☐ Minimize bundle size
-  ☐ Test performance on various devices
-
-## 7) Testing & Quality
-  ☐ Write unit tests for game logic
-  ☐ Add integration tests for components
-  ☐ Test cross-browser compatibility
-  ☐ Mobile device testing
-  ☐ Performance testing and profiling
-
-## 8) Deployment & Distribution
-  ✔ Setup Vercel deployment @started(25-06-10 19:19) @done(25-06-10 19:19) @lasted(1m)
-  ☐ Configure custom domain (optional)
-  ☐ Add analytics tracking (Google Analytics/Vercel Analytics)
-  ☐ Setup error tracking (Sentry)
-  ☐ Create social media preview images
-  ☐ Add PWA capabilities for mobile installation
-
-d
-
-## 10) Advanced Features (Optional)
-  ☐ Multiplayer functionality
-  ☐ Leaderboards/high scores
-  ☐ Achievement system
-  ☐ Power-ups and special abilities
-  ☐ Multiple game modes
-  ☐ Character customization
-  ☐ Mini-games or side quests
+    Lets also make it so when they sign in its a different dash board, and they can see their progress and their games:
+      1) Lets have a button to go back to the home page.
+      2) Lets have a button to go to the games page.
+      ☐ lets ensure that this game page is a different page, and not just a section on the home page
+      3) Lets have a button to go to the about page.
