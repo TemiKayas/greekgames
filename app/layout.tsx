@@ -1,3 +1,4 @@
+import { AuthProvider } from "@/contexts/AuthContext";
 import type { Metadata } from "next";
 import { Cinzel, Crimson_Text } from "next/font/google";
 import "./globals.css";
@@ -30,7 +31,7 @@ export const metadata: Metadata = {
     "Greek culture",
     "Greek conversation",
   ],
-  authors: [{ name: "Learn Greek Through Play" }],
+  authors: [{ name: "Blue Dev Digital" }],
   openGraph: {
     title: "Learn Greek Through Play - Interactive Language Learning",
     description:
@@ -50,7 +51,7 @@ export default function RootLayout({
       <body
         className={`${cinzel.variable} ${crimsonText.variable} antialiased`}
       >
-        {children}
+        <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
   );

@@ -84,14 +84,14 @@ Part 2:
 ## 🔐 SUPABASE AUTHENTICATION & USER SYSTEM IMPLEMENTATION
 
 ### PHASE 1: Core Authentication & Basic Progress Tracking
-  ☐ 1.1) Supabase Project Setup:
+  ✔ 1.1) Supabase Project Setup: @started(25-06-16 19:19) @done(25-06-16 19:19) @lasted(30 mins)
     ☐ Create new Supabase project
     ☐ Configure environment variables (.env.local)
     ☐ Install @supabase/supabase-js and @supabase/auth-helpers-nextjs
     ☐ Setup Supabase client configuration
     ☐ Configure authentication providers (email/password + Google OAuth)
 
-  ☐ 1.2) Database Schema Creation:
+  ✔ 1.2) Database Schema Creation: @started(25-06-16 19:20) @done(25-06-16 19:29) @lasted(9m48s)
     ☐ Create users table with columns: id, email, full_name, role, avatar_url, created_at, updated_at, preferences, is_active
     ☐ Create games table to sync with registry.ts: id, game_key, name, description, category, difficulty_level, max_score, version, is_active, metadata, created_at, updated_at
     ☐ Create student_progress table: id, student_id, game_id, current_level, total_score, best_score, times_played, total_time_spent, last_played_at, progress_data, completion_percentage, created_at, updated_at
@@ -99,7 +99,9 @@ Part 2:
     ☐ Setup Row Level Security (RLS) policies for data protection
     ☐ Create database functions for automatic game registry sync
 
-  ☐ 1.3) Authentication Components:
+  ✔ Had to test the DB and make sure it was working, and it was. @started(25-06-16 19:42) @done(25-06-16 19:42) @lasted(7 mins)
+
+  ☐ 1.3) Authentication Components: @started(25-06-16 19:43)
     ☐ Create LoginModal component with email/password and Google OAuth
     ☐ Create SignUpModal component with role selection (student/teacher)
     ☐ Create UserProfile component for account management
