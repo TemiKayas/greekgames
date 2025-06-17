@@ -35,6 +35,31 @@ export function SignUpModal({
   const [mounted, setMounted] = useState(false);
   const { signUp, signInWithGoogle } = useAuth();
 
+  // Password validation states
+  const [passwordValidation, setPasswordValidation] = useState({
+    length: false,
+    uppercase: false,
+    lowercase: false,
+    number: false,
+    special: false,
+  });
+
+  // Password validation function
+  const validatePassword = (pass: string) => {
+    setPasswordValidation({
+      length: pass.length >= 8,
+      uppercase: /[A-Z]/.test(pass),
+      lowercase: /[a-z]/.test(pass),
+      number: /\d/.test(pass),
+      special: /[!@#$%^&*(),.?":{}|<>]/.test(pass),
+    });
+  };
+
+  // Check if password meets all requirements
+  const isPasswordValid = () => {
+    return Object.values(passwordValidation).every(Boolean);
+  };
+
   // Handle mounting for portal
   useEffect(() => {
     setMounted(true);
@@ -62,9 +87,9 @@ export function SignUpModal({
     setError("");
     setSuccess("");
 
-    // Basic validation
-    if (password.length < 6) {
-      setError("Password must be at least 6 characters long");
+    // Enhanced password validation
+    if (!isPasswordValid()) {
+      setError("Password does not meet all requirements");
       setLoading(false);
       return;
     }
@@ -277,16 +302,41 @@ export function SignUpModal({
                 id="password"
                 type="password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  validatePassword(e.target.value);
+                }}
                 required
-                minLength={6}
+                minLength={8}
                 className="w-full pl-10 pr-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-colors text-foreground placeholder-muted"
                 placeholder="Choose a secure password"
               />
             </div>
-            <p className="text-xs text-muted mt-1">
-              Must be at least 6 characters long
-            </p>
+            <div className="mt-2 space-y-1">
+              <p className="text-xs text-muted">Password must contain:</p>
+              <ul className="text-xs space-y-1">
+                <li className={`flex items-center gap-1 ${passwordValidation.length ? 'text-green-600' : 'text-muted'}`}>
+                  <span>{passwordValidation.length ? '✓' : '○'}</span>
+                  At least 8 characters
+                </li>
+                <li className={`flex items-center gap-1 ${passwordValidation.uppercase ? 'text-green-600' : 'text-muted'}`}>
+                  <span>{passwordValidation.uppercase ? '✓' : '○'}</span>
+                  One uppercase letter
+                </li>
+                <li className={`flex items-center gap-1 ${passwordValidation.lowercase ? 'text-green-600' : 'text-muted'}`}>
+                  <span>{passwordValidation.lowercase ? '✓' : '○'}</span>
+                  One lowercase letter
+                </li>
+                <li className={`flex items-center gap-1 ${passwordValidation.number ? 'text-green-600' : 'text-muted'}`}>
+                  <span>{passwordValidation.number ? '✓' : '○'}</span>
+                  One number
+                </li>
+                <li className={`flex items-center gap-1 ${passwordValidation.special ? 'text-green-600' : 'text-muted'}`}>
+                  <span>{passwordValidation.special ? '✓' : '○'}</span>
+                  One special character
+                </li>
+              </ul>
+            </div>
           </div>
 
           <button

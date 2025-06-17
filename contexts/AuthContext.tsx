@@ -5,6 +5,11 @@ import { User as DatabaseUser } from "@/types/database.types";
 import { User } from "@supabase/supabase-js";
 import React, { createContext, useContext, useEffect, useState } from "react";
 
+// Security constants
+const MAX_LOGIN_ATTEMPTS = 5;
+const LOCKOUT_DURATION = 15 * 60 * 1000; // 15 minutes
+const SESSION_TIMEOUT = 24 * 60 * 60 * 1000; // 24 hours
+
 interface AuthContextType {
   user: User | null;
   profile: DatabaseUser | null;
@@ -19,6 +24,8 @@ interface AuthContextType {
   signInWithGoogle: () => Promise<void>;
   signOut: () => Promise<void>;
   updateProfile: (updates: Partial<DatabaseUser>) => Promise<void>;
+  isRateLimited: boolean;
+  remainingLockoutTime: number;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -27,7 +34,76 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [profile, setProfile] = useState<DatabaseUser | null>(null);
   const [loading, setLoading] = useState(true);
+  const [loginAttempts, setLoginAttempts] = useState<{ [key: string]: { count: number; timestamp: number } }>({});
+  const [isRateLimited, setIsRateLimited] = useState(false);
+  const [remainingLockoutTime, setRemainingLockoutTime] = useState(0);
   const supabase = createSupabaseClient();
+
+  // Check rate limiting status
+  useEffect(() => {
+    const checkRateLimit = () => {
+      const now = Date.now();
+      let isLimited = false;
+      let minRemainingTime = 0;
+
+      Object.entries(loginAttempts).forEach(([email, data]) => {
+        if (data.count >= MAX_LOGIN_ATTEMPTS) {
+          const timeSinceLastAttempt = now - data.timestamp;
+          if (timeSinceLastAttempt < LOCKOUT_DURATION) {
+            isLimited = true;
+            const remaining = LOCKOUT_DURATION - timeSinceLastAttempt;
+            minRemainingTime = Math.max(minRemainingTime, remaining);
+          } else {
+            // Reset attempts if lockout period has passed
+            setLoginAttempts(prev => {
+              const newAttempts = { ...prev };
+              delete newAttempts[email];
+              return newAttempts;
+            });
+          }
+        }
+      });
+
+      setIsRateLimited(isLimited);
+      setRemainingLockoutTime(minRemainingTime);
+    };
+
+    const interval = setInterval(checkRateLimit, 1000);
+    return () => clearInterval(interval);
+  }, [loginAttempts]);
+
+  // Session timeout check
+  useEffect(() => {
+    if (!user) return;
+
+    const checkSessionTimeout = () => {
+      const lastActivity = localStorage.getItem('lastActivity');
+      if (lastActivity) {
+        const timeSinceLastActivity = Date.now() - parseInt(lastActivity);
+        if (timeSinceLastActivity > SESSION_TIMEOUT) {
+          signOut();
+        }
+      }
+    };
+
+    const updateLastActivity = () => {
+      localStorage.setItem('lastActivity', Date.now().toString());
+    };
+
+    // Update last activity on user interaction
+    window.addEventListener('mousemove', updateLastActivity);
+    window.addEventListener('keydown', updateLastActivity);
+    window.addEventListener('click', updateLastActivity);
+
+    const interval = setInterval(checkSessionTimeout, 60000); // Check every minute
+
+    return () => {
+      window.removeEventListener('mousemove', updateLastActivity);
+      window.removeEventListener('keydown', updateLastActivity);
+      window.removeEventListener('click', updateLastActivity);
+      clearInterval(interval);
+    };
+  }, [user]);
 
   useEffect(() => {
     // Get initial session
@@ -190,12 +266,53 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const signIn = async (email: string, password: string) => {
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+    // Check rate limiting
+    const now = Date.now();
+    const userAttempts = loginAttempts[email] || { count: 0, timestamp: now };
 
-    if (error) throw error;
+    if (userAttempts.count >= MAX_LOGIN_ATTEMPTS) {
+      const timeSinceLastAttempt = now - userAttempts.timestamp;
+      if (timeSinceLastAttempt < LOCKOUT_DURATION) {
+        throw new Error(`Too many login attempts. Please try again in ${Math.ceil((LOCKOUT_DURATION - timeSinceLastAttempt) / 60000)} minutes.`);
+      }
+      // Reset attempts if lockout period has passed
+      setLoginAttempts(prev => {
+        const newAttempts = { ...prev };
+        delete newAttempts[email];
+        return newAttempts;
+      });
+    }
+
+    try {
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (error) {
+        // Increment failed attempts
+        setLoginAttempts(prev => ({
+          ...prev,
+          [email]: {
+            count: (prev[email]?.count || 0) + 1,
+            timestamp: now,
+          },
+        }));
+        throw error;
+      }
+
+      // Reset attempts on successful login
+      setLoginAttempts(prev => {
+        const newAttempts = { ...prev };
+        delete newAttempts[email];
+        return newAttempts;
+      });
+
+      // Update last activity timestamp
+      localStorage.setItem('lastActivity', now.toString());
+    } catch (error) {
+      throw error;
+    }
   };
 
   const signInWithGoogle = async () => {
@@ -205,7 +322,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         redirectTo: `${window.location.origin}/auth/callback`,
         queryParams: {
           prompt: "select_account",
+          access_type: "offline",
+          hd: "*", // Allow any Google domain
         },
+        scopes: "email profile",
+        skipBrowserRedirect: false,
       },
     });
 
@@ -250,6 +371,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     signInWithGoogle,
     signOut,
     updateProfile,
+    isRateLimited,
+    remainingLockoutTime,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

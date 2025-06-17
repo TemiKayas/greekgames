@@ -21,7 +21,13 @@ export function LoginModal({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [mounted, setMounted] = useState(false);
-  const { signIn, signInWithGoogle } = useAuth();
+  const { signIn, signInWithGoogle, isRateLimited, remainingLockoutTime } = useAuth();
+
+  // Format remaining time
+  const formatRemainingTime = (ms: number) => {
+    const minutes = Math.ceil(ms / 60000);
+    return `${minutes} minute${minutes !== 1 ? 's' : ''}`;
+  };
 
   // Handle mounting for portal
   useEffect(() => {
@@ -106,8 +112,17 @@ export function LoginModal({
 
         {/* Error Message */}
         {error && (
-          <div className="bg-accent/10 border border-accent/20 rounded-lg p-3 mb-4">
-            <p className="text-accent text-sm">{error}</p>
+          <div className="bg-red-50 border border-red-200 rounded-lg p-3 mb-4">
+            <p className="text-red-700 text-sm">{error}</p>
+          </div>
+        )}
+
+        {/* Rate Limit Warning */}
+        {isRateLimited && (
+          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3 mb-4">
+            <p className="text-yellow-700 text-sm">
+              Too many login attempts. Please try again in {formatRemainingTime(remainingLockoutTime)}.
+            </p>
           </div>
         )}
 
