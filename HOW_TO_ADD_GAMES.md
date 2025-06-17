@@ -13,7 +13,7 @@ Edit `app/utils/games/registry.ts` and add your activity to the `GAMES` array:
   description: "Learn Greek vocabulary...",  // Educational description
   status: "beta",                            // See status options below
   icon: "📚",                               // Emoji icon
-  href: "/your-activity",                    // Route to your activity
+  href: "/games/your-activity",              // Route to your activity
   category: "memory",                        // Learning category
   difficulty: "medium",                      // Difficulty level
   estimatedPlayTime: "5-10 min",            // How long to complete
@@ -24,7 +24,7 @@ Edit `app/utils/games/registry.ts` and add your activity to the `GAMES` array:
 
 ### 2. Create your learning activity page
 
-Create a new file at `app/your-activity/page.tsx`:
+Create a new file at `app/games/your-activity/page.tsx`:
 
 ```typescript
 import { useGameSession } from "@/hooks/useGameSession";
@@ -138,21 +138,22 @@ Create organized folders for complex activities:
 
 ```
 app/
-└── your-activity/
-    ├── page.tsx              # Main activity page
-    ├── components/           # Activity-specific components
-    │   ├── VocabularyCard.tsx
-    │   ├── ProgressTracker.tsx
-    │   └── AudioPlayer.tsx
-    ├── hooks/               # Custom learning hooks
-    │   ├── useVocabulary.ts
-    │   └── useProgress.ts
-    ├── utils/               # Activity utilities
-    │   ├── greekHelpers.ts
-    │   └── pronunciation.ts
-    └── data/                # Learning content
-        ├── vocabulary.ts
-        └── lessons.ts
+└── games/
+    └── your-activity/
+        ├── page.tsx              # Main activity page
+        ├── components/           # Activity-specific components
+        │   ├── VocabularyCard.tsx
+        │   ├── ProgressTracker.tsx
+        │   └── AudioPlayer.tsx
+        ├── hooks/               # Custom learning hooks
+        │   ├── useVocabulary.ts
+        │   └── useProgress.ts
+        ├── utils/               # Activity utilities
+        │   ├── greekHelpers.ts
+        │   └── pronunciation.ts
+        └── data/                # Learning content
+            ├── vocabulary.ts
+            └── lessons.ts
 ```
 
 ## 📱 Responsive Learning Design
@@ -193,7 +194,7 @@ Activities are automatically organized by:
 
 ## ✨ Educational Examples
 
-Check out the existing memory game at `app/memory/page.tsx` for:
+Check out the existing memory game at `app/games/memory/page.tsx` for:
 
 - Vocabulary learning with visual associations
 - Progress tracking and scoring

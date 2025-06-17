@@ -224,9 +224,11 @@ export default function Home() {
             language step by step
           </p>
 
-          <button className="bg-primary hover:bg-primary-dark text-background font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-lg transition-colors">
-            View Full Dashboard
-          </button>
+          <Link href="/games">
+            <button className="bg-primary hover:bg-primary-dark text-background font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-lg transition-colors">
+              View All Games
+            </button>
+          </Link>
         </motion.section>
       </main>
     </div>

@@ -24,7 +24,7 @@ export function DashboardNav() {
       icon: Home,
     },
     {
-      href: "/dashboard/games",
+      href: "/games",
       label: "Games",
       icon: BookOpen,
     },
