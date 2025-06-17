@@ -11,7 +11,8 @@ import {
   User,
   X,
 } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 
 interface SignUpModalProps {
   isOpen: boolean;
@@ -31,9 +32,29 @@ export function SignUpModal({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [mounted, setMounted] = useState(false);
   const { signUp, signInWithGoogle } = useAuth();
 
-  if (!isOpen) return null;
+  // Handle mounting for portal
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+
+    // Cleanup function to restore scroll
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen]);
+
+  if (!isOpen || !mounted) return null;
 
   const handleEmailSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -70,13 +91,25 @@ export function SignUpModal({
     }
   };
 
-  return (
-    <div className="fixed inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="bg-surface rounded-xl max-w-md w-full p-6 relative max-h-[90vh] overflow-y-auto border border-border shadow-[--shadow-glow]">
+  const modalContent = (
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
+      {/* Backdrop */}
+      <div
+        className="absolute inset-0 bg-black/50 backdrop-blur-sm cursor-pointer"
+        onClick={onClose}
+        aria-label="Close modal"
+      />
+
+      {/* Modal Content */}
+      <div
+        className="relative bg-surface rounded-xl max-w-md w-full p-6 border border-border shadow-[--shadow-glow] max-h-[90vh] overflow-y-auto"
+        onClick={(e) => e.stopPropagation()}
+      >
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-muted hover:text-foreground transition-colors"
+          className="absolute top-4 right-4 text-muted hover:text-foreground transition-colors z-10 p-1 rounded-full hover:bg-border/50"
+          aria-label="Close modal"
         >
           <X size={24} />
         </button>
@@ -281,4 +314,6 @@ export function SignUpModal({
       </div>
     </div>
   );
+
+  return createPortal(modalContent, document.body);
 }

@@ -78,12 +78,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           await createProfileForUser(userId);
           return;
         }
+        // eslint-disable-next-line no-console
         console.error("Error fetching profile:", error);
         return;
       }
 
       setProfile(data);
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error("Error fetching profile:", error);
     }
   };
@@ -95,6 +97,29 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       if (!userData.user) return;
 
       const user = userData.user;
+
+      // Only create profile for confirmed users
+      if (!user.email_confirmed_at) {
+        // eslint-disable-next-line no-console
+        console.log("User email not confirmed yet, skipping profile creation");
+        return;
+      }
+
+      // Check if profile already exists to prevent duplicate creation
+      const { data: existingProfile } = await supabase
+        .from("users")
+        .select("id")
+        .eq("id", userId)
+        .single();
+
+      if (existingProfile) {
+        // eslint-disable-next-line no-console
+        console.log("Profile already exists for user:", userId);
+        // Fetch the full profile data
+        await fetchProfile(userId);
+        return;
+      }
+
       const fullName =
         user.user_metadata.full_name ||
         user.user_metadata.name ||
@@ -116,12 +141,23 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         .single();
 
       if (error) {
+        // Check if it's a duplicate key error
+        if (error.code === "23505") {
+          // eslint-disable-next-line no-console
+          console.log("Profile already exists (duplicate key), fetching existing profile");
+          await fetchProfile(userId);
+          return;
+        }
+        // eslint-disable-next-line no-console
         console.error("Error creating profile:", error);
         return;
       }
 
       setProfile(data);
+      // eslint-disable-next-line no-console
+      console.log("Profile created successfully:", data);
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error("Error creating profile for user:", error);
     }
   };
@@ -167,6 +203,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       provider: "google",
       options: {
         redirectTo: `${window.location.origin}/auth/callback`,
+        queryParams: {
+          prompt: "select_account",
+        },
       },
     });
 
@@ -174,8 +213,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const signOut = async () => {
-    const { error } = await supabase.auth.signOut();
-    if (error) throw error;
+    try {
+      // Clear local state first
+      setUser(null);
+      setProfile(null);
+
+      const { error } = await supabase.auth.signOut();
+      if (error) throw error;
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error("Error signing out:", error);
+      throw error;
+    }
   };
 
   const updateProfile = async (updates: Partial<DatabaseUser>) => {

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { LoginModal } from "./LoginModal";
 import { SignUpModal } from "./SignUpModal";
 
@@ -18,6 +18,13 @@ export function AuthModals({
   onClose,
 }: AuthModalsProps) {
   const [currentModal, setCurrentModal] = useState<AuthModalType>(initialModal);
+
+  // Sync currentModal with initialModal when it changes
+  useEffect(() => {
+    if (isOpen) {
+      setCurrentModal(initialModal);
+    }
+  }, [isOpen, initialModal]);
 
   const handleClose = () => {
     setCurrentModal(null);

@@ -4,24 +4,28 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(request: NextRequest) {
   const requestUrl = new URL(request.url);
   const code = requestUrl.searchParams.get("code");
-  const origin = requestUrl.origin;
 
   if (code) {
     const supabase = await createSupabaseServerClient();
 
     const { data, error } = await supabase.auth.exchangeCodeForSession(code);
 
-    if (!error && data.user) {
-      // Check if user profile exists in our users table
+    if (error) {
+      // eslint-disable-next-line no-console
+      console.error("Error exchanging code for session:", error);
+      return NextResponse.redirect(`${requestUrl.origin}/?error=auth_error`);
+    }
+
+    if (data.user) {
+      // Check if profile exists
       const { data: existingProfile } = await supabase
         .from("users")
         .select("id")
         .eq("id", data.user.id)
         .single();
 
-      // If no profile exists, create one
-      if (!existingProfile) {
-        // Get user metadata from auth user or default values
+      // Create profile if it doesn't exist and user is confirmed
+      if (!existingProfile && data.user.email_confirmed_at) {
         const fullName =
           data.user.user_metadata.full_name ||
           data.user.user_metadata.name ||
@@ -39,13 +43,22 @@ export async function GET(request: NextRequest) {
         });
 
         if (profileError) {
+          // Check if it's a duplicate key error (profile already exists)
+          if (profileError.code === "23505") {
+            // eslint-disable-next-line no-console
+            console.log("Profile already exists, continuing...");
+          } else {
+            // eslint-disable-next-line no-console
+            console.error("Error creating user profile:", profileError);
+          }
+        } else {
           // eslint-disable-next-line no-console
-          console.error("Error creating profile:", profileError);
+          console.log("User profile created successfully");
         }
       }
     }
   }
 
-  // Redirect to dashboard or home page
-  return NextResponse.redirect(`${origin}/dashboard`);
+  // URL to redirect to after sign in process completes
+  return NextResponse.redirect(`${requestUrl.origin}/`);
 }
