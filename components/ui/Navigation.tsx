@@ -1,5 +1,6 @@
 "use client";
 
+import { useAuth } from "@/contexts/AuthContext";
 import Link from "next/link";
 import { AuthButtons } from "./AuthButtons";
 
@@ -8,6 +9,8 @@ interface NavigationProps {
 }
 
 export function Navigation({ className = "" }: NavigationProps) {
+  const { profile } = useAuth();
+
   return (
     <nav
       className={`bg-surface/95 backdrop-blur-sm border-b border-border sticky top-0 z-50 ${className}`}
@@ -27,6 +30,14 @@ export function Navigation({ className = "" }: NavigationProps) {
             >
               About
             </Link>
+            {profile && (
+              <Link
+                href="/dashboard"
+                className="text-foreground/80 hover:text-primary transition-colors font-medium"
+              >
+                Dashboard
+              </Link>
+            )}
             <AuthButtons />
           </div>
         </div>
