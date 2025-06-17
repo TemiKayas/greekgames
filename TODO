@@ -101,7 +101,7 @@ Part 2:
 
   ✔ Had to test the DB and make sure it was working, and it was. @started(25-06-16 19:42) @done(25-06-16 19:42) @lasted(7 mins)
 
-  ☐ 1.3) Authentication Components: @started(25-06-16 19:43)
+  ✔ 1.3) Authentication Components: @started(25-06-16 19:43) @done(25-06-16 20:48) @lasted(1h5m49s)
     ☐ Create LoginModal component with email/password and Google OAuth
     ☐ Create SignUpModal component with role selection (student/teacher)
     ☐ Create UserProfile component for account management
@@ -109,65 +109,125 @@ Part 2:
     ☐ Create ProtectedRoute component for authenticated pages
     ☐ Add login/logout buttons to main navigation
 
-  ☐ 1.4) User Dashboard Creation:
+
+  ☐ 1.3.5 ensure safety and security @started(25-06-17 16:10)
+
+  ✔ 1.4) User Dashboard Creation: @started(25-06-17 16:30) @done(25-06-17 17:22) @lasted(52m13s)
     ☐ Create /dashboard route with protected access
     ☐ Build DashboardLayout with navigation (Home, Games, About, Profile, Logout)
+
     ☐ Create StudentDashboard with progress overview
     ☐ Create TeacherDashboard with class management overview
     ☐ Implement user role-based dashboard routing
 
+
   ☐ 1.5) Game Progress Integration:
-    ☐ Update existing games to save progress to Supabase
-    ☐ Create useGameProgress hook for progress tracking
-    ☐ Modify memory game to record sessions and update progress
-    ☐ Modify writing game to record sessions and update progress
-    ☐ Modify vocabulary game to record sessions and update progress
-    ☐ Create progress visualization components (charts, progress bars)
+    ☐ Create Supabase Tables:
+      - game_sessions:
+        - id: uuid
+        - user_id: uuid (student)
+        - game_id: uuid
+        - score: integer
+        - duration: integer (seconds)
+        - completed_at: timestamp
+        - mistakes: integer
+        - accuracy: float
+        - level_reached: integer
+      - game_progress:
+        - id: uuid
+        - user_id: uuid
+        - game_id: uuid
+        - total_score: integer
+        - highest_level: integer
+        - total_time: integer
+        - last_played_at: timestamp
+        - mastery_level: integer (1-5)
+      - game_achievements:
+        - id: uuid
+        - user_id: uuid
+        - game_id: uuid
+        - achievement_id: uuid
+        - earned_at: timestamp
+        - progress: jsonb (specific achievement data)
+    ☐ Create Progress Hooks:
+      - useGameSession:
+        - startSession(): Record start time
+        - endSession(score, mistakes, level): Save session data
+        - getRecentSessions(limit): Fetch last N sessions
+      - useGameProgress:
+        - updateProgress(sessionData): Update overall progress
+        - getProgress(): Fetch current progress
+        - getMasteryLevel(): Calculate mastery (1-5)
+      - useGameAchievements:
+        - checkAchievements(sessionData): Check for new achievements
+        - getAchievements(): Fetch earned achievements
+    ☐ Create Progress Components:
+      - GameProgressBar:
+        - Show current level
+        - Display mastery progress
+        - Visual completion status
+      - AchievementDisplay:
+        - Show earned achievements
+        - Display progress to next achievement
+        - Highlight recent achievements
 
-  ☐ 1.6) Data Migration & Game Registry Sync:
-    ☐ Create script to populate games table from registry.ts
-    ☐ Setup automatic sync when new games are added to registry
-    ☐ Create database migration scripts
-    ☐ Test data consistency between frontend registry and database
+  ☐ 1.6) Game Registry & Database Sync:
+    ☐ Create Supabase Tables:
+      - games: id, key, name, type, version, status, metadata
+      - game_versions: id, game_id, version, changes, released_at
+      - game_metrics: id, game_id, metric_key, metric_value, updated_at
+    ☐ Create Sync Functions:
+      - syncGamesRegistry: Keep games table in sync with registry.ts
+      - updateGameVersion: Handle version updates
+      - validateGameData: Ensure data consistency
+    ☐ Create Game Integration:
+      - GameRegistration: Add new games to system
+      - ProgressTracking: Standard progress metrics
+      - AnalyticsSetup: Basic game analytics
 
-### PHASE 2: Teacher-Student Relationships & Assignment System
-  ☐ 2.1) Teacher-Student Schema:
-    ☐ Create teacher_student_relationships table: id, teacher_id, student_id, assigned_at, status, notes
-    ☐ Create assignments table: id, teacher_id, title, description, due_date, is_mandatory, created_at, updated_at, status
-    ☐ Create assignment_games table: assignment_id, game_id, required_score, required_completion, order_index
-    ☐ Create student_assignments table: id, assignment_id, student_id, assigned_at, completed_at, status, teacher_notes
-    ☐ Update RLS policies for teacher-student data access
+### PHASE 2: Teacher-Student System
+  ☐ 2.1) Core Database Structure:
+    ☐ Create Supabase Tables:
+      - classes: id, teacher_id, name, created_at, settings
+      - class_students: id, class_id, student_id, joined_at, status
+      - assignments: id, class_id, title, due_date, status, requirements
+      - student_assignments: id, assignment_id, student_id, status, completed_at
+    ☐ Create RLS Policies:
+      - Teacher access to their classes
+      - Student access to their assignments
+      - Progress tracking permissions
+    ☐ Create Database Functions:
+      - create_class: Setup new class with defaults
+      - add_student: Add student to class
+      - track_progress: Update student progress
 
-  ☐ 2.2) Teacher Management Interface:
-    ☐ Create teacher registration flow with verification
-    ☐ Create ClassManagement component for viewing students
-    ☐ Create StudentInvite component for adding students to class
-    ☐ Create AssignmentCreator component for creating assignments
-    ☐ Create StudentProgressView for individual student tracking
-    ☐ Create ClassProgressView for class-wide analytics
+  ☐ 2.2) Teacher Features:
+    ☐ Create Teacher Views:
+      - ClassList: View and manage classes
+      - StudentProgress: Track student performance
+      - AssignmentManager: Create and manage assignments
+    ☐ Create Teacher Functions:
+      - createAssignment: Setup new assignments
+      - trackProgress: Monitor student progress
+      - generateReports: Create progress reports
+    ☐ Create Analytics:
+      - ClassPerformance: Overall class stats
+      - StudentProgress: Individual tracking
+      - AssignmentCompletion: Assignment stats
 
-  ☐ 2.3) Assignment System:
-    ☐ Create AssignmentList component for teachers
-    ☐ Create AssignmentDetail component for viewing/editing assignments
-    ☐ Create StudentAssignmentView for students to see their assignments
-    ☐ Create AssignmentProgress component for tracking completion
-    ☐ Implement assignment due date notifications
-    ☐ Create assignment template system for reusable assignments
-
-  ☐ 2.4) Student Class Interface:
-    ☐ Create class joining flow (invite codes or teacher approval)
-    ☐ Create MyTeacher component showing assigned teacher info
-    ☐ Create MyAssignments component showing current/past assignments
-    ☐ Create AssignmentDetail view for students
-    ☐ Update student dashboard to include assignment overview
-    ☐ Create progress sharing with teacher functionality
-
-  ☐ 2.5) Communication Features:
-    ☐ Create teacher-student messaging system
-    ☐ Create progress report generation
-    ☐ Create email notifications for assignments and progress
-    ☐ Create in-app notification system
-    ☐ Create teacher feedback system on student performance
+  ☐ 2.3) Student Features:
+    ☐ Create Student Views:
+      - MyClasses: View enrolled classes
+      - MyAssignments: View and complete assignments
+      - MyProgress: Track personal progress
+    ☐ Create Student Functions:
+      - joinClass: Enroll in new class
+      - submitAssignment: Complete assignments
+      - trackProgress: Update personal progress
+    ☐ Create Communication:
+      - MessageTeacher: Contact teacher
+      - ShareProgress: Share achievements
+      - RequestHelp: Get assistance
 
 ### PHASE 3: Achievements, Leaderboards & Gamification
   ☐ 3.1) Achievement System Schema:

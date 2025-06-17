@@ -1,6 +1,6 @@
 # 🇬🇷 How to Add Learning Activities to Learn Greek Through Play
 
-## ⚡ Quick Start (2 Steps!)
+## ⚡ Quick Start (3 Steps!)
 
 ### 1. Add your learning activity to the registry
 
@@ -27,7 +27,25 @@ Edit `app/utils/games/registry.ts` and add your activity to the `GAMES` array:
 Create a new file at `app/your-activity/page.tsx`:
 
 ```typescript
+import { useGameSession } from "@/hooks/useGameSession";
+import { useGameProgress } from "@/hooks/useGameProgress";
+import { useGameAchievements } from "@/hooks/useGameAchievements";
+
 export default function YourActivity() {
+  const { startSession, endSession } = useGameSession();
+  const { updateProgress } = useGameProgress();
+  const { checkAchievements } = useGameAchievements();
+
+  const handleGameStart = () => {
+    startSession();
+  };
+
+  const handleGameEnd = (score: number, level: number) => {
+    endSession(score, level);
+    updateProgress({ score, level });
+    checkAchievements({ score, level });
+  };
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <div className="container mx-auto px-6 py-8">
@@ -41,7 +59,20 @@ export default function YourActivity() {
 }
 ```
 
-That's it! Your activity will automatically appear on the homepage! 🚀
+### 3. Implement Progress Tracking
+
+Add these components to your activity:
+
+```typescript
+import { GameProgressBar } from "@/components/game/GameProgressBar";
+import { AchievementDisplay } from "@/components/game/AchievementDisplay";
+
+// In your component:
+<GameProgressBar />
+<AchievementDisplay />
+```
+
+That's it! Your activity will automatically appear on the homepage with progress tracking! 🚀
 
 ## 📋 Configuration Options
 
@@ -73,27 +104,33 @@ That's it! Your activity will automatically appear on the homepage! 🚀
 "hard"; // Advanced (C1-C2 level)
 ```
 
-## 🇬🇷 Greek Language Learning Focus
+## 🎮 Progress Tracking
 
-Your activities should help learners with:
+Your activity automatically gets:
 
-- **Vocabulary**: Essential Modern Greek words
-- **Grammar**: Verb conjugations, noun cases
-- **Pronunciation**: Audio and phonetic guides
-- **Culture**: Greek traditions and context
-- **Conversation**: Real-world speaking practice
-- **Writing**: Greek alphabet and script
+- **Session Tracking**: Start/end times, scores, levels
+- **Progress Saving**: Total scores, highest levels
+- **Achievements**: Track and display accomplishments
+- **Analytics**: Basic performance metrics
 
-## 🎨 Using Greek Theme
+### Required Progress Data
 
-Your activity automatically gets access to:
+```typescript
+// Session data (automatically tracked)
+{
+  score: number;      // Game score
+  level: number;      // Current level
+  duration: number;   // Time spent
+  completed: boolean; // Whether game was finished
+}
 
-- **Colors**: `text-primary`, `bg-surface`, `border-border`
-- **Fonts**: `font-display` (Cinzel), `font-body` (Crimson Text)
-- **Greek Text**: Use Unicode for Greek characters (Αα, Ββ, Γγ...)
-- **Animations**: Framer Motion for engaging interactions
-- **State**: Zustand for learning progress tracking
-- **Icons**: Lucide React icons for UI elements
+// Progress data (automatically saved)
+{
+  totalScore: number;    // Cumulative score
+  highestLevel: number;  // Best level reached
+  lastPlayed: Date;      // Last session date
+}
+```
 
 ## 🏗️ Folder Structure for Learning Activities
 
@@ -152,7 +189,7 @@ Activities are automatically organized by:
 - **Homepage**: Featured activities prominently displayed
 - **Categories**: Auto-grouped by learning type
 - **Difficulty**: Filtered by language level
-- **Progress**: (Coming soon) Track learner advancement
+- **Progress**: Track learner advancement
 
 ## ✨ Educational Examples
 
