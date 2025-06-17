@@ -51,30 +51,30 @@ export function LoginModal({
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-xl max-w-md w-full p-6 relative">
+    <div className="fixed inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+      <div className="bg-surface rounded-xl max-w-md w-full p-6 relative border border-border shadow-[--shadow-glow]">
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
+          className="absolute top-4 right-4 text-muted hover:text-foreground transition-colors"
         >
           <X size={24} />
         </button>
 
         {/* Header */}
         <div className="text-center mb-6">
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">
+          <h2 className="text-2xl font-display font-bold text-primary mb-2">
             Welcome Back
           </h2>
-          <p className="text-gray-600">
+          <p className="text-foreground/70">
             Sign in to continue your Greek learning journey
           </p>
         </div>
 
         {/* Error Message */}
         {error && (
-          <div className="bg-red-50 border border-red-200 rounded-lg p-3 mb-4">
-            <p className="text-red-700 text-sm">{error}</p>
+          <div className="bg-accent/10 border border-accent/20 rounded-lg p-3 mb-4">
+            <p className="text-accent text-sm">{error}</p>
           </div>
         )}
 
@@ -82,7 +82,7 @@ export function LoginModal({
         <button
           onClick={handleGoogleLogin}
           disabled={loading}
-          className="w-full flex items-center justify-center gap-3 bg-white border-2 border-gray-200 rounded-lg py-3 px-4 text-gray-700 font-medium hover:bg-gray-50 hover:border-gray-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed mb-4"
+          className="w-full flex items-center justify-center gap-3 bg-surface border border-border rounded-lg py-3 px-4 text-foreground font-medium hover:bg-background/50 hover:border-primary/50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed mb-4"
         >
           {loading ? (
             <Loader2 size={20} className="animate-spin" />
@@ -94,9 +94,9 @@ export function LoginModal({
 
         {/* Divider */}
         <div className="flex items-center gap-4 mb-4">
-          <div className="flex-1 h-px bg-gray-200"></div>
-          <span className="text-gray-500 text-sm">or</span>
-          <div className="flex-1 h-px bg-gray-200"></div>
+          <div className="flex-1 h-px bg-border"></div>
+          <span className="text-muted text-sm">or</span>
+          <div className="flex-1 h-px bg-border"></div>
         </div>
 
         {/* Email/Password Form */}
@@ -104,14 +104,14 @@ export function LoginModal({
           <div>
             <label
               htmlFor="email"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="block text-sm font-medium text-foreground mb-1"
             >
               Email
             </label>
             <div className="relative">
               <Mail
                 size={20}
-                className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted"
               />
               <input
                 id="email"
@@ -119,7 +119,7 @@ export function LoginModal({
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+                className="w-full pl-10 pr-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-colors text-foreground placeholder-muted"
                 placeholder="Enter your email"
               />
             </div>
@@ -128,14 +128,14 @@ export function LoginModal({
           <div>
             <label
               htmlFor="password"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="block text-sm font-medium text-foreground mb-1"
             >
               Password
             </label>
             <div className="relative">
               <Lock
                 size={20}
-                className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted"
               />
               <input
                 id="password"
@@ -143,7 +143,7 @@ export function LoginModal({
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+                className="w-full pl-10 pr-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-colors text-foreground placeholder-muted"
                 placeholder="Enter your password"
               />
             </div>
@@ -152,7 +152,7 @@ export function LoginModal({
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            className="w-full bg-primary text-background py-3 px-4 rounded-lg font-medium hover:bg-primary-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
           >
             {loading && <Loader2 size={20} className="animate-spin" />}
             Sign In
@@ -161,11 +161,11 @@ export function LoginModal({
 
         {/* Switch to Sign Up */}
         <div className="text-center mt-6">
-          <p className="text-gray-600">
+          <p className="text-foreground/70">
             Don&apos;t have an account?{" "}
             <button
               onClick={onSwitchToSignUp}
-              className="text-blue-600 hover:text-blue-700 font-medium transition-colors"
+              className="text-primary hover:text-primary-dark font-medium transition-colors"
             >
               Sign up
             </button>

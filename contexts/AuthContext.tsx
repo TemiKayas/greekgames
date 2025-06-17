@@ -72,7 +72,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         .eq("id", userId)
         .single();
 
-      if (error && error.code !== "PGRST116") {
+      if (error) {
+        // If profile doesn't exist, create one
+        if (error.code === "PGRST116") {
+          await createProfileForUser(userId);
+          return;
+        }
         console.error("Error fetching profile:", error);
         return;
       }
@@ -80,6 +85,44 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setProfile(data);
     } catch (error) {
       console.error("Error fetching profile:", error);
+    }
+  };
+
+  const createProfileForUser = async (userId: string) => {
+    try {
+      // Get current user data
+      const { data: userData } = await supabase.auth.getUser();
+      if (!userData.user) return;
+
+      const user = userData.user;
+      const fullName =
+        user.user_metadata.full_name ||
+        user.user_metadata.name ||
+        user.email?.split("@")[0] ||
+        "User";
+
+      const role = user.user_metadata.role || "student";
+
+      const { data, error } = await supabase
+        .from("users")
+        .insert({
+          id: userId,
+          email: user.email!,
+          full_name: fullName,
+          role: role,
+          avatar_url: user.user_metadata.avatar_url,
+        })
+        .select()
+        .single();
+
+      if (error) {
+        console.error("Error creating profile:", error);
+        return;
+      }
+
+      setProfile(data);
+    } catch (error) {
+      console.error("Error creating profile for user:", error);
     }
   };
 
@@ -102,19 +145,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     if (error) throw error;
 
-    // Create profile in our users table
-    if (data.user) {
-      const { error: profileError } = await supabase.from("users").insert({
-        id: data.user.id,
-        email: data.user.email!,
-        full_name: fullName,
-        role: role,
-      });
+    // For email/password signup, the user needs to verify their email first
+    // The profile will be created when they confirm their email and sign in
+    // This prevents the error you were seeing
 
-      if (profileError) {
-        console.error("Error creating profile:", profileError);
-      }
-    }
+    // Note: We don't create the profile here because the user isn't confirmed yet
+    // The profile creation will happen in the auth callback or when they sign in
   };
 
   const signIn = async (email: string, password: string) => {

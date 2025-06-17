@@ -5,7 +5,7 @@ import {
   getAvailableGames,
   getGameCollection,
 } from "@/app/utils/games/registry";
-import { AuthButtons } from "@/components/ui/AuthButtons";
+import { Navigation } from "@/components/ui/Navigation";
 import { motion } from "framer-motion";
 import { BookOpen, Target, Users, Zap } from "lucide-react";
 import Link from "next/link";
@@ -24,27 +24,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Navigation Bar */}
-      <nav className="bg-white/95 backdrop-blur-sm border-b border-gray-100 sticky top-0 z-50">
-        <div className="container mx-auto px-4 sm:px-6">
-          <div className="flex items-center justify-between h-16">
-            <Link href="/" className="flex items-center gap-2">
-              <span className="text-xl font-display font-bold text-primary">
-                🇬🇷 Greek Games
-              </span>
-            </Link>
-
-            <div className="flex items-center gap-6">
-              <Link
-                href="/about"
-                className="text-gray-700 hover:text-blue-600 transition-colors"
-              >
-                About
-              </Link>
-              <AuthButtons />
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Navigation />
 
       {/* Hero Section */}
       <header className="relative overflow-hidden">
@@ -227,47 +207,28 @@ export default function Home() {
             </div>
             <div className="text-center">
               <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-1 sm:mb-2">
-                {Object.keys(getGameCollection().categories).length}
+                0
               </div>
-              <p className="text-muted text-xs sm:text-sm">Skill Areas</p>
+              <p className="text-muted text-xs sm:text-sm">Hours Practiced</p>
             </div>
             <div className="text-center">
               <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-1 sm:mb-2">
-                100%
+                0%
               </div>
-              <p className="text-muted text-xs sm:text-sm">Free Access</p>
+              <p className="text-muted text-xs sm:text-sm">Course Progress</p>
             </div>
           </div>
 
-          <p className="text-foreground/70 text-sm sm:text-base max-w-lg mx-auto mb-6 sm:mb-8">
-            Track your progress across different learning categories and unlock
-            new challenges as you advance
+          <p className="text-foreground/70 mb-6 sm:mb-8">
+            Track your progress, earn achievements, and master the Greek
+            language step by step
           </p>
 
-          <button className="bg-primary hover:bg-primary-dark text-background font-semibold py-2 sm:py-3 px-4 sm:px-6 rounded-lg transition-colors text-sm sm:text-base">
-            View Progress Details
+          <button className="bg-primary hover:bg-primary-dark text-background font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-lg transition-colors">
+            View Full Dashboard
           </button>
         </motion.section>
       </main>
-
-      {/* Footer CTA */}
-      <footer className="bg-surface/30 border-t border-border">
-        <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-12 text-center">
-          <h2 className="font-display text-xl sm:text-2xl md:text-3xl font-semibold text-primary mb-3 sm:mb-4">
-            Ready to Start Learning?
-          </h2>
-          <p className="text-foreground/70 text-sm sm:text-base max-w-lg mx-auto mb-6 sm:mb-8 px-4">
-            Join thousands of learners discovering the beauty of the Greek
-            language through interactive games and cultural exploration
-          </p>
-          <button
-            onClick={scrollToGames}
-            className="bg-primary hover:bg-primary-dark text-background font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-lg transition-colors text-base sm:text-lg"
-          >
-            Begin Your Journey
-          </button>
-        </div>
-      </footer>
     </div>
   );
 }

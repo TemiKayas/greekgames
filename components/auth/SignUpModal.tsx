@@ -71,35 +71,37 @@ export function SignUpModal({
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-xl max-w-md w-full p-6 relative max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+      <div className="bg-surface rounded-xl max-w-md w-full p-6 relative max-h-[90vh] overflow-y-auto border border-border shadow-[--shadow-glow]">
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
+          className="absolute top-4 right-4 text-muted hover:text-foreground transition-colors"
         >
           <X size={24} />
         </button>
 
         {/* Header */}
         <div className="text-center mb-6">
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">Join Us</h2>
-          <p className="text-gray-600">
+          <h2 className="text-2xl font-display font-bold text-primary mb-2">
+            Join Us
+          </h2>
+          <p className="text-foreground/70">
             Start your Greek learning adventure today
           </p>
         </div>
 
         {/* Error Message */}
         {error && (
-          <div className="bg-red-50 border border-red-200 rounded-lg p-3 mb-4">
-            <p className="text-red-700 text-sm">{error}</p>
+          <div className="bg-accent/10 border border-accent/20 rounded-lg p-3 mb-4">
+            <p className="text-accent text-sm">{error}</p>
           </div>
         )}
 
         {/* Success Message */}
         {success && (
-          <div className="bg-green-50 border border-green-200 rounded-lg p-3 mb-4">
-            <p className="text-green-700 text-sm">{success}</p>
+          <div className="bg-primary/10 border border-primary/20 rounded-lg p-3 mb-4">
+            <p className="text-primary text-sm">{success}</p>
           </div>
         )}
 
@@ -107,7 +109,7 @@ export function SignUpModal({
         <button
           onClick={handleGoogleSignUp}
           disabled={loading}
-          className="w-full flex items-center justify-center gap-3 bg-white border-2 border-gray-200 rounded-lg py-3 px-4 text-gray-700 font-medium hover:bg-gray-50 hover:border-gray-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed mb-4"
+          className="w-full flex items-center justify-center gap-3 bg-surface border border-border rounded-lg py-3 px-4 text-foreground font-medium hover:bg-background/50 hover:border-primary/50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed mb-4"
         >
           {loading ? (
             <Loader2 size={20} className="animate-spin" />
@@ -119,16 +121,16 @@ export function SignUpModal({
 
         {/* Divider */}
         <div className="flex items-center gap-4 mb-4">
-          <div className="flex-1 h-px bg-gray-200"></div>
-          <span className="text-gray-500 text-sm">or</span>
-          <div className="flex-1 h-px bg-gray-200"></div>
+          <div className="flex-1 h-px bg-border"></div>
+          <span className="text-muted text-sm">or</span>
+          <div className="flex-1 h-px bg-border"></div>
         </div>
 
         {/* Email/Password Form */}
         <form onSubmit={handleEmailSignUp} className="space-y-4">
           {/* Role Selection */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-foreground mb-2">
               I am a...
             </label>
             <div className="grid grid-cols-2 gap-3">
@@ -137,18 +139,18 @@ export function SignUpModal({
                 onClick={() => setRole("student")}
                 className={`flex flex-col items-center p-4 rounded-lg border-2 transition-colors ${
                   role === "student"
-                    ? "border-blue-500 bg-blue-50"
-                    : "border-gray-200 hover:border-gray-300"
+                    ? "border-primary bg-primary/10"
+                    : "border-border hover:border-primary/50"
                 }`}
               >
                 <GraduationCap
                   size={24}
-                  className={
-                    role === "student" ? "text-blue-600" : "text-gray-400"
-                  }
+                  className={role === "student" ? "text-primary" : "text-muted"}
                 />
                 <span
-                  className={`text-sm font-medium mt-1 ${role === "student" ? "text-blue-600" : "text-gray-600"}`}
+                  className={`text-sm font-medium mt-1 ${
+                    role === "student" ? "text-primary" : "text-foreground/70"
+                  }`}
                 >
                   Student
                 </span>
@@ -159,18 +161,18 @@ export function SignUpModal({
                 onClick={() => setRole("teacher")}
                 className={`flex flex-col items-center p-4 rounded-lg border-2 transition-colors ${
                   role === "teacher"
-                    ? "border-blue-500 bg-blue-50"
-                    : "border-gray-200 hover:border-gray-300"
+                    ? "border-primary bg-primary/10"
+                    : "border-border hover:border-primary/50"
                 }`}
               >
                 <BookOpen
                   size={24}
-                  className={
-                    role === "teacher" ? "text-blue-600" : "text-gray-400"
-                  }
+                  className={role === "teacher" ? "text-primary" : "text-muted"}
                 />
                 <span
-                  className={`text-sm font-medium mt-1 ${role === "teacher" ? "text-blue-600" : "text-gray-600"}`}
+                  className={`text-sm font-medium mt-1 ${
+                    role === "teacher" ? "text-primary" : "text-foreground/70"
+                  }`}
                 >
                   Teacher
                 </span>
@@ -181,14 +183,14 @@ export function SignUpModal({
           <div>
             <label
               htmlFor="fullName"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="block text-sm font-medium text-foreground mb-1"
             >
               Full Name
             </label>
             <div className="relative">
               <User
                 size={20}
-                className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted"
               />
               <input
                 id="fullName"
@@ -196,7 +198,7 @@ export function SignUpModal({
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
                 required
-                className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+                className="w-full pl-10 pr-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-colors text-foreground placeholder-muted"
                 placeholder="Enter your full name"
               />
             </div>
@@ -205,14 +207,14 @@ export function SignUpModal({
           <div>
             <label
               htmlFor="email"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="block text-sm font-medium text-foreground mb-1"
             >
               Email
             </label>
             <div className="relative">
               <Mail
                 size={20}
-                className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted"
               />
               <input
                 id="email"
@@ -220,7 +222,7 @@ export function SignUpModal({
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+                className="w-full pl-10 pr-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-colors text-foreground placeholder-muted"
                 placeholder="Enter your email"
               />
             </div>
@@ -229,14 +231,14 @@ export function SignUpModal({
           <div>
             <label
               htmlFor="password"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="block text-sm font-medium text-foreground mb-1"
             >
               Password
             </label>
             <div className="relative">
               <Lock
                 size={20}
-                className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted"
               />
               <input
                 id="password"
@@ -245,11 +247,11 @@ export function SignUpModal({
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 minLength={6}
-                className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+                className="w-full pl-10 pr-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-colors text-foreground placeholder-muted"
                 placeholder="Choose a secure password"
               />
             </div>
-            <p className="text-xs text-gray-500 mt-1">
+            <p className="text-xs text-muted mt-1">
               Must be at least 6 characters long
             </p>
           </div>
@@ -257,7 +259,7 @@ export function SignUpModal({
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            className="w-full bg-primary text-background py-3 px-4 rounded-lg font-medium hover:bg-primary-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
           >
             {loading && <Loader2 size={20} className="animate-spin" />}
             Create Account
@@ -266,11 +268,11 @@ export function SignUpModal({
 
         {/* Switch to Login */}
         <div className="text-center mt-6">
-          <p className="text-gray-600">
+          <p className="text-foreground/70">
             Already have an account?{" "}
             <button
               onClick={onSwitchToLogin}
-              className="text-blue-600 hover:text-blue-700 font-medium transition-colors"
+              className="text-primary hover:text-primary-dark font-medium transition-colors"
             >
               Sign in
             </button>

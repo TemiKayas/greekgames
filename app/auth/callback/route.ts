@@ -21,14 +21,20 @@ export async function GET(request: NextRequest) {
 
       // If no profile exists, create one
       if (!existingProfile) {
+        // Get user metadata from auth user or default values
+        const fullName =
+          data.user.user_metadata.full_name ||
+          data.user.user_metadata.name ||
+          data.user.email?.split("@")[0] ||
+          "User";
+
+        const role = data.user.user_metadata.role || "student"; // Default to student
+
         const { error: profileError } = await supabase.from("users").insert({
           id: data.user.id,
           email: data.user.email!,
-          full_name:
-            data.user.user_metadata.full_name ||
-            data.user.user_metadata.name ||
-            "Unknown",
-          role: "student", // Default role for OAuth signups
+          full_name: fullName,
+          role: role,
           avatar_url: data.user.user_metadata.avatar_url,
         });
 

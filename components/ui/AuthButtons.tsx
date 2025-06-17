@@ -38,7 +38,7 @@ export function AuthButtons() {
       <div className="flex items-center gap-4">
         <Link
           href="/dashboard"
-          className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-blue-600 transition-colors"
+          className="flex items-center gap-2 px-3 py-2 text-foreground/80 hover:text-primary transition-colors font-medium"
         >
           <User size={18} />
           <span className="hidden sm:block">
@@ -47,7 +47,7 @@ export function AuthButtons() {
         </Link>
         <button
           onClick={handleSignOut}
-          className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-red-600 transition-colors"
+          className="flex items-center gap-2 px-3 py-2 text-foreground/80 hover:text-accent transition-colors font-medium"
         >
           <LogOut size={18} />
           <span className="hidden sm:block">Sign Out</span>
@@ -62,14 +62,14 @@ export function AuthButtons() {
       <div className="flex items-center gap-2">
         <button
           onClick={openLoginModal}
-          className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-blue-600 transition-colors"
+          className="flex items-center gap-2 px-3 py-2 text-foreground/80 hover:text-primary transition-colors font-medium"
         >
           <LogIn size={18} />
           <span className="hidden sm:block">Sign In</span>
         </button>
         <button
           onClick={openSignUpModal}
-          className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          className="flex items-center gap-2 px-3 py-2 bg-primary text-background rounded-lg hover:bg-primary-dark transition-colors font-medium"
         >
           <UserPlus size={18} />
           <span className="hidden sm:block">Sign Up</span>
