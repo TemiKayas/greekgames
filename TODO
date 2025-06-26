@@ -120,8 +120,9 @@ Part 2:
     ☐ Create TeacherDashboard with class management overview
     ☐ Implement user role-based dashboard routing
 
+  ✔ 1.4.5) future proofing games and making them more modular and scalable: @started(25-06-17 17:57) @done(25-06-17 17:57) @lasted(30 mins)
 
-  ☐ 1.5) Game Progress Integration:
+☐ 1.5) Game Progress Integration:
     ☐ Create Supabase Tables:
       - game_sessions:
         - id: uuid
@@ -317,3 +318,11 @@ Part 2:
       - develope curriculum specifically for standadized testing
       - how to a research market
        - TAM or SAM
+
+
+Tishes criqies:
+  ☐ 1) Sound effects
+  ☐ 2) remove text for harder difficultys of the alphabet game
+  ☐ 3) add a way to click on greek letters for writing practice game
+  ☐ 4) make translation bigger in the writting game
+  ☐ 5) divorce tables more
