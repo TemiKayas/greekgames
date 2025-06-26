@@ -1,4 +1,138 @@
-How to make a Greek-themed web game with:
+# Greek Games - Free Games with Ads Project
+
+## 🎯 NEW DIRECTION: Free Games with Ads
+- ✅ Created new branch: `free-games-with-ads`
+- ✅ Reverted to last working Vercel deployment (89278d7)
+- ✅ Organized games into `/app/games/` folder structure
+- ✔ ☐ Remove authentication/user management code @started(25-06-26 11:00) @done(25-06-26 11:00) @lasted(41s)
+- ☐ Integrate Google AdSense across all games
+- ☐ Complete all games in the registry
+- ☐ Optimize for ad revenue while maintaining good UX
+
+## 🎮 GAME DEVELOPMENT PRIORITY
+
+### ✅ COMPLETED GAMES (3/8)
+1. **Greek Alphabet Master** (`/games/memory`) - Memory matching game
+2. **Greek Writing Practice** (`/games/writing`) - Fill-in-the-blank exercises
+3. **Everyday Greek Words** (`/games/vocabulary`) - Drag & drop vocabulary
+
+### 🚧 GAMES TO DEVELOP (5/8)
+
+#### Phase 1: Core Language Games (Priority: High)
+4. **Greek Verb Trainer** (`/games/verbs`) - Verb conjugation practice
+   - Status: planning
+   - Features: Common verbs, all tenses, interactive quizzes
+   - Estimated dev time: 2-3 days
+
+5. **Greek Numbers Game** (`/games/numbers`) - Numbers and counting
+   - Status: coming-soon
+   - Features: Numbers 1-1000, math operations, time/dates
+   - Estimated dev time: 1-2 days
+
+#### Phase 2: Advanced Learning Games (Priority: Medium)
+6. **Greek Conversations** (`/games/conversations`) - Real-world scenarios
+   - Status: planning
+   - Features: Real scenarios, voice recognition, cultural context
+   - Estimated dev time: 3-4 days
+
+7. **Greek Culture & History** (`/games/culture`) - Cultural learning
+   - Status: planning
+   - Features: Cultural facts, historical context, geography
+   - Estimated dev time: 2-3 days
+
+8. **Greek Pronunciation Coach** (`/games/pronunciation`) - AI pronunciation
+   - Status: planning
+   - Features: Speech recognition, accent training, phonetic guide
+   - Estimated dev time: 3-4 days
+
+## 📱 GOOGLE ADSENSE INTEGRATION PLAN
+
+### Ad Placement Strategy
+- **Header Banner**: 728x90 or 320x50 (responsive)
+- **Sidebar**: 300x250 (desktop only)
+- **In-Game**: 320x50 between game rounds
+- **Footer**: 728x90 or 320x50 (responsive)
+- **Interstitial**: Between games (after completion)
+
+### Implementation Steps
+1. ☐ Set up Google AdSense account
+2. ☐ Create ad components:
+   - `AdBanner` - Responsive banner ads
+   - `AdSidebar` - Desktop sidebar ads
+   - `AdInGame` - In-game placement ads
+   - `AdInterstitial` - Full-screen between games
+3. ☐ Integrate ads into:
+   - Homepage (header + footer)
+   - Game pages (sidebar + in-game)
+   - About page (header + footer)
+4. ☐ Test ad performance and user experience
+5. ☐ Optimize ad placement for maximum revenue
+
+### Ad Component Structure
+```typescript
+// components/ads/
+├── AdBanner.tsx      // Responsive banner ads
+├── AdSidebar.tsx     // Desktop sidebar ads
+├── AdInGame.tsx      // In-game placement
+├── AdInterstitial.tsx // Full-screen ads
+└── AdProvider.tsx    // AdSense initialization
+```
+
+## 🏗️ TECHNICAL TASKS
+
+### Remove Authentication (Simplify for Free Games)
+- ☐ Remove Supabase integration
+- ☐ Remove user authentication components
+- ☐ Remove progress tracking
+- ☐ Simplify game state management
+- ☐ Remove user-specific features
+
+### Game Development Framework
+- ☐ Create reusable game components
+- ☐ Standardize game layouts with ad placements
+- ☐ Implement consistent scoring systems
+- ☐ Add game completion celebrations
+- ☐ Create game navigation system
+
+### Performance & SEO
+- ☐ Optimize for mobile performance
+- ☐ Implement proper meta tags for each game
+- ☐ Add structured data for games
+- ☐ Optimize loading times with ads
+- ☐ Implement proper error boundaries
+
+## 📊 MONETIZATION STRATEGY
+
+### Revenue Optimization
+- ☐ A/B test ad placements
+- ☐ Monitor user engagement metrics
+- ☐ Optimize ad frequency vs user experience
+- ☐ Implement ad loading optimization
+- ☐ Track conversion rates
+
+### User Experience Balance
+- ☐ Ensure ads don't interfere with gameplay
+- ☐ Maintain fast loading times
+- ☐ Keep games engaging despite ads
+- ☐ Provide clear game instructions
+- ☐ Add social sharing features
+
+## 🎯 SUCCESS METRICS
+- Total games completed: 8/8
+- Ad revenue per user session
+- User engagement time
+- Game completion rates
+- Ad click-through rates
+- Page load performance
+
+## 📅 TIMELINE
+- **Week 1**: Complete Phase 1 games (Verb Trainer, Numbers)
+- **Week 2**: Set up Google AdSense and integrate ads
+- **Week 3**: Complete Phase 2 games (Conversations, Culture)
+- **Week 4**: Polish, optimize, and launch
+
+---
+*Last updated: 2024-12-19 - New direction: Free games with ads*
 
 ## 1) Project Setup & Foundation
   ✔ Initialize Next.js 14+ project with TypeScript @started(25-06-09 21:16) @done(25-06-09 21:16) @lasted(52s)
@@ -62,190 +196,3 @@ Part 2:
     ✔ 2) Lets ensure that the home page has a button to go to the about page. @started(25-06-13 15:48) @done(25-06-13 15:48) @lasted(45s)
     3) Lets ensure that the home page has a button to go to the games page.:
       - right now its a section on the home page
-
-  Need to setup some sort of acount sign up and login system.:
-    1) Firebase to allow people to sign up and login
-    2) Save the users progress to the database for their games
-    2.5) Perhaps have a sort of assighned teacher to the user, so they can track their progress and get help from the teacher.
-    3) Have a sort of leaderboard system, so people can see how they are doing compared to others.
-    4) Have a sort of rewards system, so people can earn rewards for their progress.
-    5) Have a sort of achievements system, so people can earn achievements for their progress.
-    6) Have a sort of badges system, so people can earn badges for their progress.
-    7) Have a sort of leaderboard system, so people can see how they are doing compared to others.
-    8) Have a sort of rewards system, so people can earn rewards for their progress.
-    9) Have a sort of achievements system, so people can earn achievements for their progress.
-
-    Lets also make it so when they sign in its a different dash board, and they can see their progress and their games:
-      1) Lets have a button to go back to the home page.
-      2) Lets have a button to go to the games page.
-      ☐ lets ensure that this game page is a different page, and not just a section on the home page
-      3) Lets have a button to go to the about page.
-
-## 🔐 SUPABASE AUTHENTICATION & USER SYSTEM IMPLEMENTATION
-
-### PHASE 1: Core Authentication & Basic Progress Tracking
-  ☐ 1.1) Supabase Project Setup:
-    ☐ Create new Supabase project
-    ☐ Configure environment variables (.env.local)
-    ☐ Install @supabase/supabase-js and @supabase/auth-helpers-nextjs
-    ☐ Setup Supabase client configuration
-    ☐ Configure authentication providers (email/password + Google OAuth)
-
-  ☐ 1.2) Database Schema Creation:
-    ☐ Create users table with columns: id, email, full_name, role, avatar_url, created_at, updated_at, preferences, is_active
-    ☐ Create games table to sync with registry.ts: id, game_key, name, description, category, difficulty_level, max_score, version, is_active, metadata, created_at, updated_at
-    ☐ Create student_progress table: id, student_id, game_id, current_level, total_score, best_score, times_played, total_time_spent, last_played_at, progress_data, completion_percentage, created_at, updated_at
-    ☐ Create game_sessions table: id, student_id, game_id, score, duration, completed, session_data, started_at, completed_at
-    ☐ Setup Row Level Security (RLS) policies for data protection
-    ☐ Create database functions for automatic game registry sync
-
-  ☐ 1.3) Authentication Components:
-    ☐ Create LoginModal component with email/password and Google OAuth
-    ☐ Create SignUpModal component with role selection (student/teacher)
-    ☐ Create UserProfile component for account management
-    ☐ Create AuthProvider context for global auth state
-    ☐ Create ProtectedRoute component for authenticated pages
-    ☐ Add login/logout buttons to main navigation
-
-  ☐ 1.4) User Dashboard Creation:
-    ☐ Create /dashboard route with protected access
-    ☐ Build DashboardLayout with navigation (Home, Games, About, Profile, Logout)
-    ☐ Create StudentDashboard with progress overview
-    ☐ Create TeacherDashboard with class management overview
-    ☐ Implement user role-based dashboard routing
-
-  ☐ 1.5) Game Progress Integration:
-    ☐ Update existing games to save progress to Supabase
-    ☐ Create useGameProgress hook for progress tracking
-    ☐ Modify memory game to record sessions and update progress
-    ☐ Modify writing game to record sessions and update progress
-    ☐ Modify vocabulary game to record sessions and update progress
-    ☐ Create progress visualization components (charts, progress bars)
-
-  ☐ 1.6) Data Migration & Game Registry Sync:
-    ☐ Create script to populate games table from registry.ts
-    ☐ Setup automatic sync when new games are added to registry
-    ☐ Create database migration scripts
-    ☐ Test data consistency between frontend registry and database
-
-### PHASE 2: Teacher-Student Relationships & Assignment System
-  ☐ 2.1) Teacher-Student Schema:
-    ☐ Create teacher_student_relationships table: id, teacher_id, student_id, assigned_at, status, notes
-    ☐ Create assignments table: id, teacher_id, title, description, due_date, is_mandatory, created_at, updated_at, status
-    ☐ Create assignment_games table: assignment_id, game_id, required_score, required_completion, order_index
-    ☐ Create student_assignments table: id, assignment_id, student_id, assigned_at, completed_at, status, teacher_notes
-    ☐ Update RLS policies for teacher-student data access
-
-  ☐ 2.2) Teacher Management Interface:
-    ☐ Create teacher registration flow with verification
-    ☐ Create ClassManagement component for viewing students
-    ☐ Create StudentInvite component for adding students to class
-    ☐ Create AssignmentCreator component for creating assignments
-    ☐ Create StudentProgressView for individual student tracking
-    ☐ Create ClassProgressView for class-wide analytics
-
-  ☐ 2.3) Assignment System:
-    ☐ Create AssignmentList component for teachers
-    ☐ Create AssignmentDetail component for viewing/editing assignments
-    ☐ Create StudentAssignmentView for students to see their assignments
-    ☐ Create AssignmentProgress component for tracking completion
-    ☐ Implement assignment due date notifications
-    ☐ Create assignment template system for reusable assignments
-
-  ☐ 2.4) Student Class Interface:
-    ☐ Create class joining flow (invite codes or teacher approval)
-    ☐ Create MyTeacher component showing assigned teacher info
-    ☐ Create MyAssignments component showing current/past assignments
-    ☐ Create AssignmentDetail view for students
-    ☐ Update student dashboard to include assignment overview
-    ☐ Create progress sharing with teacher functionality
-
-  ☐ 2.5) Communication Features:
-    ☐ Create teacher-student messaging system
-    ☐ Create progress report generation
-    ☐ Create email notifications for assignments and progress
-    ☐ Create in-app notification system
-    ☐ Create teacher feedback system on student performance
-
-### PHASE 3: Achievements, Leaderboards & Gamification
-  ☐ 3.1) Achievement System Schema:
-    ☐ Create achievements table: id, name, description, icon, category, requirements, points_value, rarity, is_active, created_at, updated_at
-    ☐ Create student_achievements table: id, student_id, achievement_id, earned_at, progress_data, is_displayed
-    ☐ Create leaderboards table: id, name, type, game_id, teacher_id, start_date, end_date, is_active, created_at
-    ☐ Create leaderboard_entries table: id, leaderboard_id, student_id, score, rank, metadata, updated_at
-
-  ☐ 3.2) Achievement Engine:
-    ☐ Create achievement definition system (JSONB requirements)
-    ☐ Create achievement checking service (runs after each game session)
-    ☐ Create AchievementPopup component for celebration
-    ☐ Create AchievementBadge component for display
-    ☐ Create StudentAchievements page showing all earned achievements
-    ☐ Create achievement progress tracking for multi-step achievements
-
-  ☐ 3.3) Leaderboard System:
-    ☐ Create GlobalLeaderboard component for site-wide rankings
-    ☐ Create ClassLeaderboard component for teacher's students
-    ☐ Create GameLeaderboard component for game-specific rankings
-    ☐ Create WeeklyLeaderboard component for time-based competitions
-    ☐ Create leaderboard calculation service (real-time updates)
-    ☐ Create leaderboard privacy settings
-
-  ☐ 3.4) Gamification Features:
-    ☐ Create point system for all student activities
-    ☐ Create streak tracking for daily engagement
-    ☐ Create level system based on total points earned
-    ☐ Create badge collection and display system
-    ☐ Create reward unlocking system (new themes, avatars, etc.)
-    ☐ Create daily/weekly challenges system
-
-  ☐ 3.5) Social Features:
-    ☐ Create friend system for students
-    ☐ Create study groups functionality
-    ☐ Create progress sharing to social media
-    ☐ Create class competitions and tournaments
-    ☐ Create peer recognition system (student-to-student kudos)
-
-### PHASE 4: Advanced Analytics & Custom Features
-  ☐ 4.1) Advanced Analytics:
-    ☐ Create learning analytics dashboard for teachers
-    ☐ Create performance prediction algorithms
-    ☐ Create difficulty analysis for games and questions
-    ☐ Create engagement pattern analysis
-    ☐ Create automated struggling student identification
-    ☐ Create curriculum effectiveness analysis
-
-  ☐ 4.2) Custom Achievement Creator:
-    ☐ Create teacher interface for custom achievements
-    ☐ Create achievement template library
-    ☐ Create class-specific achievement system
-    ☐ Create seasonal/event-based achievements
-    ☐ Create achievement sharing between teachers
-
-  ☐ 4.3) Advanced Assignment Features:
-    ☐ Create adaptive assignment difficulty
-    ☐ Create prerequisite assignment chains
-    ☐ Create group assignments for collaboration
-    ☐ Create assignment analytics and optimization
-    ☐ Create automated assignment suggestions based on student performance
-
-  ☐ 4.4) Parent/Guardian Portal:
-    ☐ Create parent account type and authentication
-    ☐ Create parent dashboard for viewing child's progress
-    ☐ Create parent-teacher communication system
-    ☐ Create progress report sharing with parents
-    ☐ Create home practice suggestions for parents
-
-  ☐ 4.5) Mobile App Preparation:
-    ☐ Create Progressive Web App (PWA) configuration
-    ☐ Create offline data synchronization
-    ☐ Create mobile-optimized game interfaces
-    ☐ Create push notification system
-    ☐ Create mobile-specific user experience improvements
-
-  ☐ 4.6) Scaling & Performance:
-    ☐ Implement database indexing optimization
-    ☐ Create caching layer for frequently accessed data
-    ☐ Create real-time subscription optimization
-    ☐ Create data archiving system for old sessions
-    ☐ Create performance monitoring and alerting
-    ☐ Create automated backup and disaster recovery

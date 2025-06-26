@@ -1,0 +1,4 @@
+gotta change the site URL in supabase to the acutal website link instead of localhost.
+DB tests threw "Users table is publicly readable (this might be intended for testing)" probs have to fix thios for deployment
+do the google app verification for the google sign in to show the app name instead of the supabase link
+delete the role switcher dev tool
