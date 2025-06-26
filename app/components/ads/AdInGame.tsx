@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 
 interface AdInGameProps {
   adSlot: string;
@@ -14,8 +14,8 @@ export const AdInGame = ({
   adSlot,
   showAfterRounds = 3,
   currentRound = 1,
-  className = '',
-  style = {}
+  className = "",
+  style = {},
 }: AdInGameProps) => {
   const adRef = useRef<HTMLDivElement>(null);
   const [shouldShow, setShouldShow] = useState(false);
@@ -28,12 +28,12 @@ export const AdInGame = ({
   }, [currentRound, showAfterRounds]);
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && adRef.current && shouldShow) {
+    if (typeof window !== "undefined" && adRef.current && shouldShow) {
       try {
         // @ts-ignore - Google AdSense types
         (window.adsbygoogle = window.adsbygoogle || []).push({});
       } catch (error) {
-        console.error('AdSense error:', error);
+        // Silently handle AdSense errors
       }
     }
   }, [shouldShow]);
@@ -47,16 +47,16 @@ export const AdInGame = ({
       ref={adRef}
       className={`ad-in-game ${className}`}
       style={{
-        display: 'block',
-        textAlign: 'center',
-        overflow: 'hidden',
-        margin: '20px 0',
-        ...style
+        display: "block",
+        textAlign: "center",
+        overflow: "hidden",
+        margin: "20px 0",
+        ...style,
       }}
     >
       <ins
         className="adsbygoogle"
-        style={{ display: 'block' }}
+        style={{ display: "block" }}
         data-ad-client="ca-pub-YOUR_PUBLISHER_ID" // Replace with your AdSense ID
         data-ad-slot={adSlot}
         data-ad-format="auto"

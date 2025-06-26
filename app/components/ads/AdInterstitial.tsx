@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 
 interface AdInterstitialProps {
   adSlot: string;
@@ -16,8 +16,8 @@ export const AdInterstitial = ({
   showOnGameComplete = true,
   isGameComplete = false,
   onClose,
-  className = '',
-  style = {}
+  className = "",
+  style = {},
 }: AdInterstitialProps) => {
   const adRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -29,12 +29,12 @@ export const AdInterstitial = ({
   }, [showOnGameComplete, isGameComplete]);
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && adRef.current && isVisible) {
+    if (typeof window !== "undefined" && adRef.current && isVisible) {
       try {
         // @ts-ignore - Google AdSense types
         (window.adsbygoogle = window.adsbygoogle || []).push({});
       } catch (error) {
-        console.error('AdSense error:', error);
+        // Silently handle AdSense errors
       }
     }
   }, [isVisible]);
@@ -66,15 +66,15 @@ export const AdInterstitial = ({
           ref={adRef}
           className="ad-interstitial"
           style={{
-            display: 'block',
-            textAlign: 'center',
-            overflow: 'hidden',
-            minHeight: '400px'
+            display: "block",
+            textAlign: "center",
+            overflow: "hidden",
+            minHeight: "400px",
           }}
         >
           <ins
             className="adsbygoogle"
-            style={{ display: 'block' }}
+            style={{ display: "block" }}
             data-ad-client="ca-pub-YOUR_PUBLISHER_ID" // Replace with your AdSense ID
             data-ad-slot={adSlot}
             data-ad-format="auto"
