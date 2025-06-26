@@ -4,6 +4,7 @@
 - ✅ Created new branch: `free-games-with-ads`
 - ✅ Reverted to last working Vercel deployment (89278d7)
 - ✅ Organized games into `/app/games/` folder structure
+- ✅ Fixed build formatting issues for Vercel deployment
 - ✔ ☐ Remove authentication/user management code @started(25-06-26 11:00) @done(25-06-26 11:00) @lasted(41s)
 - ☐ Integrate Google AdSense across all games
 - ☐ Complete all games in the registry
@@ -11,128 +12,311 @@
 
 ## 🎮 GAME DEVELOPMENT PRIORITY
 
-### ✅ COMPLETED GAMES (3/8)
+### ✅ COMPLETED GAMES (4/8)
 1. **Greek Alphabet Master** (`/games/memory`) - Memory matching game
 2. **Greek Writing Practice** (`/games/writing`) - Fill-in-the-blank exercises
 3. **Everyday Greek Words** (`/games/vocabulary`) - Drag & drop vocabulary
+4. **Greek Verb Trainer** (`/games/verbs`) - Verb conjugation practice
 
-### 🚧 GAMES TO DEVELOP (5/8)
+### 🚧 GAMES TO DEVELOP (4/8)
 
 #### Phase 1: Core Language Games (Priority: High)
-4. **Greek Verb Trainer** (`/games/verbs`) - Verb conjugation practice
-   - Status: planning
-   - Features: Common verbs, all tenses, interactive quizzes
-   - Estimated dev time: 2-3 days
 
-5. **Greek Numbers Game** (`/games/numbers`) - Numbers and counting
-   - Status: coming-soon
-   - Features: Numbers 1-1000, math operations, time/dates
-   - Estimated dev time: 1-2 days
+☐ ##### 4. Greek Verb Trainer (`/games/verbs`) - Verb Conjugation Practice @started(25-06-26 11:21)
+**Status**: planning | **Estimated dev time**: 2-3 days | **Difficulty**: hard
 
-#### Phase 2: Advanced Learning Games (Priority: Medium)
-6. **Greek Conversations** (`/games/conversations`) - Real-world scenarios
-   - Status: planning
-   - Features: Real scenarios, voice recognition, cultural context
-   - Estimated dev time: 3-4 days
+**Game Mechanics**:
+- Present tense conjugation practice for common Greek verbs
+- Multiple choice format with 4 options
+- Progressive difficulty: present → future → past tenses
+- Score tracking and completion celebration
 
-7. **Greek Culture & History** (`/games/culture`) - Cultural learning
-   - Status: planning
-   - Features: Cultural facts, historical context, geography
-   - Estimated dev time: 2-3 days
-
-8. **Greek Pronunciation Coach** (`/games/pronunciation`) - AI pronunciation
-   - Status: planning
-   - Features: Speech recognition, accent training, phonetic guide
-   - Estimated dev time: 3-4 days
-
-## 📱 GOOGLE ADSENSE INTEGRATION PLAN
-
-### Ad Placement Strategy
-- **Header Banner**: 728x90 or 320x50 (responsive)
-- **Sidebar**: 300x250 (desktop only)
-- **In-Game**: 320x50 between game rounds
-- **Footer**: 728x90 or 320x50 (responsive)
-- **Interstitial**: Between games (after completion)
-
-### Implementation Steps
-1. ☐ Set up Google AdSense account
-2. ☐ Create ad components:
-   - `AdBanner` - Responsive banner ads
-   - `AdSidebar` - Desktop sidebar ads
-   - `AdInGame` - In-game placement ads
-   - `AdInterstitial` - Full-screen between games
-3. ☐ Integrate ads into:
-   - Homepage (header + footer)
-   - Game pages (sidebar + in-game)
-   - About page (header + footer)
-4. ☐ Test ad performance and user experience
-5. ☐ Optimize ad placement for maximum revenue
-
-### Ad Component Structure
+**Data Structure**:
 ```typescript
-// components/ads/
-├── AdBanner.tsx      // Responsive banner ads
-├── AdSidebar.tsx     // Desktop sidebar ads
-├── AdInGame.tsx      // In-game placement
-├── AdInterstitial.tsx // Full-screen ads
-└── AdProvider.tsx    // AdSense initialization
+interface VerbData {
+  infinitive: string;        // "γράφω" (I write)
+  english: string;          // "to write"
+  conjugations: {
+    present: {
+      εγώ: string;         // "γράφω"
+      εσύ: string;         // "γράφεις"
+      αυτός: string;       // "γράφει"
+      εμείς: string;       // "γράφουμε"
+      εσείς: string;       // "γράφετε"
+      αυτοί: string;       // "γράφουν"
+    };
+    future: { /* similar structure */ };
+    past: { /* similar structure */ };
+  };
+}
 ```
 
-## 🏗️ TECHNICAL TASKS
+**Verbs to Include**:
+- γράφω (write), διαβάζω (read), μιλάω (speak)
+- τρώω (eat), πίνω (drink), πηγαίνω (go)
+- έρχομαι (come), βλέπω (see), ακούω (hear)
+- κάνω (do/make), θέλω (want), μπορώ (can)
 
-### Remove Authentication (Simplify for Free Games)
-- ☐ Remove Supabase integration
-- ☐ Remove user authentication components
-- ☐ Remove progress tracking
-- ☐ Simplify game state management
-- ☐ Remove user-specific features
+**Features**:
+- ✅ Verb selection screen with categories
+- ✅ Multiple choice conjugation questions
+- ✅ Tense selection (present/future/past)
+- ✅ Progress tracking (verbs completed)
+- ✅ Score display and accuracy percentage
+- ✅ Completion celebration with Greek phrases
+- ✅ Ad integration between verb sets
 
-### Game Development Framework
-- ☐ Create reusable game components
-- ☐ Standardize game layouts with ad placements
-- ☐ Implement consistent scoring systems
-- ☐ Add game completion celebrations
-- ☐ Create game navigation system
+---
 
-### Performance & SEO
-- ☐ Optimize for mobile performance
-- ☐ Implement proper meta tags for each game
-- ☐ Add structured data for games
-- ☐ Optimize loading times with ads
-- ☐ Implement proper error boundaries
+##### 5. Greek Numbers Game (`/games/numbers`) - Numbers and Counting
+**Status**: coming-soon | **Estimated dev time**: 1-2 days | **Difficulty**: easy
 
-## 📊 MONETIZATION STRATEGY
+**Game Mechanics**:
+- Number recognition and pronunciation
+- Math operations in Greek
+- Time and date practice
+- Money and price exercises
 
-### Revenue Optimization
-- ☐ A/B test ad placements
-- ☐ Monitor user engagement metrics
-- ☐ Optimize ad frequency vs user experience
-- ☐ Implement ad loading optimization
-- ☐ Track conversion rates
+**Data Structure**:
+```typescript
+interface NumberData {
+  digit: number;            // 1, 2, 3...
+  greek: string;           // "ένα", "δύο", "τρία"
+  english: string;         // "one", "two", "three"
+  pronunciation: string;   // "EH-nah", "THEE-oh"
+}
 
-### User Experience Balance
-- ☐ Ensure ads don't interfere with gameplay
-- ☐ Maintain fast loading times
-- ☐ Keep games engaging despite ads
-- ☐ Provide clear game instructions
-- ☐ Add social sharing features
+interface MathProblem {
+  operation: '+' | '-' | '×' | '÷';
+  num1: number;
+  num2: number;
+  answer: number;
+  greekQuestion: string;   // "δύο συν τρία ισούται με"
+}
+```
+
+**Game Modes**:
+1. **Number Recognition**: Match digits to Greek words
+2. **Math Operations**: Solve problems in Greek
+3. **Time Practice**: Read and write time in Greek
+4. **Money Practice**: Price calculations and currency
+
+**Features**:
+- [ ] Number flashcards (1-100)
+- [ ] Interactive math problems
+- [ ] Clock/time reading exercises
+- [ ] Price calculation scenarios
+- [ ] Audio pronunciation (optional)
+- [ ] Progress tracking by category
+- [ ] Ad integration between game modes
+
+---
+
+#### Phase 2: Advanced Learning Games (Priority: Medium)
+
+##### 6. Greek Conversations (`/games/conversations`) - Real-world Scenarios
+**Status**: planning | **Estimated dev time**: 3-4 days | **Difficulty**: medium
+
+**Game Mechanics**:
+- Interactive dialogue scenarios
+- Multiple choice responses
+- Cultural context explanations
+- Progressive conversation building
+
+**Data Structure**:
+```typescript
+interface ConversationScenario {
+  id: string;
+  title: string;           // "At the Restaurant"
+  description: string;     // "Order food and interact with staff"
+  difficulty: 'beginner' | 'intermediate' | 'advanced';
+  context: string;         // Cultural background info
+  dialogues: Dialogue[];
+}
+
+interface Dialogue {
+  speaker: 'you' | 'other';
+  greek: string;
+  english: string;
+  options?: string[];      // Response choices
+  correctOption?: number;
+  explanation?: string;    // Why this response is appropriate
+}
+```
+
+**Scenarios to Include**:
+- At the Restaurant (ordering food)
+- At the Market (shopping)
+- At the Airport (travel)
+- At the Doctor (health)
+- Meeting Friends (social)
+- At the Hotel (accommodation)
+
+**Features**:
+- [ ] Scenario selection screen
+- [ ] Interactive dialogue trees
+- [ ] Cultural context explanations
+- [ ] Response evaluation and feedback
+- [ ] Vocabulary highlights
+- [ ] Progress tracking by scenario
+- [ ] Ad integration between scenarios
+
+---
+
+##### 7. Greek Culture & History (`/games/culture`) - Cultural Learning
+**Status**: planning | **Estimated dev time**: 2-3 days | **Difficulty**: medium
+
+**Game Mechanics**:
+- Quiz format with cultural facts
+- Historical timeline exploration
+- Geography and landmarks
+- Traditions and customs
+
+**Data Structure**:
+```typescript
+interface CultureQuestion {
+  id: string;
+  category: 'history' | 'geography' | 'traditions' | 'mythology';
+  question: string;
+  options: string[];
+  correctAnswer: number;
+  explanation: string;
+  imageUrl?: string;
+  relatedVocabulary?: string[];
+}
+
+interface CulturalFact {
+  id: string;
+  title: string;
+  content: string;
+  category: string;
+  difficulty: 'easy' | 'medium' | 'hard';
+  greekTerms: string[];
+}
+```
+
+**Categories**:
+1. **Ancient Greece**: Mythology, Philosophy, Democracy
+2. **Modern Greece**: Geography, Islands, Cities
+3. **Traditions**: Easter, Name Days, Weddings
+4. **Food & Culture**: Greek cuisine, customs
+5. **Language History**: Greek alphabet evolution
+
+**Features**:
+- [ ] Category-based quiz system
+- [ ] Interactive timeline
+- [ ] Map exploration of Greece
+- [ ] Cultural fact cards
+- [ ] Vocabulary integration
+- [ ] Progress tracking by category
+- [ ] Ad integration between categories
+
+---
+
+##### 8. Greek Pronunciation Coach (`/games/pronunciation`) - AI Pronunciation
+**Status**: planning | **Estimated dev time**: 3-4 days | **Difficulty**: medium
+
+**Game Mechanics**:
+- Audio pronunciation practice
+- Speech recognition (if available)
+- Phonetic guide integration
+- Regional dialect awareness
+
+**Data Structure**:
+```typescript
+interface PronunciationExercise {
+  id: string;
+  word: string;
+  phonetic: string;        // IPA transcription
+  audioUrl: string;        // Native speaker recording
+  difficulty: 'easy' | 'medium' | 'hard';
+  category: 'vowels' | 'consonants' | 'words' | 'phrases';
+  tips: string[];          // Pronunciation tips
+}
+
+interface PhoneticGuide {
+  sound: string;           // "α"
+  ipa: string;            // "/a/"
+  englishExample: string;  // "father"
+  description: string;     // "Open front unrounded vowel"
+}
+```
+
+**Exercise Types**:
+1. **Vowel Sounds**: α, ε, η, ι, ο, υ, ω
+2. **Consonant Sounds**: β, γ, δ, θ, λ, μ, ν, ξ, π, ρ, σ, τ, φ, χ, ψ
+3. **Word Practice**: Common vocabulary
+4. **Phrase Practice**: Complete sentences
+5. **Regional Variations**: Different Greek accents
+
+**Features**:
+- [ ] Audio playback controls
+- [ ] Phonetic transcription display
+- [ ] Pronunciation tips and guides
+- [ ] Progress tracking by sound category
+- [ ] Difficulty progression
+- [ ] Ad integration between exercise sets
+- [ ] Optional speech recognition (future enhancement)
+
+---
+
+## 🏗️ GAME DEVELOPMENT FRAMEWORK
+
+### Shared Components to Create
+- [ ] `GameLayout` - Standard game page layout with ads
+- [ ] `ScoreDisplay` - Consistent scoring across games
+- [ ] `ProgressBar` - Visual progress indicator
+- [ ] `GameNavigation` - Next/previous game navigation
+- [ ] `CompletionCelebration` - Victory animations
+- [ ] `DifficultySelector` - Game difficulty options
+
+### Data Management
+- [ ] Create `/app/utils/games/data/` folder
+- [ ] Organize game data by category:
+  - `/verbs/` - Verb conjugation data
+  - `/numbers/` - Number and math data
+  - `/conversations/` - Dialogue scenarios
+  - `/culture/` - Cultural facts and questions
+  - `/pronunciation/` - Audio and phonetic data
+
+### Ad Integration Strategy
+- [ ] Sidebar ads on desktop for all games
+- [ ] In-game ads every 5-10 questions/exercises
+- [ ] Interstitial ads after game completion
+- [ ] Banner ads on game selection screens
+
+## 📅 DEVELOPMENT TIMELINE
+
+### Week 1: Core Language Games
+- **Days 1-2**: Greek Verb Trainer
+- **Days 3-4**: Greek Numbers Game
+- **Day 5**: Testing and refinement
+
+### Week 2: AdSense Integration
+- **Days 1-2**: Set up Google AdSense account
+- **Days 3-4**: Integrate ads into existing games
+- **Day 5**: Test ad performance and user experience
+
+### Week 3: Advanced Learning Games
+- **Days 1-2**: Greek Conversations
+- **Days 3-4**: Greek Culture & History
+- **Day 5**: Testing and refinement
+
+### Week 4: Polish & Launch
+- **Days 1-2**: Greek Pronunciation Coach
+- **Days 3-4**: Final testing and optimization
+- **Day 5**: Launch preparation
 
 ## 🎯 SUCCESS METRICS
 - Total games completed: 8/8
-- Ad revenue per user session
-- User engagement time
+- User engagement time per game
 - Game completion rates
-- Ad click-through rates
-- Page load performance
-
-## 📅 TIMELINE
-- **Week 1**: Complete Phase 1 games (Verb Trainer, Numbers)
-- **Week 2**: Set up Google AdSense and integrate ads
-- **Week 3**: Complete Phase 2 games (Conversations, Culture)
-- **Week 4**: Polish, optimize, and launch
+- Ad revenue per user session
+- User retention across multiple games
+- Page load performance with ads
 
 ---
-*Last updated: 2024-12-19 - New direction: Free games with ads*
+*Last updated: 2024-12-19 - Detailed game development roadmap*
 
 ## 1) Project Setup & Foundation
   ✔ Initialize Next.js 14+ project with TypeScript @started(25-06-09 21:16) @done(25-06-09 21:16) @lasted(52s)

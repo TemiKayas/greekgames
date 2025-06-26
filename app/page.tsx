@@ -175,6 +175,15 @@ export default function Home() {
           </div>
         </motion.section>
 
+        {/* Add Games Listing Button */}
+        <div className="flex justify-center mb-16">
+          <Link href="/games">
+            <button className="bg-gradient-to-r from-blue-500 to-purple-600 text-white py-4 px-10 rounded-xl text-xl font-bold shadow-lg hover:from-blue-600 hover:to-purple-700 transition-all transform hover:scale-105">
+              View All Games
+            </button>
+          </Link>
+        </div>
+
         {/* Learning Progress Section */}
         <motion.section
           initial={{ opacity: 0, y: 40 }}

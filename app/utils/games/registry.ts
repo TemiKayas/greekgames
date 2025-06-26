@@ -73,7 +73,7 @@ export const GAMES: GameMetadata[] = [
     id: "verb-conjugation",
     title: "Greek Verb Trainer",
     description: "Master Greek verb conjugations with interactive practice",
-    status: "planning",
+    status: "available",
     icon: "📝",
     href: "/games/verbs",
     category: "puzzle",
@@ -85,7 +85,8 @@ export const GAMES: GameMetadata[] = [
       "Interactive Quizzes",
       "Conjugation Tables",
     ],
-    releaseDate: "2025-02-15",
+    releaseDate: "2024-12-19",
+    version: "1.0.0",
   },
 
   {
