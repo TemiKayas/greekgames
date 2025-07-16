@@ -104,8 +104,9 @@ export default function ConsentBanner({ onConsentChange }: ConsentBannerProps) {
           </h3>
           <p className="text-sm text-gray-600">
             We use cookies and similar technologies to provide you with the best
-            experience and to show you relevant ads. By clicking &quot;Accept&quot;,
-            you consent to our use of cookies and data collection.
+            experience and to show you relevant ads. By clicking{" "}
+            &quot;Accept&quot;, you consent to our use of cookies and data
+            collection.
           </p>
         </div>
         <div className="flex gap-3 flex-shrink-0">

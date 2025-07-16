@@ -5,11 +5,13 @@ This directory contains all the Greek language learning games for the applicatio
 ## 📁 Current Games
 
 ### ✅ Completed Games
+
 - **`/memory`** - Greek Alphabet Master (Memory matching game)
 - **`/writing`** - Greek Writing Practice (Fill-in-the-blank exercises)
 - **`/vocabulary`** - Everyday Greek Words (Drag & drop vocabulary)
 
 ### 🚧 Planned Games
+
 - **`/verbs`** - Greek Verb Trainer (Verb conjugation practice)
 - **`/numbers`** - Greek Numbers Game (Numbers and counting)
 - **`/conversations`** - Greek Conversations (Real-world scenarios)
@@ -19,6 +21,7 @@ This directory contains all the Greek language learning games for the applicatio
 ## 🏗️ Game Structure
 
 Each game follows this structure:
+
 ```
 /games/[game-name]/
 ├── page.tsx          # Main game page
@@ -37,6 +40,7 @@ Each game follows this structure:
 ## 📱 Ad Integration
 
 All games should include:
+
 - **Sidebar ads** (desktop only)
 - **In-game ads** (between rounds)
 - **Interstitial ads** (after completion)
