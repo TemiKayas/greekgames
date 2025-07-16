@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Cinzel, Crimson_Text } from "next/font/google";
+import ConsentBanner from "./components/ConsentBanner";
 import "./globals.css";
 
 const cinzel = Cinzel({
@@ -51,6 +52,7 @@ export default function RootLayout({
         className={`${cinzel.variable} ${crimsonText.variable} antialiased`}
       >
         {children}
+        <ConsentBanner />
       </body>
     </html>
   );
