@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";
 import { Cinzel, Crimson_Text } from "next/font/google";
 import ConsentBanner from "./components/ConsentBanner";
@@ -53,6 +54,7 @@ export default function RootLayout({
       >
         {children}
         <ConsentBanner />
+        <Analytics />
       </body>
     </html>
   );
