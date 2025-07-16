@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 // Extend Window interface for gtag
 declare global {
@@ -22,7 +22,7 @@ export default function ConsentBanner({ onConsentChange }: ConsentBannerProps) {
     const isEEAUser = checkIfEEAUser();
 
     // Check if consent has already been given
-    const hasConsent = localStorage.getItem('adConsent');
+    const hasConsent = localStorage.getItem("adConsent");
 
     if (isEEAUser && !hasConsent) {
       setShowBanner(true);
@@ -36,29 +36,50 @@ export default function ConsentBanner({ onConsentChange }: ConsentBannerProps) {
     // like a geolocation API or IP-based detection
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     const eeaTimezones = [
-      'Europe/London', 'Europe/Paris', 'Europe/Berlin', 'Europe/Rome',
-      'Europe/Madrid', 'Europe/Amsterdam', 'Europe/Brussels', 'Europe/Vienna',
-      'Europe/Zurich', 'Europe/Stockholm', 'Europe/Oslo', 'Europe/Copenhagen',
-      'Europe/Helsinki', 'Europe/Warsaw', 'Europe/Prague', 'Europe/Budapest',
-      'Europe/Bratislava', 'Europe/Ljubljana', 'Europe/Riga', 'Europe/Tallinn',
-      'Europe/Vilnius', 'Europe/Dublin', 'Europe/Luxembourg', 'Europe/Malta',
-      'Europe/Nicosia', 'Europe/Sofia', 'Europe/Bucharest', 'Europe/Zagreb'
+      "Europe/London",
+      "Europe/Paris",
+      "Europe/Berlin",
+      "Europe/Rome",
+      "Europe/Madrid",
+      "Europe/Amsterdam",
+      "Europe/Brussels",
+      "Europe/Vienna",
+      "Europe/Zurich",
+      "Europe/Stockholm",
+      "Europe/Oslo",
+      "Europe/Copenhagen",
+      "Europe/Helsinki",
+      "Europe/Warsaw",
+      "Europe/Prague",
+      "Europe/Budapest",
+      "Europe/Bratislava",
+      "Europe/Ljubljana",
+      "Europe/Riga",
+      "Europe/Tallinn",
+      "Europe/Vilnius",
+      "Europe/Dublin",
+      "Europe/Luxembourg",
+      "Europe/Malta",
+      "Europe/Nicosia",
+      "Europe/Sofia",
+      "Europe/Bucharest",
+      "Europe/Zagreb",
     ];
 
     return eeaTimezones.includes(timezone);
   };
 
   const handleConsent = () => {
-    localStorage.setItem('adConsent', 'true');
-    localStorage.setItem('adConsentDate', new Date().toISOString());
+    localStorage.setItem("adConsent", "true");
+    localStorage.setItem("adConsentDate", new Date().toISOString());
     setShowBanner(false);
     onConsentChange?.(true);
 
     // Initialize Google AdSense
-    if (typeof window !== 'undefined' && window.gtag) {
-      window.gtag('consent', 'update', {
-        'ad_storage': 'granted',
-        'analytics_storage': 'granted'
+    if (typeof window !== "undefined" && window.gtag) {
+      window.gtag("consent", "update", {
+        ad_storage: "granted",
+        analytics_storage: "granted",
       });
     }
   };
@@ -82,9 +103,9 @@ export default function ConsentBanner({ onConsentChange }: ConsentBannerProps) {
             We value your privacy
           </h3>
           <p className="text-sm text-gray-600">
-            We use cookies and similar technologies to provide you with the best experience
-            and to show you relevant ads. By clicking "Accept", you consent to our use of
-            cookies and data collection.
+            We use cookies and similar technologies to provide you with the best
+            experience and to show you relevant ads. By clicking &quot;Accept&quot;,
+            you consent to our use of cookies and data collection.
           </p>
         </div>
         <div className="flex gap-3 flex-shrink-0">
