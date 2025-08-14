@@ -1,9 +1,6 @@
 "use client";
 
 import {
-  GREEK_MATH_PROBLEMS,
-  GREEK_NUMBERS,
-  GREEK_TIME_EXERCISES,
   getMathProblemsByDifficulty,
   getNumbersByDifficulty,
   getTimeExercisesByDifficulty,
@@ -16,13 +13,13 @@ import {
 } from "@/app/utils/games/data/numbers/numberData";
 import { AnimatePresence, motion } from "framer-motion";
 import {
+  Calculator,
+  Clock,
+  Hash,
   Home,
   Play,
   RotateCcw,
   Trophy,
-  Clock,
-  Calculator,
-  Hash,
 } from "lucide-react";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
@@ -192,11 +189,41 @@ export default function NumbersGame() {
             (p) => p.operation === operationSymbol
           );
           question = filteredMath[questionIndex];
+
+          // Generate better wrong answers
+          const correctAnswer = question.answer;
+          const wrongAnswers = [];
+
+          // Add answers that are close but wrong
+          if (correctAnswer > 0) {
+            wrongAnswers.push(correctAnswer - 1);
+          }
+          wrongAnswers.push(correctAnswer + 1);
+          wrongAnswers.push(correctAnswer + 2);
+
+          // If we need more wrong answers, add some based on the operation
+          if (wrongAnswers.length < 3) {
+            if (type === "addition") {
+              wrongAnswers.push(correctAnswer + 3);
+            } else if (type === "subtraction") {
+              wrongAnswers.push(Math.max(0, correctAnswer - 2));
+            } else if (type === "multiplication") {
+              wrongAnswers.push(correctAnswer + 5);
+            } else if (type === "division") {
+              wrongAnswers.push(correctAnswer + 1);
+            }
+          }
+
+          // Ensure we have exactly 3 wrong answers
+          while (wrongAnswers.length < 3) {
+            wrongAnswers.push(correctAnswer + wrongAnswers.length + 1);
+          }
+
           answerOptions = [
-            { value: question.answer, correct: true },
-            { value: question.answer + 1, correct: false },
-            { value: question.answer - 1, correct: false },
-            { value: question.answer + 2, correct: false },
+            { value: correctAnswer, correct: true },
+            ...wrongAnswers
+              .slice(0, 3)
+              .map((value) => ({ value, correct: false })),
           ];
           break;
 
@@ -234,6 +261,7 @@ export default function NumbersGame() {
       setGameState((prev) => ({
         ...prev,
         score: Math.max(0, prev.score - 10),
+        currentQuestion: prev.currentQuestion + 1, // Still move to next question even if wrong
         wrongAnswer: true,
       }));
     }
