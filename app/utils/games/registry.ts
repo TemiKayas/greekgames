@@ -112,19 +112,20 @@ export const GAMES: GameMetadata[] = [
     id: "numbers-and-counting",
     title: "Greek Numbers Game",
     description: "Learn Greek numbers, counting, and basic mathematics",
-    status: "coming-soon",
+    status: "available",
     icon: "🔢",
     href: "/games/numbers",
     category: "puzzle",
     difficulty: "easy",
     estimatedPlayTime: "5-10 min",
     features: [
-      "Numbers 1-1000",
+      "Numbers 1-100",
       "Math Operations",
-      "Time & Dates",
-      "Money & Prices",
+      "Time Reading",
+      "Multiple Game Types",
     ],
-    releaseDate: "2025-01-20",
+    releaseDate: "2024-12-19",
+    version: "1.0.0",
   },
 
   {
@@ -171,6 +172,7 @@ export const FEATURED_GAME_IDS = [
   "greek-alphabet-master",
   "alphabet-writing",
   "everyday-vocabulary",
+  "numbers-and-counting",
 ];
 
 // 📊 UTILITY FUNCTIONS
