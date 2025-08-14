@@ -12,14 +12,15 @@
 
 ## 🎮 GAME DEVELOPMENT PRIORITY
 
-### ✅ COMPLETED GAMES (5/8)
+### ✅ COMPLETED GAMES (6/8)
 1. **Greek Alphabet Master** (`/games/memory`) - Memory matching game
 2. **Greek Writing Practice** (`/games/writing`) - Fill-in-the-blank exercises
 3. **Everyday Greek Words** (`/games/vocabulary`) - Drag & drop vocabulary
 4. **Greek Verb Trainer** (`/games/verbs`) - Verb conjugation practice
 5. **Greek Numbers Game** (`/games/numbers`) - Numbers and mathematics
+6. **Greek Conversations** (`/games/conversations`) - Real-world conversation practice
 
-### 🚧 GAMES TO DEVELOP (3/8)
+### 🚧 GAMES TO DEVELOP (2/8)
 
 #### Phase 1: Core Language Games (Priority: High)
 
@@ -115,8 +116,8 @@ interface MathProblem {
 
 #### Phase 2: Advanced Learning Games (Priority: Medium)
 
-##### 6. Greek Conversations (`/games/conversations`) - Real-world Scenarios
-**Status**: planning | **Estimated dev time**: 3-4 days | **Difficulty**: medium
+✅ ##### 6. Greek Conversations (`/games/conversations`) - Real-world Scenarios @started(25-06-26 11:21) @done(25-06-26 11:21) @lasted(2h)
+**Status**: completed | **Estimated dev time**: 3-4 days | **Difficulty**: medium
 
 **Game Mechanics**:
 - Interactive dialogue scenarios
@@ -154,13 +155,13 @@ interface Dialogue {
 - At the Hotel (accommodation)
 
 **Features**:
-- [ ] Scenario selection screen
-- [ ] Interactive dialogue trees
-- [ ] Cultural context explanations
-- [ ] Response evaluation and feedback
-- [ ] Vocabulary highlights
-- [ ] Progress tracking by scenario
-- [ ] Ad integration between scenarios
+- ✅ Scenario selection screen
+- ✅ Interactive dialogue trees
+- ✅ Cultural context explanations
+- ✅ Response evaluation and feedback
+- ✅ Vocabulary highlights
+- ✅ Progress tracking by scenario
+- ✅ Ad integration between scenarios
 
 ---
 

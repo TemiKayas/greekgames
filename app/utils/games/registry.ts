@@ -93,7 +93,7 @@ export const GAMES: GameMetadata[] = [
     id: "conversation-practice",
     title: "Greek Conversations",
     description: "Practice real-world Greek conversations in common scenarios",
-    status: "planning",
+    status: "available",
     icon: "🗣️",
     href: "/games/conversations",
     category: "adventure",
@@ -101,11 +101,12 @@ export const GAMES: GameMetadata[] = [
     estimatedPlayTime: "10-30 min",
     features: [
       "Real Scenarios",
-      "Voice Recognition",
       "Cultural Context",
-      "Difficulty Levels",
+      "Interactive Dialogues",
+      "Vocabulary Learning",
     ],
-    releaseDate: "2025-03-01",
+    releaseDate: "2024-12-19",
+    version: "1.0.0",
   },
 
   {
@@ -172,6 +173,7 @@ export const FEATURED_GAME_IDS = [
   "greek-alphabet-master",
   "alphabet-writing",
   "everyday-vocabulary",
+  "conversation-practice",
   "numbers-and-counting",
 ];
 
