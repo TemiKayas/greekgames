@@ -29,19 +29,6 @@ const nextConfig: NextConfig = {
         destination: "https://greekgames.io/:path*",
         permanent: true,
       },
-      // Redirect HTTP to HTTPS
-      {
-        source: "/:path*",
-        has: [
-          {
-            type: "header",
-            key: "x-forwarded-proto",
-            value: "http",
-          },
-        ],
-        destination: "https://greekgames.io/:path*",
-        permanent: true,
-      },
     ];
   },
 };
