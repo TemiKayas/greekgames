@@ -1,0 +1,30 @@
+<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="32" height="32" fill="#1e3a8a" rx="4"/>
+
+  <!-- 2x2 Grid of squares -->
+  <g transform="translate(4, 4)">
+    <!-- Top-left square (A) -->
+    <rect x="0" y="0" width="10" height="10" fill="#1e3a8a" rx="2"/>
+    <text x="5" y="7" font-family="Arial, sans-serif" font-size="8" font-weight="bold" text-anchor="middle" fill="#fef3c7">A</text>
+
+    <!-- Top-right square (B) -->
+    <rect x="12" y="0" width="10" height="10" fill="#3b82f6" rx="2"/>
+    <text x="17" y="7" font-family="Arial, sans-serif" font-size="8" font-weight="bold" text-anchor="middle" fill="#fef3c7">B</text>
+
+    <!-- Bottom-left square (Controller) -->
+    <rect x="0" y="12" width="10" height="10" fill="#3b82f6" rx="2"/>
+    <!-- Controller D-pad -->
+    <rect x="3" y="15" width="4" height="4" fill="#fef3c7" rx="1"/>
+    <rect x="4" y="14" width="2" height="6" fill="#fef3c7" rx="1"/>
+    <!-- Controller buttons -->
+    <circle cx="16" cy="17" r="1" fill="#fef3c7"/>
+    <circle cx="18" cy="15" r="1" fill="#fef3c7"/>
+    <circle cx="18" cy="19" r="1" fill="#fef3c7"/>
+    <circle cx="20" cy="17" r="1" fill="#fef3c7"/>
+
+    <!-- Bottom-right square (Γ) -->
+    <rect x="12" y="12" width="10" height="10" fill="#1e3a8a" rx="2"/>
+    <text x="17" y="19" font-family="Arial, sans-serif" font-size="8" font-weight="bold" text-anchor="middle" fill="#fef3c7">Γ</text>
+  </g>
+</svg>
