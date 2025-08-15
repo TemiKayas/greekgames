@@ -4,10 +4,17 @@ Allow: /
 # Sitemap
 Sitemap: https://greekgames.io/sitemap.xml
 
-# Prevent duplicate content
+# Prevent duplicate content and unnecessary crawling
 Disallow: /api/
 Disallow: /_next/
 Disallow: /static/
+Disallow: /favicon.ico
+Disallow: /*.ico$
+Disallow: /*.png$
+Disallow: /*.jpg$
+Disallow: /*.jpeg$
+Disallow: /*.gif$
+Disallow: /*.svg$
 
 # Crawl delay
 Crawl-delay: 1

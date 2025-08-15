@@ -17,6 +17,19 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // Redirect www to non-www
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'www.greekgames.io',
+          },
+        ],
+        destination: 'https://greekgames.io/:path*',
+        permanent: true,
+      },
+      // Redirect HTTP to HTTPS
       {
         source: '/:path*',
         has: [
