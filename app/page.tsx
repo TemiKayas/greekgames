@@ -2,8 +2,8 @@
 
 import { GameCard } from "@/app/components/ui/GameCard";
 import {
-  getAvailableGames,
-  getGameCollection,
+    getAvailableGames,
+    getGameCollection,
 } from "@/app/utils/games/registry";
 import { motion } from "framer-motion";
 import { BookOpen, Target, Users, Zap } from "lucide-react";
@@ -82,13 +82,34 @@ export default function Home() {
           >
             <button
               onClick={scrollToGames}
-              className="bg-primary hover:bg-primary-dark text-background font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-lg transition-colors text-base sm:text-lg"
+              className="group relative bg-gradient-to-r from-primary to-primary-dark text-background font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-xl transition-all transform hover:scale-105 shadow-lg hover:shadow-xl border-2 border-primary/20 hover:border-primary/40 text-base sm:text-lg"
             >
-              Start Learning Free
+              <span className="relative z-10 flex items-center gap-2">
+                Start Learning Free
+                <svg
+                  className="w-4 h-4 transition-transform group-hover:translate-x-1"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </span>
+              <div className="absolute inset-0 bg-gradient-to-r from-primary-dark to-primary rounded-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
             </button>
             <Link href="/about">
-              <button className="border border-primary text-primary hover:bg-primary/10 font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-lg transition-colors text-base sm:text-lg">
-                About Us
+              <button className="group relative border-2 border-primary text-primary hover:bg-primary/10 font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-xl transition-all transform hover:scale-105 text-base sm:text-lg shadow-lg hover:shadow-xl">
+                <span className="relative z-10 flex items-center gap-2">
+                  About Us
+                  <svg
+                    className="w-4 h-4 transition-transform group-hover:translate-x-1"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                </span>
               </button>
             </Link>
           </motion.div>
@@ -163,7 +184,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mb-8 sm:mb-12">
             {featured.map((game, index) => (
               <GameCard
                 key={game.id}
@@ -173,16 +194,36 @@ export default function Home() {
               />
             ))}
           </div>
-        </motion.section>
 
-        {/* Add Games Listing Button */}
-        <div className="flex justify-center mb-16">
-          <Link href="/games">
-            <button className="bg-gradient-to-r from-blue-500 to-purple-600 text-white py-4 px-10 rounded-xl text-xl font-bold shadow-lg hover:from-blue-600 hover:to-purple-700 transition-all transform hover:scale-105">
-              View All Games
-            </button>
-          </Link>
-        </div>
+          {/* Three dots indicator */}
+          <div className="flex justify-center mb-6 sm:mb-8">
+            <div className="flex space-x-2">
+              <div className="w-2 h-2 bg-primary/30 rounded-full animate-pulse"></div>
+              <div className="w-2 h-2 bg-primary/50 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
+              <div className="w-2 h-2 bg-primary/70 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></div>
+            </div>
+          </div>
+
+          {/* View All Games Button */}
+          <div className="flex justify-center">
+            <Link href="/games">
+              <button className="group relative bg-gradient-to-r from-primary to-primary-dark text-background font-semibold py-4 sm:py-5 px-8 sm:px-12 rounded-xl text-lg sm:text-xl shadow-lg hover:shadow-xl transition-all transform hover:scale-105 border-2 border-primary/20 hover:border-primary/40">
+                <span className="relative z-10 flex items-center gap-3">
+                  Explore All Games
+                  <svg
+                    className="w-5 h-5 transition-transform group-hover:translate-x-1"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                </span>
+                <div className="absolute inset-0 bg-gradient-to-r from-primary-dark to-primary rounded-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              </button>
+            </Link>
+          </div>
+        </motion.section>
 
         {/* Learning Progress Section */}
         <motion.section
@@ -229,8 +270,19 @@ export default function Home() {
             new challenges as you advance
           </p>
 
-          <button className="bg-primary hover:bg-primary-dark text-background font-semibold py-2 sm:py-3 px-4 sm:px-6 rounded-lg transition-colors text-sm sm:text-base">
-            View Progress Details
+          <button className="group relative bg-gradient-to-r from-primary to-primary-dark text-background font-semibold py-2 sm:py-3 px-4 sm:px-6 rounded-xl text-sm sm:text-base shadow-lg hover:shadow-xl transition-all transform hover:scale-105 border-2 border-primary/20 hover:border-primary/40">
+            <span className="relative z-10 flex items-center gap-2">
+              View Progress Details
+              <svg
+                className="w-4 h-4 transition-transform group-hover:translate-x-1"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </span>
+            <div className="absolute inset-0 bg-gradient-to-r from-primary-dark to-primary rounded-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
           </button>
         </motion.section>
       </main>
@@ -247,9 +299,20 @@ export default function Home() {
           </p>
           <button
             onClick={scrollToGames}
-            className="bg-primary hover:bg-primary-dark text-background font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-lg transition-colors text-base sm:text-lg"
+            className="group relative bg-gradient-to-r from-primary to-primary-dark text-background font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-xl text-base sm:text-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105 border-2 border-primary/20 hover:border-primary/40"
           >
-            Begin Your Journey
+            <span className="relative z-10 flex items-center gap-2">
+              Begin Your Journey
+              <svg
+                className="w-4 h-4 transition-transform group-hover:translate-x-1"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </span>
+            <div className="absolute inset-0 bg-gradient-to-r from-primary-dark to-primary rounded-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
           </button>
         </div>
       </footer>

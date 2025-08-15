@@ -173,8 +173,6 @@ export const FEATURED_GAME_IDS = [
   "greek-alphabet-master",
   "alphabet-writing",
   "everyday-vocabulary",
-  "conversation-practice",
-  "numbers-and-counting",
 ];
 
 // 📊 UTILITY FUNCTIONS
