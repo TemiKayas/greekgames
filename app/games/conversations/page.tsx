@@ -455,10 +455,10 @@ export default function ConversationsPage() {
 
         {/* Dialogue */}
         <div className="max-w-4xl mx-auto">
-          {/* Show conversation context - previous waiter messages */}
+          {/* Show conversation context - previous staff messages */}
           {gameState.currentScenario.dialogues
             .slice(0, gameState.currentDialogueIndex)
-            .filter(d => d.speaker === 'waiter')
+            .filter(d => d.speaker === 'waiter' || d.speaker === 'vendor' || d.speaker === 'staff' || d.speaker === 'receptionist')
             .map((dialogue, index) => (
               <div key={`context-${index}`} className="mb-4">
                 <div className="flex items-start space-x-3">
@@ -483,7 +483,7 @@ export default function ConversationsPage() {
             ))}
 
           {/* Current Interactive Dialogue */}
-          {currentDialogue.speaker === 'customer' && currentDialogue.options && (
+          {(currentDialogue.speaker === 'customer' || currentDialogue.speaker === 'guest') && currentDialogue.options && (
             <div className="mb-6">
               <div className="flex items-start space-x-3">
                 <div className="text-2xl">{getSpeakerIcon('customer')}</div>

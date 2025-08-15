@@ -33,12 +33,17 @@ export const metadata: Metadata = {
     "Greek conversation",
   ],
   authors: [{ name: "Learn Greek Through Play" }],
+  metadataBase: new URL('https://greekgames.io'),
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
     title: "Learn Greek Through Play - Interactive Language Learning",
     description:
       "Master Modern Greek with engaging games and cultural immersion",
     type: "website",
     locale: "en_US",
+    url: 'https://greekgames.io',
   },
 };
 

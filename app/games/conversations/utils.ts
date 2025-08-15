@@ -86,22 +86,38 @@ export const isCorrectAnswer = (dialogue: DialogueTurn, selectedOptionId: string
   return dialogue.correctOptionId === selectedOptionId;
 };
 
-export const getSpeakerDisplayName = (speaker: 'waiter' | 'customer'): string => {
+export const getSpeakerDisplayName = (speaker: 'waiter' | 'customer' | 'vendor' | 'staff' | 'receptionist' | 'guest'): string => {
   switch (speaker) {
     case 'waiter':
       return 'Waiter';
     case 'customer':
+      return 'You';
+    case 'vendor':
+      return 'Vendor';
+    case 'staff':
+      return 'Staff';
+    case 'receptionist':
+      return 'Receptionist';
+    case 'guest':
       return 'You';
     default:
       return 'Unknown';
   }
 };
 
-export const getSpeakerIcon = (speaker: 'waiter' | 'customer'): string => {
+export const getSpeakerIcon = (speaker: 'waiter' | 'customer' | 'vendor' | 'staff' | 'receptionist' | 'guest'): string => {
   switch (speaker) {
     case 'waiter':
       return '👨‍🍳';
     case 'customer':
+      return '👤';
+    case 'vendor':
+      return '🛒';
+    case 'staff':
+      return '✈️';
+    case 'receptionist':
+      return '🏨';
+    case 'guest':
       return '👤';
     default:
       return '💬';

@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://greekgames.io/sitemap.xml
+
+# Prevent duplicate content
+Disallow: /api/
+Disallow: /_next/
+Disallow: /static/
+
+# Crawl delay
+Crawl-delay: 1
