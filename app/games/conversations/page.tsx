@@ -3,24 +3,31 @@
 import { AdInGame } from "@/app/components/ads";
 import { getAdSlot } from "@/app/utils/ads/config";
 import {
-    CONVERSATION_SCENARIOS,
-    ConversationScenario
+  CONVERSATION_SCENARIOS,
+  ConversationScenario,
 } from "@/app/utils/games/data/conversations/conversationData";
-import { ArrowLeft, BookOpen, Clock, Home, Trophy, Volume2 } from "lucide-react";
+import {
+  ArrowLeft,
+  BookOpen,
+  Clock,
+  Home,
+  Trophy,
+  Volume2,
+} from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { Category, ConversationGameState, Difficulty } from "./types";
 import {
-    calculateAccuracy,
-    getCategoryDisplayName,
-    getDialogueOptions,
-    getDifficultyDisplayName,
-    getEnglishPhrase,
-    getGreekPhrase,
-    getScenarioEstimatedTime,
-    getSpeakerDisplayName,
-    getSpeakerIcon,
-    isCorrectAnswer
+  calculateAccuracy,
+  getCategoryDisplayName,
+  getDialogueOptions,
+  getDifficultyDisplayName,
+  getEnglishPhrase,
+  getGreekPhrase,
+  getScenarioEstimatedTime,
+  getSpeakerDisplayName,
+  getSpeakerIcon,
+  isCorrectAnswer,
 } from "./utils";
 
 export default function ConversationsPage() {
@@ -39,25 +46,36 @@ export default function ConversationsPage() {
     showVocabulary: false,
   });
 
-  const [selectedDifficulty, setSelectedDifficulty] = useState<Difficulty | 'all'>('all');
-  const [selectedCategory, setSelectedCategory] = useState<Category | 'all'>('all');
+  const [selectedDifficulty, setSelectedDifficulty] = useState<
+    Difficulty | "all"
+  >("all");
+  const [selectedCategory, setSelectedCategory] = useState<Category | "all">(
+    "all"
+  );
   const [gameStarted, setGameStarted] = useState(false);
   const [showScenarioInfo, setShowScenarioInfo] = useState(false);
-  const [selectedScenario, setSelectedScenario] = useState<ConversationScenario | null>(null);
+  const [selectedScenario, setSelectedScenario] =
+    useState<ConversationScenario | null>(null);
 
-  const availableScenarios = CONVERSATION_SCENARIOS.filter(scenario => {
-    const difficultyMatch = selectedDifficulty === 'all' || scenario.difficulty === selectedDifficulty;
-    const categoryMatch = selectedCategory === 'all' || scenario.category === selectedCategory;
+  const availableScenarios = CONVERSATION_SCENARIOS.filter((scenario) => {
+    const difficultyMatch =
+      selectedDifficulty === "all" ||
+      scenario.difficulty === selectedDifficulty;
+    const categoryMatch =
+      selectedCategory === "all" || scenario.category === selectedCategory;
     return difficultyMatch && categoryMatch;
   });
 
-    const startScenario = (scenario: ConversationScenario) => {
+  const startScenario = (scenario: ConversationScenario) => {
     // Find the first interactive dialogue
-    const firstInteractiveIndex = scenario.dialogues.findIndex(d => d.options);
-    
+    const firstInteractiveIndex = scenario.dialogues.findIndex(
+      (d) => d.options
+    );
+
     setGameState({
       currentScenario: scenario,
-      currentDialogueIndex: firstInteractiveIndex >= 0 ? firstInteractiveIndex : 0,
+      currentDialogueIndex:
+        firstInteractiveIndex >= 0 ? firstInteractiveIndex : 0,
       totalDialogues: scenario.dialogues.length,
       score: 0,
       correctAnswers: 0,
@@ -75,19 +93,20 @@ export default function ConversationsPage() {
   const handleAnswer = (selectedOptionId: string) => {
     if (!gameState.currentScenario) return;
 
-    const currentDialogue = gameState.currentScenario.dialogues[gameState.currentDialogueIndex];
+    const currentDialogue =
+      gameState.currentScenario.dialogues[gameState.currentDialogueIndex];
     const isCorrect = isCorrectAnswer(currentDialogue, selectedOptionId);
 
     const newCorrectAnswers = gameState.correctAnswers + (isCorrect ? 1 : 0);
     const newWrongAnswers = gameState.wrongAnswers + (isCorrect ? 0 : 1);
 
-    setGameState(prev => ({
+    setGameState((prev) => ({
       ...prev,
       correctAnswers: newCorrectAnswers,
       wrongAnswers: newWrongAnswers,
       selectedAnswers: {
         ...prev.selectedAnswers,
-        [currentDialogue.id]: selectedOptionId
+        [currentDialogue.id]: selectedOptionId,
       },
       showExplanation: true,
     }));
@@ -96,24 +115,36 @@ export default function ConversationsPage() {
   const nextDialogue = () => {
     if (!gameState.currentScenario) return;
 
-    const interactiveDialogues = gameState.currentScenario.dialogues.filter(d => d.options);
-    const currentInteractiveIndex = interactiveDialogues.findIndex(d => d.id === gameState.currentScenario!.dialogues[gameState.currentDialogueIndex].id);
+    const interactiveDialogues = gameState.currentScenario.dialogues.filter(
+      (d) => d.options
+    );
+    const currentInteractiveIndex = interactiveDialogues.findIndex(
+      (d) =>
+        d.id ===
+        gameState.currentScenario!.dialogues[gameState.currentDialogueIndex].id
+    );
     const nextInteractiveIndex = currentInteractiveIndex + 1;
 
     if (nextInteractiveIndex >= interactiveDialogues.length) {
       // Game complete
-      setGameState(prev => ({
+      setGameState((prev) => ({
         ...prev,
         isGameComplete: true,
         showResults: true,
-        accuracy: calculateAccuracy(prev.correctAnswers, interactiveDialogues.length),
+        accuracy: calculateAccuracy(
+          prev.correctAnswers,
+          interactiveDialogues.length
+        ),
       }));
     } else {
       // Find next interactive dialogue
-      const nextInteractiveDialogue = interactiveDialogues[nextInteractiveIndex];
-      const nextDialogueIndex = gameState.currentScenario.dialogues.findIndex(d => d.id === nextInteractiveDialogue.id);
+      const nextInteractiveDialogue =
+        interactiveDialogues[nextInteractiveIndex];
+      const nextDialogueIndex = gameState.currentScenario.dialogues.findIndex(
+        (d) => d.id === nextInteractiveDialogue.id
+      );
 
-      setGameState(prev => ({
+      setGameState((prev) => ({
         ...prev,
         currentDialogueIndex: nextDialogueIndex,
         showExplanation: false,
@@ -140,7 +171,7 @@ export default function ConversationsPage() {
   };
 
   const toggleVocabulary = () => {
-    setGameState(prev => ({
+    setGameState((prev) => ({
       ...prev,
       showVocabulary: !prev.showVocabulary,
     }));
@@ -176,7 +207,8 @@ export default function ConversationsPage() {
               Greek Conversations
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Practice real-world Greek conversations in common scenarios. Learn cultural context and improve your speaking skills.
+              Practice real-world Greek conversations in common scenarios. Learn
+              cultural context and improve your speaking skills.
             </p>
           </div>
 
@@ -184,7 +216,9 @@ export default function ConversationsPage() {
           <div className="flex flex-wrap gap-4 justify-center mb-8">
             <select
               value={selectedDifficulty}
-              onChange={(e) => setSelectedDifficulty(e.target.value as Difficulty | 'all')}
+              onChange={(e) =>
+                setSelectedDifficulty(e.target.value as Difficulty | "all")
+              }
               className="px-4 py-2 border border-border rounded-lg bg-surface text-foreground"
             >
               <option value="all">All Difficulties</option>
@@ -195,7 +229,9 @@ export default function ConversationsPage() {
 
             <select
               value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value as Category | 'all')}
+              onChange={(e) =>
+                setSelectedCategory(e.target.value as Category | "all")
+              }
               className="px-4 py-2 border border-border rounded-lg bg-surface text-foreground"
             >
               <option value="all">All Categories</option>
@@ -223,17 +259,26 @@ export default function ConversationsPage() {
                     <h3 className="text-xl font-display font-bold text-primary group-hover:text-primary/80 transition-colors">
                       {scenario.title}
                     </h3>
-                    <p className="text-sm text-muted-foreground">{scenario.englishTitle}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {scenario.englishTitle}
+                    </p>
                   </div>
                   <div className="text-2xl opacity-60 group-hover:opacity-100 transition-opacity">
-                    {scenario.category === 'restaurant' ? '🍽️' : 
-                     scenario.category === 'market' ? '🛒' : 
-                     scenario.category === 'travel' ? '✈️' : 
-                     scenario.category === 'social' ? '👥' : '🏥'}
+                    {scenario.category === "restaurant"
+                      ? "🍽️"
+                      : scenario.category === "market"
+                        ? "🛒"
+                        : scenario.category === "travel"
+                          ? "✈️"
+                          : scenario.category === "social"
+                            ? "👥"
+                            : "🏥"}
                   </div>
                 </div>
 
-                <p className="text-muted-foreground mb-4 leading-relaxed">{scenario.description}</p>
+                <p className="text-muted-foreground mb-4 leading-relaxed">
+                  {scenario.description}
+                </p>
 
                 <div className="flex items-center justify-between mb-4">
                   <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium">
@@ -251,7 +296,10 @@ export default function ConversationsPage() {
                   </div>
                   <div className="flex items-center space-x-2">
                     <BookOpen className="h-4 w-4" />
-                    <span>{scenario.dialogues.filter(d => d.options).length} questions</span>
+                    <span>
+                      {scenario.dialogues.filter((d) => d.options).length}{" "}
+                      questions
+                    </span>
                   </div>
                 </div>
               </div>
@@ -260,7 +308,9 @@ export default function ConversationsPage() {
 
           {availableScenarios.length === 0 && (
             <div className="text-center py-12">
-              <p className="text-muted-foreground">No scenarios match your current filters.</p>
+              <p className="text-muted-foreground">
+                No scenarios match your current filters.
+              </p>
             </div>
           )}
         </div>
@@ -270,7 +320,9 @@ export default function ConversationsPage() {
           <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
             <div className="bg-surface border border-border rounded-lg p-6 max-w-2xl w-full max-h-[80vh] overflow-y-auto">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-2xl font-bold text-primary">{selectedScenario.title}</h2>
+                <h2 className="text-2xl font-bold text-primary">
+                  {selectedScenario.title}
+                </h2>
                 <button
                   onClick={() => setShowScenarioInfo(false)}
                   className="text-muted-foreground hover:text-foreground"
@@ -279,16 +331,22 @@ export default function ConversationsPage() {
                 </button>
               </div>
 
-              <p className="text-muted-foreground mb-4">{selectedScenario.description}</p>
+              <p className="text-muted-foreground mb-4">
+                {selectedScenario.description}
+              </p>
 
               <div className="mb-4">
                 <h3 className="font-semibold mb-2">Context:</h3>
-                <p className="text-sm text-muted-foreground">{selectedScenario.context}</p>
+                <p className="text-sm text-muted-foreground">
+                  {selectedScenario.context}
+                </p>
               </div>
 
               <div className="mb-6">
                 <h3 className="font-semibold mb-2">Cultural Background:</h3>
-                <p className="text-sm text-muted-foreground">{selectedScenario.culturalBackground}</p>
+                <p className="text-sm text-muted-foreground">
+                  {selectedScenario.culturalBackground}
+                </p>
               </div>
 
               <div className="flex space-x-4">
@@ -319,9 +377,14 @@ export default function ConversationsPage() {
     return <div>Loading...</div>;
   }
 
-  const currentDialogue = gameState.currentScenario.dialogues[gameState.currentDialogueIndex];
-  const interactiveDialogues = gameState.currentScenario.dialogues.filter(d => d.options);
-  const currentInteractiveIndex = interactiveDialogues.findIndex(d => d.id === currentDialogue.id);
+  const currentDialogue =
+    gameState.currentScenario.dialogues[gameState.currentDialogueIndex];
+  const interactiveDialogues = gameState.currentScenario.dialogues.filter(
+    (d) => d.options
+  );
+  const currentInteractiveIndex = interactiveDialogues.findIndex(
+    (d) => d.id === currentDialogue.id
+  );
   const totalInteractiveDialogues = interactiveDialogues.length;
 
   if (gameState.showResults) {
@@ -343,7 +406,9 @@ export default function ConversationsPage() {
           <div className="max-w-2xl mx-auto text-center">
             <div className="mb-8">
               <Trophy className="h-16 w-16 text-primary mx-auto mb-4" />
-              <h1 className="text-3xl font-bold text-primary mb-4">Conversation Complete!</h1>
+              <h1 className="text-3xl font-bold text-primary mb-4">
+                Conversation Complete!
+              </h1>
               <p className="text-xl text-muted-foreground mb-6">
                 {gameState.currentScenario.englishTitle}
               </p>
@@ -352,21 +417,31 @@ export default function ConversationsPage() {
             <div className="bg-surface border border-border rounded-lg p-6 mb-8">
               <div className="grid grid-cols-2 gap-4 mb-6">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-primary">{gameState.correctAnswers}</div>
+                  <div className="text-2xl font-bold text-primary">
+                    {gameState.correctAnswers}
+                  </div>
                   <div className="text-sm text-muted-foreground">Correct</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-primary">{gameState.accuracy}%</div>
+                  <div className="text-2xl font-bold text-primary">
+                    {gameState.accuracy}%
+                  </div>
                   <div className="text-sm text-muted-foreground">Accuracy</div>
                 </div>
               </div>
 
               <div className="mb-6">
                 <p className="text-lg font-semibold text-primary mb-2">
-                  {getGreekPhrase(gameState.correctAnswers, gameState.totalDialogues)}
+                  {getGreekPhrase(
+                    gameState.correctAnswers,
+                    gameState.totalDialogues
+                  )}
                 </p>
                 <p className="text-muted-foreground">
-                  {getEnglishPhrase(gameState.correctAnswers, gameState.totalDialogues)}
+                  {getEnglishPhrase(
+                    gameState.correctAnswers,
+                    gameState.totalDialogues
+                  )}
                 </p>
               </div>
 
@@ -427,7 +502,9 @@ export default function ConversationsPage() {
           <div className="w-full bg-muted rounded-full h-2">
             <div
               className="bg-primary h-2 rounded-full transition-all duration-300"
-              style={{ width: `${((currentInteractiveIndex + 1) / totalInteractiveDialogues) * 100}%` }}
+              style={{
+                width: `${((currentInteractiveIndex + 1) / totalInteractiveDialogues) * 100}%`,
+              }}
             />
           </div>
         </div>
@@ -439,10 +516,14 @@ export default function ConversationsPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {gameState.currentScenario.vocabulary.map((word, index) => (
                 <div key={index} className="flex items-center space-x-3">
-                  <div className="text-lg font-semibold text-primary">{word.greek}</div>
+                  <div className="text-lg font-semibold text-primary">
+                    {word.greek}
+                  </div>
                   <div className="flex-1">
                     <div className="text-sm font-medium">{word.english}</div>
-                    <div className="text-xs text-muted-foreground">{word.pronunciation}</div>
+                    <div className="text-xs text-muted-foreground">
+                      {word.pronunciation}
+                    </div>
                   </div>
                   <button className="text-muted-foreground hover:text-foreground">
                     <Volume2 className="h-4 w-4" />
@@ -458,20 +539,34 @@ export default function ConversationsPage() {
           {/* Show conversation context - previous staff messages */}
           {gameState.currentScenario.dialogues
             .slice(0, gameState.currentDialogueIndex)
-            .filter(d => d.speaker === 'waiter' || d.speaker === 'vendor' || d.speaker === 'staff' || d.speaker === 'receptionist')
+            .filter(
+              (d) =>
+                d.speaker === "waiter" ||
+                d.speaker === "vendor" ||
+                d.speaker === "staff" ||
+                d.speaker === "receptionist"
+            )
             .map((dialogue, index) => (
               <div key={`context-${index}`} className="mb-4">
                 <div className="flex items-start space-x-3">
-                  <div className="text-2xl">{getSpeakerIcon('waiter')}</div>
+                  <div className="text-2xl">{getSpeakerIcon("waiter")}</div>
                   <div className="flex-1">
                     <div className="flex items-center space-x-2 mb-2">
-                      <span className="font-semibold text-primary">{getSpeakerDisplayName('waiter')}</span>
-                      <span className="text-sm text-muted-foreground">• {dialogue.explanation}</span>
+                      <span className="font-semibold text-primary">
+                        {getSpeakerDisplayName("waiter")}
+                      </span>
+                      <span className="text-sm text-muted-foreground">
+                        • {dialogue.explanation}
+                      </span>
                     </div>
-                                      <div className="bg-gradient-to-r from-surface to-surface/80 border border-border rounded-xl p-4 shadow-sm">
-                    <p className="text-lg font-medium mb-2 text-primary">{dialogue.greek}</p>
-                    <p className="text-muted-foreground text-sm">{dialogue.english}</p>
-                  </div>
+                    <div className="bg-gradient-to-r from-surface to-surface/80 border border-border rounded-xl p-4 shadow-sm">
+                      <p className="text-lg font-medium mb-2 text-primary">
+                        {dialogue.greek}
+                      </p>
+                      <p className="text-muted-foreground text-sm">
+                        {dialogue.english}
+                      </p>
+                    </div>
                     {dialogue.culturalContext && (
                       <div className="mt-2 text-sm text-muted-foreground bg-muted/50 rounded p-2">
                         💡 {dialogue.culturalContext}
@@ -483,53 +578,80 @@ export default function ConversationsPage() {
             ))}
 
           {/* Current Interactive Dialogue */}
-          {(currentDialogue.speaker === 'customer' || currentDialogue.speaker === 'guest') && currentDialogue.options && (
-            <div className="mb-6">
-              <div className="flex items-start space-x-3">
-                <div className="text-2xl">{getSpeakerIcon('customer')}</div>
-                <div className="flex-1">
-                  <div className="mb-4">
-                    <span className="font-semibold text-primary">{getSpeakerDisplayName('customer')}</span>
-                    <p className="text-muted-foreground">Choose your response:</p>
-                  </div>
-
-                  <div className="space-y-3">
-                    {getDialogueOptions(currentDialogue).map((option) => (
-                      <button
-                        key={option.id}
-                        onClick={() => handleAnswer(option.id)}
-                        disabled={gameState.showExplanation}
-                        className={`w-full text-left p-4 rounded-xl border-2 transition-all duration-200 transform hover:scale-[1.02] ${
-                          gameState.showExplanation
-                            ? option.isCorrect
-                              ? 'bg-green-50 border-green-300 text-green-800 shadow-lg'
-                              : option.id === gameState.selectedAnswers[currentDialogue.id]
-                              ? 'bg-red-50 border-red-300 text-red-800 shadow-lg'
-                              : 'bg-muted border-border text-muted-foreground'
-                            : 'bg-surface border-border hover:bg-muted hover:border-primary hover:shadow-md'
-                        }`}
-                      >
-                        <p className="text-lg font-medium mb-1">{option.greek}</p>
-                        <p className="text-muted-foreground text-sm">{option.english}</p>
-                      </button>
-                    ))}
-                  </div>
-
-                  {/* Explanation */}
-                  {gameState.showExplanation && (
-                    <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                      <p className="text-blue-800 mb-2">
-                        <strong>Explanation:</strong> {currentDialogue.options.find(opt => opt.id === gameState.selectedAnswers[currentDialogue.id])?.explanation}
-                      </p>
-                      <p className="text-blue-700 text-sm">
-                        <strong>Cultural Note:</strong> {currentDialogue.options.find(opt => opt.id === gameState.selectedAnswers[currentDialogue.id])?.culturalNote}
+          {(currentDialogue.speaker === "customer" ||
+            currentDialogue.speaker === "guest") &&
+            currentDialogue.options && (
+              <div className="mb-6">
+                <div className="flex items-start space-x-3">
+                  <div className="text-2xl">{getSpeakerIcon("customer")}</div>
+                  <div className="flex-1">
+                    <div className="mb-4">
+                      <span className="font-semibold text-primary">
+                        {getSpeakerDisplayName("customer")}
+                      </span>
+                      <p className="text-muted-foreground">
+                        Choose your response:
                       </p>
                     </div>
-                  )}
+
+                    <div className="space-y-3">
+                      {getDialogueOptions(currentDialogue).map((option) => (
+                        <button
+                          key={option.id}
+                          onClick={() => handleAnswer(option.id)}
+                          disabled={gameState.showExplanation}
+                          className={`w-full text-left p-4 rounded-xl border-2 transition-all duration-200 transform hover:scale-[1.02] ${
+                            gameState.showExplanation
+                              ? option.isCorrect
+                                ? "bg-green-50 border-green-300 text-green-800 shadow-lg"
+                                : option.id ===
+                                    gameState.selectedAnswers[
+                                      currentDialogue.id
+                                    ]
+                                  ? "bg-red-50 border-red-300 text-red-800 shadow-lg"
+                                  : "bg-muted border-border text-muted-foreground"
+                              : "bg-surface border-border hover:bg-muted hover:border-primary hover:shadow-md"
+                          }`}
+                        >
+                          <p className="text-lg font-medium mb-1">
+                            {option.greek}
+                          </p>
+                          <p className="text-muted-foreground text-sm">
+                            {option.english}
+                          </p>
+                        </button>
+                      ))}
+                    </div>
+
+                    {/* Explanation */}
+                    {gameState.showExplanation && (
+                      <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                        <p className="text-blue-800 mb-2">
+                          <strong>Explanation:</strong>{" "}
+                          {
+                            currentDialogue.options.find(
+                              (opt) =>
+                                opt.id ===
+                                gameState.selectedAnswers[currentDialogue.id]
+                            )?.explanation
+                          }
+                        </p>
+                        <p className="text-blue-700 text-sm">
+                          <strong>Cultural Note:</strong>{" "}
+                          {
+                            currentDialogue.options.find(
+                              (opt) =>
+                                opt.id ===
+                                gameState.selectedAnswers[currentDialogue.id]
+                            )?.culturalNote
+                          }
+                        </p>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-          )}
+            )}
 
           {/* Next Button */}
           {gameState.showExplanation && (
@@ -546,7 +668,7 @@ export default function ConversationsPage() {
 
         {/* Ad */}
         <div className="mt-8">
-          <AdInGame slot={getAdSlot("conversation-game")} />
+          <AdInGame adSlot={getAdSlot("IN_GAME")} />
         </div>
       </div>
     </div>

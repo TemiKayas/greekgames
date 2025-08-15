@@ -1,4 +1,7 @@
-import { getGameCollection, getAvailableGames } from "@/app/utils/games/registry";
+import {
+  getGameCollection,
+  getAvailableGames,
+} from "@/app/utils/games/registry";
 import { GameCard } from "@/app/components/ui/GameCard";
 import { Home } from "lucide-react";
 import Link from "next/link";

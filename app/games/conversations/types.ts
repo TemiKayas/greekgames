@@ -8,7 +8,7 @@ export interface ConversationGameState {
   correctAnswers: number;
   wrongAnswers: number;
   isGameComplete: boolean;
-  showResults: false;
+  showResults: boolean;
   accuracy: number;
   selectedAnswers: Record<string, string>;
   showExplanation: boolean;
@@ -17,12 +17,12 @@ export interface ConversationGameState {
 
 export interface ConversationSettings {
   scenarioId: string;
-  difficulty: 'beginner' | 'intermediate' | 'advanced' | 'all';
-  category: 'restaurant' | 'market' | 'travel' | 'social' | 'health' | 'all';
+  difficulty: "beginner" | "intermediate" | "advanced" | "all";
+  category: "restaurant" | "market" | "travel" | "social" | "health" | "all";
 }
 
-export type Difficulty = 'beginner' | 'intermediate' | 'advanced';
-export type Category = 'restaurant' | 'market' | 'travel' | 'social' | 'health';
+export type Difficulty = "beginner" | "intermediate" | "advanced";
+export type Category = "restaurant" | "market" | "travel" | "social" | "health";
 
 export interface GameProgress {
   scenarioId: string;

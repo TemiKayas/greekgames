@@ -33,18 +33,18 @@ export const metadata: Metadata = {
     "Greek conversation",
   ],
   authors: [{ name: "Learn Greek Through Play" }],
-  metadataBase: new URL('https://greekgames.io'),
+  metadataBase: new URL("https://greekgames.io"),
   alternates: {
-    canonical: '/',
+    canonical: "/",
   },
   icons: {
     icon: [
-      { url: '/favicon.ico', sizes: 'any' },
-      { url: '/favicon-16.png', sizes: '16x16', type: 'image/png' },
-      { url: '/favicon-32.png', sizes: '32x32', type: 'image/png' },
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
     ],
-    shortcut: '/favicon.ico',
-    apple: '/favicon-32.png',
+    shortcut: "/favicon.ico",
+    apple: "/favicon-32.png",
   },
   openGraph: {
     title: "Learn Greek Through Play - Interactive Language Learning",
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
       "Master Modern Greek with engaging games and cultural immersion",
     type: "website",
     locale: "en_US",
-    url: 'https://greekgames.io',
+    url: "https://greekgames.io",
   },
 };
 

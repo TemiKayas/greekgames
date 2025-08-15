@@ -5,11 +5,11 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
-        source: '/(.*)',
+        source: "/(.*)",
         headers: [
           {
-            key: 'Strict-Transport-Security',
-            value: 'max-age=31536000; includeSubDomains'
+            key: "Strict-Transport-Security",
+            value: "max-age=31536000; includeSubDomains",
           },
         ],
       },
@@ -19,27 +19,27 @@ const nextConfig: NextConfig = {
     return [
       // Redirect www to non-www
       {
-        source: '/:path*',
+        source: "/:path*",
         has: [
           {
-            type: 'host',
-            value: 'www.greekgames.io',
+            type: "host",
+            value: "www.greekgames.io",
           },
         ],
-        destination: 'https://greekgames.io/:path*',
+        destination: "https://greekgames.io/:path*",
         permanent: true,
       },
       // Redirect HTTP to HTTPS
       {
-        source: '/:path*',
+        source: "/:path*",
         has: [
           {
-            type: 'header',
-            key: 'x-forwarded-proto',
-            value: 'http',
+            type: "header",
+            key: "x-forwarded-proto",
+            value: "http",
           },
         ],
-        destination: 'https://greekgames.io/:path*',
+        destination: "https://greekgames.io/:path*",
         permanent: true,
       },
     ];

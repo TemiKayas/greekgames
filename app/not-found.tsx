@@ -1,14 +1,14 @@
-import Link from 'next/link'
-import { Metadata } from 'next'
+import Link from "next/link";
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Page Not Found - Learn Greek Through Play',
-  description: 'The page you are looking for could not be found.',
+  title: "Page Not Found - Learn Greek Through Play",
+  description: "The page you are looking for could not be found.",
   robots: {
     index: false,
     follow: false,
   },
-}
+};
 
 export default function NotFound() {
   return (
@@ -19,7 +19,7 @@ export default function NotFound() {
         <p className="text-muted mb-8">
           The page you are looking for could not be found.
         </p>
-        <Link 
+        <Link
           href="/"
           className="bg-primary hover:bg-primary-dark text-background font-semibold py-3 px-6 rounded-lg transition-colors"
         >
@@ -27,5 +27,5 @@ export default function NotFound() {
         </Link>
       </div>
     </div>
-  )
+  );
 }

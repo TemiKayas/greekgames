@@ -1,4 +1,8 @@
-import { ConversationScenario, DialogueOption, DialogueTurn } from "@/app/utils/games/data/conversations/conversationData";
+import {
+  ConversationScenario,
+  DialogueOption,
+  DialogueTurn,
+} from "@/app/utils/games/data/conversations/conversationData";
 import { Category, Difficulty } from "./types";
 
 export const calculateAccuracy = (correct: number, total: number): number => {
@@ -77,50 +81,59 @@ export const shuffleArray = <T>(array: T[]): T[] => {
   return shuffled;
 };
 
-export const getDialogueOptions = (dialogue: DialogueTurn): DialogueOption[] => {
+export const getDialogueOptions = (
+  dialogue: DialogueTurn
+): DialogueOption[] => {
   if (!dialogue.options) return [];
   return shuffleArray(dialogue.options);
 };
 
-export const isCorrectAnswer = (dialogue: DialogueTurn, selectedOptionId: string): boolean => {
+export const isCorrectAnswer = (
+  dialogue: DialogueTurn,
+  selectedOptionId: string
+): boolean => {
   return dialogue.correctOptionId === selectedOptionId;
 };
 
-export const getSpeakerDisplayName = (speaker: 'waiter' | 'customer' | 'vendor' | 'staff' | 'receptionist' | 'guest'): string => {
+export const getSpeakerDisplayName = (
+  speaker: "waiter" | "customer" | "vendor" | "staff" | "receptionist" | "guest"
+): string => {
   switch (speaker) {
-    case 'waiter':
-      return 'Waiter';
-    case 'customer':
-      return 'You';
-    case 'vendor':
-      return 'Vendor';
-    case 'staff':
-      return 'Staff';
-    case 'receptionist':
-      return 'Receptionist';
-    case 'guest':
-      return 'You';
+    case "waiter":
+      return "Waiter";
+    case "customer":
+      return "You";
+    case "vendor":
+      return "Vendor";
+    case "staff":
+      return "Staff";
+    case "receptionist":
+      return "Receptionist";
+    case "guest":
+      return "You";
     default:
-      return 'Unknown';
+      return "Unknown";
   }
 };
 
-export const getSpeakerIcon = (speaker: 'waiter' | 'customer' | 'vendor' | 'staff' | 'receptionist' | 'guest'): string => {
+export const getSpeakerIcon = (
+  speaker: "waiter" | "customer" | "vendor" | "staff" | "receptionist" | "guest"
+): string => {
   switch (speaker) {
-    case 'waiter':
-      return '👨‍🍳';
-    case 'customer':
-      return '👤';
-    case 'vendor':
-      return '🛒';
-    case 'staff':
-      return '✈️';
-    case 'receptionist':
-      return '🏨';
-    case 'guest':
-      return '👤';
+    case "waiter":
+      return "👨‍🍳";
+    case "customer":
+      return "👤";
+    case "vendor":
+      return "🛒";
+    case "staff":
+      return "✈️";
+    case "receptionist":
+      return "🏨";
+    case "guest":
+      return "👤";
     default:
-      return '💬';
+      return "💬";
   }
 };
 
@@ -136,7 +149,9 @@ export const formatTime = (minutes: number): string => {
   return `${hours}h ${remainingMinutes}m`;
 };
 
-export const getScenarioEstimatedTime = (scenario: ConversationScenario): string => {
+export const getScenarioEstimatedTime = (
+  scenario: ConversationScenario
+): string => {
   const dialogueCount = scenario.dialogues.length;
   const estimatedMinutes = Math.ceil(dialogueCount * 1.5); // 1.5 minutes per dialogue
   return formatTime(estimatedMinutes);
