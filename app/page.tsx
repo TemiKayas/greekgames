@@ -313,10 +313,10 @@ export default function Home() {
         </motion.section>
       </main>
 
-      {/* Footer CTA */}
-      <footer className="bg-surface/30 border-t border-border">
-        <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-12">
-          <div className="text-center mb-6 sm:mb-8">
+      {/* CTA Section */}
+      <section className="bg-surface/30 border-t border-border py-8 sm:py-12">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="text-center">
             <h2 className="font-display text-xl sm:text-2xl md:text-3xl font-semibold text-primary mb-3 sm:mb-4">
               Ready to Start Learning?
             </h2>
@@ -347,37 +347,8 @@ export default function Home() {
               <div className="absolute inset-0 bg-gradient-to-r from-primary-dark to-primary rounded-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
             </button>
           </div>
-
-          {/* Footer Links */}
-          <div className="border-t border-border pt-6 sm:pt-8">
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 text-sm text-muted">
-              <p className="text-foreground/60">
-                © {new Date().getFullYear()} Greek Games. All rights reserved.
-              </p>
-              <div className="flex gap-4 sm:gap-6">
-                <Link
-                  href="/privacy"
-                  className="hover:text-primary transition-colors underline"
-                >
-                  Privacy Policy
-                </Link>
-                <Link
-                  href="/terms"
-                  className="hover:text-primary transition-colors underline"
-                >
-                  Terms of Service
-                </Link>
-                <Link
-                  href="/about"
-                  className="hover:text-primary transition-colors underline"
-                >
-                  About
-                </Link>
-              </div>
-            </div>
-          </div>
         </div>
-      </footer>
+      </section>
     </div>
   );
 }

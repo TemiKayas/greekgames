@@ -2,6 +2,7 @@ import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";
 import { Cinzel, Crimson_Text } from "next/font/google";
 import ConsentBanner from "./components/ConsentBanner";
+import Footer from "./components/Footer";
 import "./globals.css";
 
 const cinzel = Cinzel({
@@ -64,9 +65,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${cinzel.variable} ${crimsonText.variable} antialiased`}
+        className={`${cinzel.variable} ${crimsonText.variable} antialiased flex flex-col min-h-screen`}
       >
-        {children}
+        <div className="flex-1">{children}</div>
+        <Footer />
         <ConsentBanner />
         <Analytics />
       </body>
