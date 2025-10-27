@@ -46,7 +46,7 @@ export const metadata: Metadata = {
       "Learn Modern Greek Online - Free Interactive Games & Vocabulary Exercises",
     description:
       "Master Modern Greek with our free interactive learning games, vocabulary exercises, and grammar practice. Perfect for beginners and intermediate learners.",
-    url: "https://greekgames.com/about",
+    url: "https://greekgames.io/about",
     siteName: "Greek Games",
     locale: "en_US",
     type: "website",
@@ -60,7 +60,7 @@ export const metadata: Metadata = {
     creator: "@BlueDevDigital",
   },
   alternates: {
-    canonical: "https://greekgames.com/about",
+    canonical: "https://greekgames.io/about",
   },
 };
 

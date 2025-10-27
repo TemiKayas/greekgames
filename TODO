@@ -244,6 +244,22 @@ interface PhoneticGuide {
 }
 ```
 
+
+Textbook is designed for each chapter to have a lexicon, well be different because well offer the difffernt naritives for each lexicon
+thus practicing with each differnt scenarios. 
+
+Chatper 1:
+  - simple introdutcion, basic patterns, 
+  - explain some of the learning theary for a landuage as its for college students
+Chapter 2: 
+  - Aerist 
+  - Use of imperfect and such (narritvices for the aerist and the imperefect to see which is used when, start training the pattern recognition)
+
+General:
+  - Track usage times with every game, and also with the build in LLM
+
+
+
 **Exercise Types**:
 1. **Vowel Sounds**: α, ε, η, ι, ο, υ, ω
 2. **Consonant Sounds**: β, γ, δ, θ, λ, μ, ν, ξ, π, ρ, σ, τ, φ, χ, ψ
