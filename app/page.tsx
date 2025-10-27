@@ -315,36 +315,67 @@ export default function Home() {
 
       {/* Footer CTA */}
       <footer className="bg-surface/30 border-t border-border">
-        <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-12 text-center">
-          <h2 className="font-display text-xl sm:text-2xl md:text-3xl font-semibold text-primary mb-3 sm:mb-4">
-            Ready to Start Learning?
-          </h2>
-          <p className="text-foreground/70 text-sm sm:text-base max-w-lg mx-auto mb-6 sm:mb-8 px-4">
-            Join thousands of learners discovering the beauty of the Greek
-            language through interactive games and cultural exploration
-          </p>
-          <button
-            onClick={scrollToGames}
-            className="group relative bg-gradient-to-r from-primary to-primary-dark text-background font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-xl text-base sm:text-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105 border-2 border-primary/20 hover:border-primary/40"
-          >
-            <span className="relative z-10 flex items-center gap-2">
-              Begin Your Journey
-              <svg
-                className="w-4 h-4 transition-transform group-hover:translate-x-1"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M13 7l5 5m0 0l-5 5m5-5H6"
-                />
-              </svg>
-            </span>
-            <div className="absolute inset-0 bg-gradient-to-r from-primary-dark to-primary rounded-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
-          </button>
+        <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-12">
+          <div className="text-center mb-6 sm:mb-8">
+            <h2 className="font-display text-xl sm:text-2xl md:text-3xl font-semibold text-primary mb-3 sm:mb-4">
+              Ready to Start Learning?
+            </h2>
+            <p className="text-foreground/70 text-sm sm:text-base max-w-lg mx-auto mb-6 sm:mb-8 px-4">
+              Join thousands of learners discovering the beauty of the Greek
+              language through interactive games and cultural exploration
+            </p>
+            <button
+              onClick={scrollToGames}
+              className="group relative bg-gradient-to-r from-primary to-primary-dark text-background font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-xl text-base sm:text-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105 border-2 border-primary/20 hover:border-primary/40"
+            >
+              <span className="relative z-10 flex items-center gap-2">
+                Begin Your Journey
+                <svg
+                  className="w-4 h-4 transition-transform group-hover:translate-x-1"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M13 7l5 5m0 0l-5 5m5-5H6"
+                  />
+                </svg>
+              </span>
+              <div className="absolute inset-0 bg-gradient-to-r from-primary-dark to-primary rounded-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            </button>
+          </div>
+
+          {/* Footer Links */}
+          <div className="border-t border-border pt-6 sm:pt-8">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 text-sm text-muted">
+              <p className="text-foreground/60">
+                © {new Date().getFullYear()} Greek Games. All rights reserved.
+              </p>
+              <div className="flex gap-4 sm:gap-6">
+                <Link
+                  href="/privacy"
+                  className="hover:text-primary transition-colors underline"
+                >
+                  Privacy Policy
+                </Link>
+                <Link
+                  href="/terms"
+                  className="hover:text-primary transition-colors underline"
+                >
+                  Terms of Service
+                </Link>
+                <Link
+                  href="/about"
+                  className="hover:text-primary transition-colors underline"
+                >
+                  About
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
       </footer>
     </div>

@@ -1,7 +1,8 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Greek Learning Games - Interactive Language Learning Activities | Greek Games",
+  title:
+    "Greek Learning Games - Interactive Language Learning Activities | Greek Games",
   description:
     "Explore our complete collection of free Greek learning games. Master vocabulary, grammar, the Greek alphabet, and conversation skills through interactive activities.",
   keywords: [
